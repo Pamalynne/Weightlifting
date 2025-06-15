@@ -1,0 +1,15 @@
+{
+  "name": "PR Oly Lifting",
+  "short_name": "PR Oly Lifting",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#202020",
+  "theme_color": "#202020",
+  "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

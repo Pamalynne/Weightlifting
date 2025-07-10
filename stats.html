@@ -54,7 +54,25 @@
         </table>
         <br/>
         <div id="button">
-            <a href="#"><strong>Calculate Percentages</strong></a>
+            <a href="program.html" onclick="saveStats()"><strong>Calculate Percentages</strong></a>
         </div>
+
+        <script>
+        function saveStats() {
+            const lifts = {
+                bs: document.getElementById('bsinput').value,
+                fs: document.getElementById('fsinput').value,
+                os: document.getElementById('osinput').value,
+                c: document.getElementById('cinput').value,
+                s: document.getElementById('sinput').value,
+                cj: document.getElementById('cjinput').value,
+                d: document.getElementById('dinput').value,
+                pp: document.getElementById('ppinput').value
+            };
+
+            localStorage.setItem('lifts', JSON.stringify(lifts));
+        }
+        </script>
+        
       </body>
 </html>

@@ -13,12 +13,12 @@ body{
     top: 0px;
     left: 0px;
     width: 100%;
-    height: 150px;
+    height: 200px;
     background-color: #202020;
     color: white;
     display: flex;
     align-items:center;
-    padding-top: 100px;
+    padding-top: 150px;
 }
 #header img{
     height: 100px;
@@ -55,7 +55,7 @@ body{
 /*=========== HOME BODY ===========*/
 
 #home-body{
-    padding-top: 425px;
+    padding-top: 475px;
     color: #202020;
     text-align: center;
     padding-left: 60px;
@@ -77,10 +77,10 @@ body{
     color: white;
 }
 
-/*=========== STATS===========*/
+/*=========== STATS ===========*/
 
 #stats{
-    padding-top: 300px;
+    padding-top: 350px;
     color: #202020;
     text-align: center;
     padding-left: 60px;
@@ -119,4 +119,57 @@ td{
   border-radius: 8px;
   background-color: #f9f9f9;
   color: #202020;
+}
+
+/*=========== PROGRAM - WEEK & DAY SELECTOR ===========*/
+
+#selectors {
+  padding-top: 420px;
+  text-align: center;
+  padding-left: 60px;
+  padding-right: 60px;
+}
+
+#selectors label {
+  font-size: 1.5em;
+  margin-left: 20px;
+  margin-right: 10px;
+  color: #202020;
+}
+
+#selectors select {
+  font-size: 1.2em;
+  padding: 15px;
+  margin: 10px;
+  border: 2px solid #202020;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  color: #202020;
+  width: 100px;
+}
+
+/*=========== PROGRAM - OUTPUT ===========*/
+
+#programDisplay table {
+    table-layout: fixed;
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table col:nth-child(1) {
+  width: 60%;
+}
+
+table col:nth-child(2),
+table col:nth-child(3) {
+  width: 20%;
+}
+
+#programDisplay th, 
+#programDisplay td {
+    min-height: 40px;
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
 }

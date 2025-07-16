@@ -130,12 +130,12 @@ td{
     padding-right: 30px;
 }
 
-.notice {
+#program-container #programDisplay p {
    text-align: center;
    color: #202020;
    padding-left: 60px;
    padding-right: 60px;
-   font-size: large;
+   font-size: 2em;
 }
 
 #selectors {

@@ -16,7 +16,6 @@
     </div>
 
     <div id="program-container"> 
-
       <div id="selectors">
         <label for="weekSelect">Week:</label>
         <select id="weekSelect">
@@ -40,6 +39,7 @@
       </div>
 
       <div id="programDisplay">
+        <p>Please select the week &amp; day of the program you wish to open.</p>
       </div>
     </div>
 
@@ -53,7 +53,7 @@
 
         if (!lifts) {
           displayDiv.innerHTML =
-            "<p class='notice'>Please enter your 1RM on all lifts before you may view the programming.</p>";
+            "<p>Please enter your 1RM on all lifts before you may view the programming.</p>";
           return;
         }
 

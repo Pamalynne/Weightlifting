@@ -75,6 +75,7 @@ body{
 #button a{
     text-decoration: none;
     color: white;
+    font-size: 1.6em;
 }
 
 /*=========== STATS ===========*/
@@ -134,7 +135,7 @@ td{
    color: #202020;
    padding-left: 60px;
    padding-right: 60px;
-   font-size: 2em;
+   font-size: 1.6em;
 }
 
 #selectors {
@@ -144,14 +145,14 @@ td{
 }
 
 #selectors label {
-  font-size: 1.5em;
+  font-size: 1.6em;
   margin-left: 20px;
   margin-right: 10px;
   color: #202020;
 }
 
 #selectors select {
-  font-size: 1.2em;
+  font-size: 1.6em;
   padding: 15px;
   margin: 10px;
   border: 2px solid #202020;

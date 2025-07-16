@@ -52,7 +52,7 @@ body{
     width: 150px;
 }
 
-/*=========== HOME BODY ===========*/
+/*=========== HOME ===========*/
 
 #home-body{
     padding-top: 300px;
@@ -60,6 +60,10 @@ body{
     text-align: center;
     padding-left: 60px;
     padding-right: 60px;
+}
+
+#home-body p{
+    font-size: 1.6em;   
 }
 
 /*=========== BUTTONS ===========*/

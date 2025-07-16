@@ -18,7 +18,7 @@ body{
     color: white;
     display: flex;
     align-items:center;
-    padding-top: 150px;
+    padding-top: 50px;
 }
 #header img{
     height: 100px;
@@ -55,7 +55,7 @@ body{
 /*=========== HOME BODY ===========*/
 
 #home-body{
-    padding-top: 475px;
+    padding-top: 375px;
     color: #202020;
     text-align: center;
     padding-left: 60px;
@@ -80,7 +80,7 @@ body{
 /*=========== STATS ===========*/
 
 #stats{
-    padding-top: 350px;
+    padding-top: 375px;
     color: #202020;
     text-align: center;
     padding-left: 60px;
@@ -124,7 +124,7 @@ td{
 /*=========== PROGRAM - WEEK & DAY SELECTOR ===========*/
 
 #selectors {
-  padding-top: 420px;
+  padding-top: 300px;
   text-align: center;
   padding-left: 60px;
   padding-right: 60px;
@@ -146,6 +146,11 @@ td{
   background-color: #f9f9f9;
   color: #202020;
   width: 100px;
+}
+
+#programDisplay p {
+   text-align: center;
+   color: #202020; 
 }
 
 /*=========== PROGRAM - OUTPUT ===========*/

@@ -15,7 +15,6 @@
             <a href="program.html"><img src="images/program-ns.png"></a>
         </div>
         <div id="stats">
-            <p>ep dropping else you love We use your 1-rep to so the work is</p>
             <p><strong>Enter your 1 rep max on all of the following movements, if you are uncertain please check with Coach:</strong></p>
         </div>
         <table border="0">
@@ -72,6 +71,20 @@
 
             localStorage.setItem('lifts', JSON.stringify(lifts));
         }
+
+        document.addEventListener("DOMContentLoaded", function () {
+        const lifts = JSON.parse(localStorage.getItem("lifts"));
+            if (lifts) {
+                document.getElementById("bsinput").value = lifts.bs || "";
+                document.getElementById("fsinput").value = lifts.fs || "";
+                document.getElementById("osinput").value = lifts.os || "";
+                document.getElementById("cinput").value = lifts.c || "";
+                document.getElementById("sinput").value = lifts.s || "";
+                document.getElementById("cjinput").value = lifts.cj || "";
+                document.getElementById("dinput").value = lifts.d || "";
+                document.getElementById("ppinput").value = lifts.pp || "";
+            }
+        });
         </script>
         
       </body>

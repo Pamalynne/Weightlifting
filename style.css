@@ -81,7 +81,6 @@ body{
 
 #stats{
     padding-top: 300px;
-    padding-bottom: 200px;
     color: #202020;
     text-align: center;
     padding-left: 60px;
@@ -100,6 +99,7 @@ table{
     border-spacing: 20px;
     padding-top: 30px;
     font-size: 1.6em;
+    padding-bottom: 200px;
 }
 
 td{

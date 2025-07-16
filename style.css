@@ -103,6 +103,7 @@ table{
     border-collapse: separate;
     border-spacing: 20px;
     padding-top: 30px;
+    padding-bottom: 30px;
     font-size: 1.6em;
 }
 
@@ -163,7 +164,7 @@ td{
   border-radius: 8px;
   background-color: #f9f9f9;
   color: #202020;
-  width: auto;
+  width: 200px;
 }
 
 

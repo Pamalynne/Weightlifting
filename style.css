@@ -55,7 +55,7 @@ body{
 /*=========== HOME BODY ===========*/
 
 #home-body{
-    padding-top: 375px;
+    padding-top: 300px;
     color: #202020;
     text-align: center;
     padding-left: 60px;
@@ -80,7 +80,8 @@ body{
 /*=========== STATS ===========*/
 
 #stats{
-    padding-top: 375px;
+    padding-top: 300px;
+    padding-bottom: 200px;
     color: #202020;
     text-align: center;
     padding-left: 60px;
@@ -88,11 +89,8 @@ body{
 }
 
 #stats p{
-    color: white;
-}
-
-#stats p strong{
     color: #202020;
+    font-size: 1.6em;
 }
 
 table{
@@ -123,8 +121,23 @@ td{
 
 /*=========== PROGRAM - WEEK & DAY SELECTOR ===========*/
 
+#program-container{
+    padding-top: 300px;
+    padding-bottom: 200px;
+    color: #202020;
+    text-align: center;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.notice {
+   text-align: center;
+   color: #202020;
+   padding-left: 60px;
+   padding-right: 60px;
+}
+
 #selectors {
-  padding-top: 300px;
   text-align: center;
   padding-left: 60px;
   padding-right: 60px;
@@ -148,10 +161,7 @@ td{
   width: 100px;
 }
 
-#programDisplay p {
-   text-align: center;
-   color: #202020; 
-}
+
 
 /*=========== PROGRAM - OUTPUT ===========*/
 
@@ -163,19 +173,21 @@ td{
     margin-bottom: 400px;
 }
 
-table col:nth-child(1) {
-  width: 70%;
+#programDisplay table td:nth-child(2),
+#programDisplay table td:nth-child(3) {
+  text-align: right;
 }
 
-table col:nth-child(2),
-table col:nth-child(3) {
-  width: 15%;
+#programDisplay th {
+    min-height: 40px;
+    padding: 12px;
+    text-align: left;
+    background-color: #202020;
+    color: white;
 }
 
-#programDisplay th, 
 #programDisplay td {
     min-height: 40px;
-    border: 1px solid #ccc;
     padding: 8px;
     text-align: left;
 }

@@ -14,7 +14,9 @@
       <a href="index.html"><img src="images/home-ns.png" /></a>
       <a href="program.html"><img src="images/program.png" /></a>
     </div>
-    <div id="program-container">
+
+    <div id="program-container"> 
+
       <div id="selectors">
         <label for="weekSelect">Week:</label>
         <select id="weekSelect">
@@ -38,7 +40,6 @@
       </div>
 
       <div id="programDisplay">
-        <p>Please select the week & day of the program you wish to open.</p>
       </div>
     </div>
 
@@ -52,7 +53,7 @@
 
         if (!lifts) {
           displayDiv.innerHTML =
-            "<p>Please enter your 1RM on all lifts before you may view the programming.</p>";
+            "<p class='notice'>Please enter your 1RM on all lifts before you may view the programming.</p>";
           return;
         }
 
@@ -60,7 +61,6 @@
           return Math.round((base * p) / 100);
         }
 
-        // Store all program content in an object keyed by "week-day"
         const programs = {
           "1-1": (() => {
             const bs = parseFloat(lifts.bs);   // Back Squat
@@ -74,39 +74,39 @@
             return `
               <table>
                 <colgroup>
-                  <col style="width: 50%;">
-                  <col style="width: 25%;">
-                  <col style="width: 25%;">
+                  <col style="width: 70%;">
+                  <col style="width: 15%;">
+                  <col style="width: 15%;">
                 </colgroup>
                     <tr><th colspan="3">Back Squat</th></tr>
-                    <tr><td>1 Set of 3 Reps</td><td>60%</td><td>${percent(bs, 60)}</td></tr>
-                    <tr><td>1 Set of 3 Reps</td><td>70%</td><td>${percent(bs, 70)}</td></tr>
-                    <tr><td>4 Sets of 3 Reps</td><td>80%</td><td>${percent(bs, 80)}</td></tr>
+                    <tr><td>1 Set of 3 Reps</td><td>60%</td><td>${percent(bs, 60)}kg</td></tr>
+                    <tr><td>1 Set of 3 Reps</td><td>70%</td><td>${percent(bs, 70)}kg</td></tr>
+                    <tr><td>4 Sets of 3 Reps</td><td>80%</td><td>${percent(bs, 80)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
 
                     <tr><th colspan="3">Snatch Pulls</th></tr>
-                    <tr><td>3 Sets of 2 Reps</td><td>90%</td><td>${percent(s, 90)}</td></tr>
+                    <tr><td>3 Sets of 2 Reps</td><td>90%</td><td>${percent(s, 90)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
 
                     <tr><th colspan="3">Power Snatch</th></tr>
-                    <tr><td>1 Set of 1 Rep</td><td>60%</td><td>${percent(s, 60)}</td></tr>
-                    <tr><td>1 Set of 1 Rep</td><td>70%</td><td>${percent(s, 70)}</td></tr>
-                    <tr><td>1 Set of 1 Rep</td><td>75%</td><td>${percent(s, 75)}</td></tr>
-                    <tr><td>5 Sets of 1 Rep</td><td>80%</td><td>${percent(s, 80)}</td></tr>
+                    <tr><td>1 Set of 1 Rep</td><td>60%</td><td>${percent(s, 60)}kg</td></tr>
+                    <tr><td>1 Set of 1 Rep</td><td>70%</td><td>${percent(s, 70)}kg</td></tr>
+                    <tr><td>1 Set of 1 Rep</td><td>75%</td><td>${percent(s, 75)}kg</td></tr>
+                    <tr><td>5 Sets of 1 Rep</td><td>80%</td><td>${percent(s, 80)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
 
                     <tr><th colspan="3">Snatch Pull to Knee + Snatch</th></tr>
-                    <tr><td>1 Set of 2 Sn.Pu.Kn. + 1 Sn.</td><td>60%</td><td>${percent(s, 60)}</td></tr>
-                    <tr><td>1 Set of 2 Sn.Pu.Kn. + 1 Sn.</td><td>70%</td><td>${percent(s, 70)}</td></tr>
-                    <tr><td>3 Sets of 2 Sn.Pu.Kn. + 1 Sn.</td><td>80%</td><td>${percent(s, 80)}</td></tr>
+                    <tr><td>1 Set of 2 Sn.Pu.Kn. + 1 Sn.</td><td>60%</td><td>${percent(s, 60)}kg</td></tr>
+                    <tr><td>1 Set of 2 Sn.Pu.Kn. + 1 Sn.</td><td>70%</td><td>${percent(s, 70)}kg</td></tr>
+                    <tr><td>3 Sets of 2 Sn.Pu.Kn. + 1 Sn.</td><td>80%</td><td>${percent(s, 80)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
 
                     <tr><th colspan="3">Snatch Grip Behind the Neck Push Press + Overhead Squat</th></tr>
-                    <tr><td>3 Sets of 3 Sn.Gr.Be.Ne.P.Pr. + 2 Oh.Sq.</td><td>75%</td><td>${percent(os, 75)}</td></tr>
+                    <tr><td>3 Sets of 3 Sn.Gr.Be.Ne.P.Pr. + 2 Oh.Sq.</td><td>75%</td><td>${percent(os, 75)}kg</td></tr>
               </table>
             `;
           })(),
@@ -123,34 +123,34 @@
             return `
               <table>
                 <colgroup>
-                  <col style="width: 50%;">
-                  <col style="width: 25%;">
-                  <col style="width: 25%;">
+                  <col style="width: 70%;">
+                  <col style="width: 15%;">
+                  <col style="width: 15%;">
                 </colgroup>
                     <tr><th colspan="3">Back Squat</th></tr>
-                    <tr><td>4 Sets of 10 Reps</td><td>60%</td><td>${percent(bs, 60)}</td></tr>
+                    <tr><td>4 Sets of 10 Reps</td><td>60%</td><td>${percent(bs, 60)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
                     
                     <tr><th colspan="3">Clean Deadlift</th></tr>
-                    <tr><td>4 Sets of 3 Reps </td><td>90%</td><td>${percent(c, 90)}</td></tr>
+                    <tr><td>4 Sets of 3 Reps </td><td>90%</td><td>${percent(c, 90)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
 
                     <tr><th colspan="3">Power Clean from Blocks Below the Knee</th></tr>
-                    <tr><td>1 Set of 1 Rep </td><td>60%</td><td>${percent(c, 60)}</td></tr>
-                    <tr><td>5 Sets of 1 Rep </td><td>70%</td><td>${percent(c, 70)}</td></tr>
+                    <tr><td>1 Set of 1 Rep </td><td>60%</td><td>${percent(c, 60)}kg</td></tr>
+                    <tr><td>5 Sets of 1 Rep </td><td>70%</td><td>${percent(c, 70)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
 
                     <tr><th colspan="3">Clean Pull to Knee + Clean</th></tr>
-                    <tr><td>1 Set of 2 Cl.Pu.Kn. + 1 Cl. </td><td>60%</td><td>${percent(c, 60)}</td></tr>
-                    <tr><td>4 Sets of 2 Cl.Pu.Kn. + 1 Cl. </td><td>70%</td><td>${percent(c, 70)}</td></tr>
+                    <tr><td>1 Set of 2 Cl.Pu.Kn. + 1 Cl. </td><td>60%</td><td>${percent(c, 60)}kg</td></tr>
+                    <tr><td>4 Sets of 2 Cl.Pu.Kn. + 1 Cl. </td><td>70%</td><td>${percent(c, 70)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
 
                     <tr><th colspan="3">Behind the Neck Push Press + Behind the Neck Push Jerk</th></tr>
-                    <tr><td>3 Sets of 3 Be.N.P.Pr. + 3 Be.N.P.Jr. </td><td>75%</td><td>${percent(d, 75)}</td></tr>
+                    <tr><td>3 Sets of 3 Be.N.P.Pr. + 3 Be.N.P.Jr. </td><td>75%</td><td>${percent(d, 75)}kg</td></tr>
 
               </table>
             `;
@@ -168,40 +168,40 @@
             return `
               <table>
                 <colgroup>
-                  <col style="width: 50%;">
-                  <col style="width: 25%;">
-                  <col style="width: 25%;">
+                  <col style="width: 70%;">
+                  <col style="width: 15%;">
+                  <col style="width: 15%;">
                 </colgroup>
                     <tr><th colspan="3">Back Squat</th></tr>
-                    <tr><td>1 Set of 5 Reps </td><td>60%</td><td>${percent(bs, 60)}</td></tr>
-                    <tr><td>4 Sets of 5 Reps </td><td>70%</td><td>${percent(bs, 70)}</td></tr>
+                    <tr><td>1 Set of 5 Reps </td><td>60%</td><td>${percent(bs, 60)}kg</td></tr>
+                    <tr><td>4 Sets of 5 Reps </td><td>70%</td><td>${percent(bs, 70)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
 
                     <tr><th colspan="3">Snatch Deadlift</th></tr>
-                    <tr><td>3 Sets of 2 Reps </td><td>95%</td><td>${percent(s, 95)}</td></tr>
+                    <tr><td>3 Sets of 2 Reps </td><td>95%</td><td>${percent(s, 95)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
 
                     <tr><th colspan="3">Power Snatch from Blocks Below the Knee</th></tr>
-                    <tr><td>1 Set of 1 Rep </td><td>60%</td><td>${percent(s, 60)}</td></tr>
-                    <tr><td>5 Sets of 1 Rep </td><td>70%</td><td>${percent(s, 70)}</td></tr>
+                    <tr><td>1 Set of 1 Rep </td><td>60%</td><td>${percent(s, 60)}kg</td></tr>
+                    <tr><td>5 Sets of 1 Rep </td><td>70%</td><td>${percent(s, 70)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
 
                     <tr><th colspan="3">Snatch Pull to Knee + Snatch</th></tr>
-                    <tr><td>1 Set of 2 Sn.Pu.Kn. + 1 Sn. </td><td>60%</td><td>${percent(s, 60)}</td></tr>
-                    <tr><td>4 Sets of 2 Sn.Pu.Kn. + 1 Sn. </td><td>70%</td><td>${percent(s, 70)}</td></tr>
+                    <tr><td>1 Set of 2 Sn.Pu.Kn. + 1 Sn. </td><td>60%</td><td>${percent(s, 60)}kg</td></tr>
+                    <tr><td>4 Sets of 2 Sn.Pu.Kn. + 1 Sn. </td><td>70%</td><td>${percent(s, 70)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
 
                     <tr><th colspan="3">Snatch Grip Behind the Neck Push Press + Overhead Squat</th></tr>
-                    <tr><td>3 Sets of 3 Sn.Gr.Be.N.P.Pr. + 3 Oh.S. </td><td>75%</td><td>${percent(os, 75)}</td></tr>
+                    <tr><td>3 Sets of 3 Sn.Gr.Be.N.P.Pr. + 3 Oh.S. </td><td>75%</td><td>${percent(os, 75)}kg</td></tr>
               </table>
             `;
             })(),
 
-            "1-4": (() => {
+          "1-4": (() => {
             const bs = parseFloat(lifts.bs);   // Back Squat
             const fs = parseFloat(lifts.fs);   // Front Squat
             const os = parseFloat(lifts.os);   // Overhead Squat
@@ -213,27 +213,27 @@
             return `
               <table>
                 <colgroup>
-                  <col style="width: 50%;">
-                  <col style="width: 25%;">
-                  <col style="width: 25%;">
+                  <col style="width: 70%;">
+                  <col style="width: 15%;">
+                  <col style="width: 15%;">
                 </colgroup>
                     <tr><th colspan="3">Back Squat</th></tr>
-                    <tr><td>3 Sets of 10 Reps </td><td>60%</td><td>${percent(bs, 60)}</td></tr>
+                    <tr><td>3 Sets of 10 Reps </td><td>60%</td><td>${percent(bs, 60)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
 
                     <tr><th colspan="3">Clean Deadlift</th></tr>
-                    <tr><td>5 Sets of 3 Reps </td><td>90%</td><td>${percent(c, 90)}</td></tr>
+                    <tr><td>5 Sets of 3 Reps </td><td>90%</td><td>${percent(c, 90)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
 
                     <tr><th colspan="3">Push Press</th></tr>
-                    <tr><td>4 Sets of 4 Reps </td><td>60%</td><td>${percent(pp, 60)}</td></tr>
+                    <tr><td>4 Sets of 4 Reps </td><td>60%</td><td>${percent(pp, 60)}kg</td></tr>
               </table>
             `;
             })(),
 
-           "2-1": (() => {
+          "2-1": (() => {
             const bs = parseFloat(lifts.bs);   // Back Squat
             const fs = parseFloat(lifts.fs);   // Front Squat
             const os = parseFloat(lifts.os);   // Overhead Squat
@@ -245,43 +245,43 @@
             return `
               <table>
                 <colgroup>
-                  <col style="width: 50%;">
-                  <col style="width: 25%;">
-                  <col style="width: 25%;">
+                  <col style="width: 70%;">
+                  <col style="width: 15%;">
+                  <col style="width: 15%;">
                 </colgroup>
                     <tr><th colspan="3">Back Squat</th></tr>
-                    <tr><td>1 Set of 5 Reps </td><td>60%</td><td>${percent(bs, 60)}</td></tr>
-                    <tr><td>1 Set of 5 Reps </td><td>70%</td><td>${percent(bs, 70)}</td></tr>
-                    <tr><td>4 Sets of 4 Reps </td><td>80%</td><td>${percent(bs, 80)}</td></tr>
+                    <tr><td>1 Set of 5 Reps </td><td>60%</td><td>${percent(bs, 60)}kg</td></tr>
+                    <tr><td>1 Set of 5 Reps </td><td>70%</td><td>${percent(bs, 70)}kg</td></tr>
+                    <tr><td>4 Sets of 4 Reps </td><td>80%</td><td>${percent(bs, 80)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
 
                     <tr><th colspan="3">Hang Snatch</th></tr>
-                    <tr><td>1 Set of 4 Reps </td><td>60%</td><td>${percent(s, 60)}</td></tr>
-                    <tr><td>1 Set of 4 Reps </td><td>70%</td><td>${percent(s, 70)}</td></tr>
-                    <tr><td>2 Sets of 3 Reps </td><td>80%</td><td>${percent(s, 80)}</td></tr>
+                    <tr><td>1 Set of 4 Reps </td><td>60%</td><td>${percent(s, 60)}kg</td></tr>
+                    <tr><td>1 Set of 4 Reps </td><td>70%</td><td>${percent(s, 70)}kg</td></tr>
+                    <tr><td>2 Sets of 3 Reps </td><td>80%</td><td>${percent(s, 80)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
 
                     <tr><th colspan="3">Hang Clean + Jerk</th></tr>
-                    <tr><td>1 Set of 4 Hg.Cl. + 1 Jr. </td><td>60%</td><td>${percent(cj, 60)}</td></tr>
-                    <tr><td>1 Set of 4 Hg.Cl. + 1 Jr. </td><td>70%</td><td>${percent(cj, 70)}</td></tr>
-                    <tr><td>1 Set of 3 Hg.Cl. + 1 Jr. </td><td>80%</td><td>${percent(cj, 80)}</td></tr>
-                    <tr><td>2 Sets of 4 Hg.Cl. + 1 Jr. </td><td>75%</td><td>${percent(cj, 75)}</td></tr>
+                    <tr><td>1 Set of 4 Hg.Cl. + 1 Jr. </td><td>60%</td><td>${percent(cj, 60)}kg</td></tr>
+                    <tr><td>1 Set of 4 Hg.Cl. + 1 Jr. </td><td>70%</td><td>${percent(cj, 70)}kg</td></tr>
+                    <tr><td>1 Set of 3 Hg.Cl. + 1 Jr. </td><td>80%</td><td>${percent(cj, 80)}kg</td></tr>
+                    <tr><td>2 Sets of 4 Hg.Cl. + 1 Jr. </td><td>75%</td><td>${percent(cj, 75)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
 
                     <tr><th colspan="3">Behind the Neck Push Press</th></tr>
-                    <tr><td>1 Set of 4 Reps </td><td>60%</td><td>${percent(pp, 60)}</td></tr>
-                    <tr><td>1 Set of 4 Reps </td><td>70%</td><td>${percent(pp, 70)}</td></tr>
-                    <tr><td>1 Set of 1 Rep </td><td>75%</td><td>${percent(pp, 75)}</td></tr>
-                    <tr><td>1 Set of 4 Reps </td><td>60%</td><td>${percent(pp, 60)}</td></tr>
-                    <tr><td>3 Sets of 4 Reps </td><td>70%</td><td>${percent(pp, 70)}</td></tr>
+                    <tr><td>1 Set of 4 Reps </td><td>60%</td><td>${percent(pp, 60)}kg</td></tr>
+                    <tr><td>1 Set of 4 Reps </td><td>70%</td><td>${percent(pp, 70)}kg</td></tr>
+                    <tr><td>1 Set of 1 Rep </td><td>75%</td><td>${percent(pp, 75)}kg</td></tr>
+                    <tr><td>1 Set of 4 Reps </td><td>60%</td><td>${percent(pp, 60)}kg</td></tr>
+                    <tr><td>3 Sets of 4 Reps </td><td>70%</td><td>${percent(pp, 70)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
 
                     <tr><th colspan="3">Snatch Pulls </th></tr>
-                    <tr><td>5 Sets of 5 Reps </td><td>80%</td><td>${percent(s, 80)}</td></tr>
+                    <tr><td>5 Sets of 5 Reps </td><td>80%</td><td>${percent(s, 80)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
 
@@ -291,7 +291,7 @@
             `;
             })(),
             
-            "2-2": (() => {
+          "2-2": (() => {
             const bs = parseFloat(lifts.bs);   // Back Squat
             const fs = parseFloat(lifts.fs);   // Front Squat
             const os = parseFloat(lifts.os);   // Overhead Squat
@@ -303,37 +303,37 @@
             return `
               <table>
                 <colgroup>
-                  <col style="width: 50%;">
-                  <col style="width: 25%;">
-                  <col style="width: 25%;">
+                  <col style="width: 70%;">
+                  <col style="width: 15%;">
+                  <col style="width: 15%;">
                 </colgroup>
                     <tr><th colspan="3">Back Squat</th></tr>
-                    <tr><td>1 Set of 4 Reps </td><td>60%</td><td>${percent(bs, 60)}</td></tr>
-                    <tr><td>1 Set of 4 Reps </td><td>70%</td><td>${percent(bs, 70)}</td></tr>
-                    <tr><td>5 Sets of 3 Reps </td><td>80%</td><td>${percent(bs, 80)}</td></tr>
+                    <tr><td>1 Set of 4 Reps </td><td>60%</td><td>${percent(bs, 60)}kg</td></tr>
+                    <tr><td>1 Set of 4 Reps </td><td>70%</td><td>${percent(bs, 70)}kg</td></tr>
+                    <tr><td>5 Sets of 3 Reps </td><td>80%</td><td>${percent(bs, 80)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
 
                     <tr><th colspan="3">Power Snatch</th></tr>
-                    <tr><td>1 Set of 4 Reps </td><td>60%</td><td>${percent(s, 60)}</td></tr>
-                    <tr><td>1 Set of 4 Reps </td><td>70%</td><td>${percent(s, 70)}</td></tr>
-                    <tr><td>1 Set of 2 Reps </td><td>75%</td><td>${percent(s, 75)}</td></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>65%</td><td>${percent(s, 65)}</td></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>70%</td><td>${percent(s, 70)}</td></tr>
+                    <tr><td>1 Set of 4 Reps </td><td>60%</td><td>${percent(s, 60)}kg</td></tr>
+                    <tr><td>1 Set of 4 Reps </td><td>70%</td><td>${percent(s, 70)}kg</td></tr>
+                    <tr><td>1 Set of 2 Reps </td><td>75%</td><td>${percent(s, 75)}kg</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>65%</td><td>${percent(s, 65)}kg</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>70%</td><td>${percent(s, 70)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
 
                     <tr><th colspan="3">Power Clean + Push Jerk</th></tr>
-                    <tr><td>1 Set of 2 P.Cl. + 3 P.Jr. </td><td>60%</td><td>${percent(cj, 60)}</td></tr>
-                    <tr><td>1 Set of 2 P.Cl. + 3 P.Jr. </td><td>70%</td><td>${percent(cj, 70)}</td></tr>
-                    <tr><td>1 Set of 1 P.Cl. + 2 P.Jr. </td><td>75%</td><td>${percent(cj, 75)}</td></tr>
-                    <tr><td>3 Sets of 2 P.Cl. + 2 P.Jr. </td><td>70%</td><td>${percent(cj, 70)}</td></tr>
+                    <tr><td>1 Set of 2 P.Cl. + 3 P.Jr. </td><td>60%</td><td>${percent(cj, 60)}kg</td></tr>
+                    <tr><td>1 Set of 2 P.Cl. + 3 P.Jr. </td><td>70%</td><td>${percent(cj, 70)}kg</td></tr>
+                    <tr><td>1 Set of 1 P.Cl. + 2 P.Jr. </td><td>75%</td><td>${percent(cj, 75)}kg</td></tr>
+                    <tr><td>3 Sets of 2 P.Cl. + 2 P.Jr. </td><td>70%</td><td>${percent(cj, 70)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
 
                     <tr><th colspan="3">RDL</th></tr>
-                    <tr><td>1 Set of 5 Reps </td><td>80%</td><td>${percent(d, 80)}</td></tr>
-                    <tr><td>5 Sets of 4 Reps </td><td>85%</td><td>${percent(d, 85)}</td></tr>
+                    <tr><td>1 Set of 5 Reps </td><td>80%</td><td>${percent(d, 80)}kg</td></tr>
+                    <tr><td>5 Sets of 4 Reps </td><td>85%</td><td>${percent(d, 85)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
 
@@ -343,7 +343,7 @@
             `;
             })(),
 
-            "2-3": (() => {
+          "2-3": (() => {
             const bs = parseFloat(lifts.bs);   // Back Squat
             const fs = parseFloat(lifts.fs);   // Front Squat
             const os = parseFloat(lifts.os);   // Overhead Squat
@@ -355,42 +355,42 @@
             return `
               <table>
                 <colgroup>
-                  <col style="width: 50%;">
-                  <col style="width: 25%;">
-                  <col style="width: 25%;">
+                  <col style="width: 70%;">
+                  <col style="width: 15%;">
+                  <col style="width: 15%;">
                 </colgroup>
                     <tr><th colspan="3">Front Squat</th></tr>
-                    <tr><td>1 Set of 5 Reps </td><td>60%</td><td>${percent(fs, 60)}</td></tr>
-                    <tr><td>1 Set of 5 Reps </td><td>70%</td><td>${percent(fs, 70)}</td></tr>
-                    <tr><td>3 Sets of 4 Reps </td><td>80%</td><td>${percent(fs, 80)}</td></tr>
-                    <tr><td>1Set of 1 Rep</td><td>90%</td><td>${percent(fs, 90)}</td></tr>
+                    <tr><td>1 Set of 5 Reps </td><td>60%</td><td>${percent(fs, 60)}kg</td></tr>
+                    <tr><td>1 Set of 5 Reps </td><td>70%</td><td>${percent(fs, 70)}kg</td></tr>
+                    <tr><td>3 Sets of 4 Reps </td><td>80%</td><td>${percent(fs, 80)}kg</td></tr>
+                    <tr><td>1Set of 1 Rep</td><td>90%</td><td>${percent(fs, 90)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
 
                     <tr><th colspan="3">Hang Snatch</th></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>60%</td><td>${percent(s, 60)}</td></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>70%</td><td>${percent(s, 70)}</td></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>80%</td><td>${percent(s, 80)}</td></tr>
-                    <tr><td>1 Set of 2 Reps </td><td>85%</td><td>${percent(s, 85)}</td></tr>
-                    <tr><td>3 Sets of 3 Reps </td><td>80%</td><td>${percent(s, 80)}</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>60%</td><td>${percent(s, 60)}kg</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>70%</td><td>${percent(s, 70)}kg</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>80%</td><td>${percent(s, 80)}kg</td></tr>
+                    <tr><td>1 Set of 2 Reps </td><td>85%</td><td>${percent(s, 85)}kg</td></tr>
+                    <tr><td>3 Sets of 3 Reps </td><td>80%</td><td>${percent(s, 80)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
 
                     <tr><th colspan="3">Hang Clean + Jerk</th></tr>
-                    <tr><td>1 Set of 3 Hg.Cl. + 1 Jr. </td><td>60%</td><td>${percent(cj, 60)}</td></tr>
-                    <tr><td>1 Set of 3 Hg.Cl. + 1 Jr. </td><td>70%</td><td>${percent(cj, 70)}</td></tr>
-                    <tr><td>3 Sets of 3 Hg.Cl. + 1 Jr. </td><td>80%</td><td>${percent(cj, 80)}</td></tr>
+                    <tr><td>1 Set of 3 Hg.Cl. + 1 Jr. </td><td>60%</td><td>${percent(cj, 60)}kg</td></tr>
+                    <tr><td>1 Set of 3 Hg.Cl. + 1 Jr. </td><td>70%</td><td>${percent(cj, 70)}kg</td></tr>
+                    <tr><td>3 Sets of 3 Hg.Cl. + 1 Jr. </td><td>80%</td><td>${percent(cj, 80)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
                     
                     <tr><th colspan="3">Clean Pulls </th></tr>
-                    <tr><td>1 Set of 4 Reps </td><td>80%</td><td>${percent(c, 80)}</td></tr>
-                    <tr><td>5 Sets of 4 Reps </td><td>90%</td><td>${percent(c, 90)}</td></tr>
+                    <tr><td>1 Set of 4 Reps </td><td>80%</td><td>${percent(c, 80)}kg</td></tr>
+                    <tr><td>5 Sets of 4 Reps </td><td>90%</td><td>${percent(c, 90)}kg</td></tr>
               </table>
             `;
             })(),
 
-            "2-4": (() => {
+          "2-4": (() => {
             const bs = parseFloat(lifts.bs);   // Back Squat
             const fs = parseFloat(lifts.fs);   // Front Squat
             const os = parseFloat(lifts.os);   // Overhead Squat
@@ -402,9 +402,9 @@
             return `
               <table>
                 <colgroup>
-                  <col style="width: 50%;">
-                  <col style="width: 25%;">
-                  <col style="width: 25%;">
+                  <col style="width: 70%;">
+                  <col style="width: 15%;">
+                  <col style="width: 15%;">
                 </colgroup>
                     <tr><th colspan="3">Power Clean + Press</th></tr>
                     <tr><td>5 Sets of 1 P.Cl. + 5 Press Work up to weight where you can maintain proper form.</td></tr>
@@ -412,29 +412,29 @@
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
 
                     <tr><th colspan="3">Power Snatch + Behind the Neck Snatch Grip Push Press + Overhead Squat</th></tr>
-                    <tr><td>1 Set of 3 P.Sn. + 3 B.N.Sn.G.P.Pr. + 3 Oh.S. </td><td>60%</td><td>${percent(os, 60)}</td></tr>
-                    <tr><td>3 Sets of 3 P.Sn. + 3 B.N.Sn.G.P.Pr. + 3 Oh.S. </td><td>70%</td><td>${percent(os, 70)}</td></tr>
+                    <tr><td>1 Set of 3 P.Sn. + 3 B.N.Sn.G.P.Pr. + 3 Oh.S. </td><td>60%</td><td>${percent(os, 60)}kg</td></tr>
+                    <tr><td>3 Sets of 3 P.Sn. + 3 B.N.Sn.G.P.Pr. + 3 Oh.S. </td><td>70%</td><td>${percent(os, 70)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
 
                     <tr><th colspan="3">Power Clean + Front Squat + Jerk</th></tr>
-                    <tr><td>1 Set of 3 P.Cl. + 3 F.S. + 3 Jr. </td><td>60%</td><td>${percent(cj, 60)}</td></tr>
-                    <tr><td>3 Sets of 3 P.Cl. + 3 F.S. + 3 Jr. </td><td>70%</td><td>${percent(cj, 70)}</td></tr>
+                    <tr><td>1 Set of 3 P.Cl. + 3 F.S. + 3 Jr. </td><td>60%</td><td>${percent(cj, 60)}kg</td></tr>
+                    <tr><td>3 Sets of 3 P.Cl. + 3 F.S. + 3 Jr. </td><td>70%</td><td>${percent(cj, 70)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
 
                     <tr><th colspan="3">Snatch Pulls</th></tr>
-                    <tr><td>4 Sets of 4 Reps </td><td>90%</td><td>${percent(s, 90)}</td></tr>
+                    <tr><td>4 Sets of 4 Reps </td><td>90%</td><td>${percent(s, 90)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
 
                     <tr><th colspan="3">Back Squat</th></tr>
-                    <tr><td>1 Set of 4 Reps </td><td>60%</td><td>${percent(bs, 60)}</td></tr>
-                    <tr><td>1 Set of 4 Reps </td><td>70%</td><td>${percent(bs, 70)}</td></tr>
-                    <tr><td>1 Set of 4 Reps </td><td>80%</td><td>${percent(bs, 80)}</td></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>85%</td><td>${percent(bs, 85)}</td></tr>
-                    <tr><td>1 Set of 4 Reps </td><td>80%</td><td>${percent(bs, 80)}</td></tr>
-                    <tr><td>1 Set of 2 Reps </td><td>85%</td><td>${percent(bs, 85)}</td></tr>
+                    <tr><td>1 Set of 4 Reps </td><td>60%</td><td>${percent(bs, 60)}kg</td></tr>
+                    <tr><td>1 Set of 4 Reps </td><td>70%</td><td>${percent(bs, 70)}kg</td></tr>
+                    <tr><td>1 Set of 4 Reps </td><td>80%</td><td>${percent(bs, 80)}kg</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>85%</td><td>${percent(bs, 85)}kg</td></tr>
+                    <tr><td>1 Set of 4 Reps </td><td>80%</td><td>${percent(bs, 80)}kg</td></tr>
+                    <tr><td>1 Set of 2 Reps </td><td>85%</td><td>${percent(bs, 85)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
 
@@ -444,7 +444,7 @@
             `;
             })(),
 
-            "3-1": (() => {
+          "3-1": (() => {
             const bs = parseFloat(lifts.bs);   // Back Squat
             const fs = parseFloat(lifts.fs);   // Front Squat
             const os = parseFloat(lifts.os);   // Overhead Squat
@@ -456,50 +456,50 @@
             return `
               <table>
                 <colgroup>
-                  <col style="width: 50%;">
-                  <col style="width: 25%;">
-                  <col style="width: 25%;">
+                  <col style="width: 70%;">
+                  <col style="width: 15%;">
+                  <col style="width: 15%;">
                 </colgroup>
                     <tr><th colspan="3">Back Squat</th></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>60%</td><td>${percent(bs, 60)}</td></tr>
-                    <tr><td>1 Set of 3 Rerps </td><td>70%</td><td>${percent(bs, 70)}</td></tr>
-                    <tr><td>2 Sets of 3 Reps </td><td>80%</td><td>${percent(bs, 80)}</td></tr>
-                    <tr><td>1 Set of 2 Reps </td><td>85%</td><td>${percent(bs, 85)}</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>60%</td><td>${percent(bs, 60)}kg</td></tr>
+                    <tr><td>1 Set of 3 Rerps </td><td>70%</td><td>${percent(bs, 70)}kg</td></tr>
+                    <tr><td>2 Sets of 3 Reps </td><td>80%</td><td>${percent(bs, 80)}kg</td></tr>
+                    <tr><td>1 Set of 2 Reps </td><td>85%</td><td>${percent(bs, 85)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
 
                     <tr><th colspan="3">Snatch</th></tr>
-                    <tr><td>1 Set of 3 Reps</td><td>60%</td><td>${percent(s, 60)}</td></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>70%</td><td>${percent(s, 70)}</td></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>80%</td><td>${percent(s, 80)}</td></tr>
-                    <tr><td>1 Set of 1 Rep </td><td>85%</td><td>${percent(s, 85)}</td></tr>
-                    <tr><td>1 Set of 2 Reps </td><td>80%</td><td>${percent(s, 80)}</td></tr>
-                    <tr><td>1 Set of 1 Rep </td><td>85%</td><td>${percent(s, 85)}</td></tr>
+                    <tr><td>1 Set of 3 Reps</td><td>60%</td><td>${percent(s, 60)}kg</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>70%</td><td>${percent(s, 70)}kg</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>80%</td><td>${percent(s, 80)}kg</td></tr>
+                    <tr><td>1 Set of 1 Rep </td><td>85%</td><td>${percent(s, 85)}kg</td></tr>
+                    <tr><td>1 Set of 2 Reps </td><td>80%</td><td>${percent(s, 80)}kg</td></tr>
+                    <tr><td>1 Set of 1 Rep </td><td>85%</td><td>${percent(s, 85)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
 
                     <tr><th colspan="3">Clean + Jerk</th></tr>
-                    <tr><td>1 Set of 1 Cl. + 3 Jr. </td><td>60%</td><td>${percent(cj, 60)}</td></tr>
-                    <tr><td>1 Set of 1 Cl. + 3 Jr. </td><td>70%</td><td>${percent(cj, 70)}</td></tr>
-                    <tr><td>1 Set of 1 Cl. + 2 Jr. </td><td>80%</td><td>${percent(cj, 80)}</td></tr>
-                    <tr><td>1 Set of 1 Cl. + 1 Jr. </td><td>85%</td><td>${percent(cj, 85)}</td></tr>
-                    <tr><td>1 Set of 1 Cl. + 2 Jr. </td><td>80%</td><td>${percent(cj, 80)}</td></tr>
-                    <tr><td>1 Set of 1 Cl. + 1 Jr. </td><td>85%</td><td>${percent(cj, 85)}</td></tr>
+                    <tr><td>1 Set of 1 Cl. + 3 Jr. </td><td>60%</td><td>${percent(cj, 60)}kg</td></tr>
+                    <tr><td>1 Set of 1 Cl. + 3 Jr. </td><td>70%</td><td>${percent(cj, 70)}kg</td></tr>
+                    <tr><td>1 Set of 1 Cl. + 2 Jr. </td><td>80%</td><td>${percent(cj, 80)}kg</td></tr>
+                    <tr><td>1 Set of 1 Cl. + 1 Jr. </td><td>85%</td><td>${percent(cj, 85)}kg</td></tr>
+                    <tr><td>1 Set of 1 Cl. + 2 Jr. </td><td>80%</td><td>${percent(cj, 80)}kg</td></tr>
+                    <tr><td>1 Set of 1 Cl. + 1 Jr. </td><td>85%</td><td>${percent(cj, 85)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
 
                     <tr><th colspan="3">Clean Pulls</th></tr>
-                    <tr><td>1 Set of 5 Reps </td><td>80%</td><td>${percent(c, 80)}</td></tr>
-                    <tr><td>5 Sets of 4 Reps </td><td>90%</td><td>${percent(c, 90)}</td></tr>
+                    <tr><td>1 Set of 5 Reps </td><td>80%</td><td>${percent(c, 80)}kg</td></tr>
+                    <tr><td>5 Sets of 4 Reps </td><td>90%</td><td>${percent(c, 90)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
                     
                     <tr><th colspan="3">Behind the Neck Push Jerk</th></tr>
-                    <tr><td>1 Set of 4 Reps </td><td>60%</td><td>${percent(cj, 60)}</td></tr>
-                    <tr><td>1 Set of 4 Reps </td><td>70%</td><td>${percent(cj, 70)}</td></tr>
-                    <tr><td>1 Set of 2 Reps </td><td>75%</td><td>${percent(cj, 75)}</td></tr>
-                    <tr><td>1 Set of 4 Reps </td><td>60%</td><td>${percent(cj, 60)}</td></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>70%</td><td>${percent(cj, 70)}</td></tr>
+                    <tr><td>1 Set of 4 Reps </td><td>60%</td><td>${percent(cj, 60)}kg</td></tr>
+                    <tr><td>1 Set of 4 Reps </td><td>70%</td><td>${percent(cj, 70)}kg</td></tr>
+                    <tr><td>1 Set of 2 Reps </td><td>75%</td><td>${percent(cj, 75)}kg</td></tr>
+                    <tr><td>1 Set of 4 Reps </td><td>60%</td><td>${percent(cj, 60)}kg</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>70%</td><td>${percent(cj, 70)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
                     
@@ -509,7 +509,7 @@
             `;
             })(),
 
-            "3-2": (() => {
+          "3-2": (() => {
             const bs = parseFloat(lifts.bs);   // Back Squat
             const fs = parseFloat(lifts.fs);   // Front Squat
             const os = parseFloat(lifts.os);   // Overhead Squat
@@ -521,44 +521,44 @@
             return `
               <table>
                 <colgroup>
-                  <col style="width: 50%;">
-                  <col style="width: 25%;">
-                  <col style="width: 25%;">
+                  <col style="width: 70%;">
+                  <col style="width: 15%;">
+                  <col style="width: 15%;">
                 </colgroup>
                     <tr><th colspan="3">Power Snatch</th></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>60%</td><td>${percent(s, 60)}</td></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>70%</td><td>${percent(s, 70)}</td></tr>
-                    <tr><td>1 Set of 1 Rep </td><td>75%</td><td>${percent(s, 75)}</td></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>60%</td><td>${percent(s, 60)}</td></tr>
-                    <tr><td>1 Set of 2 Reps </td><td>65%</td><td>${percent(s, 65)}</td></tr>
-                    <tr><td>1 Set of 2 Reps </td><td>70%</td><td>${percent(s, 70)}</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>60%</td><td>${percent(s, 60)}kg</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>70%</td><td>${percent(s, 70)}kg</td></tr>
+                    <tr><td>1 Set of 1 Rep </td><td>75%</td><td>${percent(s, 75)}kg</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>60%</td><td>${percent(s, 60)}kg</td></tr>
+                    <tr><td>1 Set of 2 Reps </td><td>65%</td><td>${percent(s, 65)}kg</td></tr>
+                    <tr><td>1 Set of 2 Reps </td><td>70%</td><td>${percent(s, 70)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
 
                     <tr><th colspan="3">Power Clean + Push Jerk</th></tr>
-                    <tr><td>1 Set of 3 P.Cl. + 1 P.Jr. </td><td>60%</td><td>${percent(cj, 60)}</td></tr>
-                    <tr><td>1 Set of 3 P.Cl. + 1 P.Jr. </td><td>70%</td><td>${percent(cj, 70)}</td></tr>
-                    <tr><td>1 Set of 1 P.Cl. + 1 P.Jr. </td><td>75%</td><td>${percent(cj, 75)}</td></tr>
-                    <tr><td>1 Set of 3 P.Cl. + 1 P.Jr. </td><td>60%</td><td>${percent(cj, 60)}</td></tr>
-                    <tr><td>1 Set of 3 P.Cl. + 1 P.Jr. </td><td>70%</td><td>${percent(cj, 70)}</td></tr>
+                    <tr><td>1 Set of 3 P.Cl. + 1 P.Jr. </td><td>60%</td><td>${percent(cj, 60)}kg</td></tr>
+                    <tr><td>1 Set of 3 P.Cl. + 1 P.Jr. </td><td>70%</td><td>${percent(cj, 70)}kg</td></tr>
+                    <tr><td>1 Set of 1 P.Cl. + 1 P.Jr. </td><td>75%</td><td>${percent(cj, 75)}kg</td></tr>
+                    <tr><td>1 Set of 3 P.Cl. + 1 P.Jr. </td><td>60%</td><td>${percent(cj, 60)}kg</td></tr>
+                    <tr><td>1 Set of 3 P.Cl. + 1 P.Jr. </td><td>70%</td><td>${percent(cj, 70)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
 
                     <tr><th colspan="3">RDL</th></tr>
-                    <tr><td>1 Set of 5 Reps </td><td>80%</td><td>${percent(d, 80)}</td></tr>
-                    <tr><td>3 Sets of 4 Reps </td><td>90%</td><td>${percent(d, 90)}</td></tr>
-                    <tr><td>2 Sets of 2 Reps </td><td>100%</td><td>${percent(d, 100)}</td></tr>
+                    <tr><td>1 Set of 5 Reps </td><td>80%</td><td>${percent(d, 80)}kg</td></tr>
+                    <tr><td>3 Sets of 4 Reps </td><td>90%</td><td>${percent(d, 90)}kg</td></tr>
+                    <tr><td>2 Sets of 2 Reps </td><td>100%</td><td>${percent(d, 100)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
 
                     <tr><th colspan="3">Front Squat</th></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>60%</td><td>${percent(fs, 60)}</td></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>70%</td><td>${percent(fs, 70)}</td></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>80%</td><td>${percent(fs, 80)}</td></tr>
-                    <tr><td>1 Set of 2 Reps </td><td>85%</td><td>${percent(fs, 85)}</td></tr>
-                    <tr><td>1 Set of 1 Rep </td><td>90%</td><td>${percent(fs, 90)}</td></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>80%</td><td>${percent(fs, 80)}</td></tr>
-                    <tr><td>1 Set of 1 Rep </td><td>85%</td><td>${percent(fs, 85)}</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>60%</td><td>${percent(fs, 60)}kg</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>70%</td><td>${percent(fs, 70)}kg</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>80%</td><td>${percent(fs, 80)}kg</td></tr>
+                    <tr><td>1 Set of 2 Reps </td><td>85%</td><td>${percent(fs, 85)}kg</td></tr>
+                    <tr><td>1 Set of 1 Rep </td><td>90%</td><td>${percent(fs, 90)}kg</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>80%</td><td>${percent(fs, 80)}kg</td></tr>
+                    <tr><td>1 Set of 1 Rep </td><td>85%</td><td>${percent(fs, 85)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
 
@@ -573,7 +573,7 @@
             `;
             })(),
 
-            "3-3": (() => {
+          "3-3": (() => {
             const bs = parseFloat(lifts.bs);   // Back Squat
             const fs = parseFloat(lifts.fs);   // Front Squat
             const os = parseFloat(lifts.os);   // Overhead Squat
@@ -585,65 +585,65 @@
             return `
               <table>
                 <colgroup>
-                  <col style="width: 50%;">
-                  <col style="width: 25%;">
-                  <col style="width: 25%;">
+                  <col style="width: 70%;">
+                  <col style="width: 15%;">
+                  <col style="width: 15%;">
                 </colgroup>
                     <tr><th colspan="3">Back Squat</th></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>60%</td><td>${percent(bs, 60)}</td></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>70%</td><td>${percent(bs, 70)}</td></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>80%</td><td>${percent(bs, 80)}</td></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>85%</td><td>${percent(bs, 85)}</td></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>90%</td><td>${percent(bs, 90)}</td></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>85%</td><td>${percent(bs, 85)}</td></tr>
-                    <tr><td>1 Set of 2 Reps </td><td>90%</td><td>${percent(bs, 90)}</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>60%</td><td>${percent(bs, 60)}kg</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>70%</td><td>${percent(bs, 70)}kg</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>80%</td><td>${percent(bs, 80)}kg</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>85%</td><td>${percent(bs, 85)}kg</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>90%</td><td>${percent(bs, 90)}kg</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>85%</td><td>${percent(bs, 85)}kg</td></tr>
+                    <tr><td>1 Set of 2 Reps </td><td>90%</td><td>${percent(bs, 90)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
 
                     <tr><th colspan="3">Snatch</th></tr>
-                    <tr><td>1 Set of 2 Reps </td><td>60%</td><td>${percent(s, 60)}</td></tr>
-                    <tr><td>1 Set of 2 Reps </td><td>70%</td><td>${percent(s, 70)}</td></tr>
-                    <tr><td>1 Set of 2 Reps </td><td>80%</td><td>${percent(s, 80)}</td></tr>
-                    <tr><td>4 Sets of 2 Reps </td><td>85%</td><td>${percent(s, 85)}</td></tr>
+                    <tr><td>1 Set of 2 Reps </td><td>60%</td><td>${percent(s, 60)}kg</td></tr>
+                    <tr><td>1 Set of 2 Reps </td><td>70%</td><td>${percent(s, 70)}kg</td></tr>
+                    <tr><td>1 Set of 2 Reps </td><td>80%</td><td>${percent(s, 80)}kg</td></tr>
+                    <tr><td>4 Sets of 2 Reps </td><td>85%</td><td>${percent(s, 85)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
 
                     <tr><th colspan="3">Clean & Jerk</th></tr>
-                    <tr><td>1 Set of 2 Cl. + 1 Jr. </td><td>60%</td><td>${percent(cj, 60)}</td></tr>
-                    <tr><td>1 Set of 2 Cl. + 1 Jr. </td><td>70%</td><td>${percent(cj, 70)}</td></tr>
-                    <tr><td>1 Set of 2 Cl. + 1 Jr. </td><td>80%</td><td>${percent(cj, 80)}</td></tr>
-                    <tr><td>3 Sets of 2 Cl. + 1 Jr. </td><td>85%</td><td>${percent(cj, 85)}</td></tr>
+                    <tr><td>1 Set of 2 Cl. + 1 Jr. </td><td>60%</td><td>${percent(cj, 60)}kg</td></tr>
+                    <tr><td>1 Set of 2 Cl. + 1 Jr. </td><td>70%</td><td>${percent(cj, 70)}kg</td></tr>
+                    <tr><td>1 Set of 2 Cl. + 1 Jr. </td><td>80%</td><td>${percent(cj, 80)}kg</td></tr>
+                    <tr><td>3 Sets of 2 Cl. + 1 Jr. </td><td>85%</td><td>${percent(cj, 85)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
 
                     <tr><th colspan="3">Behind the Neck Push Jerk</th></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>60%</td><td>${percent(cj, 60)}</td></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>65%</td><td>${percent(cj, 65)}</td></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>70%</td><td>${percent(cj, 70)}</td></tr>
-                    <tr><td>1 Set of 1 Reps </td><td>75%</td><td>${percent(cj, 75)}</td></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>65%</td><td>${percent(cj, 65)}</td></tr>
-                    <tr><td>1 Set of 2 Reps </td><td>70%</td><td>${percent(cj, 70)}</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>60%</td><td>${percent(cj, 60)}kg</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>65%</td><td>${percent(cj, 65)}kg</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>70%</td><td>${percent(cj, 70)}kg</td></tr>
+                    <tr><td>1 Set of 1 Reps </td><td>75%</td><td>${percent(cj, 75)}kg</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>65%</td><td>${percent(cj, 65)}kg</td></tr>
+                    <tr><td>1 Set of 2 Reps </td><td>70%</td><td>${percent(cj, 70)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
 
                     <tr><th colspan="3">Snatch Deadlift</th></tr>
-                    <tr><td>1 Set of 5 Reps </td><td>90%</td><td>${percent(s, 90)}</td></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>100%</td><td>${percent(s, 100)}</td></tr>
-                    <tr><td>1 Set of 2 Reps </td><td>110%</td><td>${percent(s, 110)}</td></tr>
-                    <tr><td>1 Set of 5 Reps </td><td>90%</td><td>${percent(s, 90)}</td></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>100%</td><td>${percent(s, 100)}</td></tr>
-                    <tr><td>1 Set of 2 Reps </td><td>110%</td><td>${percent(s, 110)}</td></tr>
-                    <tr><td>1 Set of 5 Reps </td><td>90%</td><td>${percent(s, 90)}</td></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>100%</td><td>${percent(s, 100)}</td></tr>
-                    <tr><td>1 Set of 2 Reps </td><td>110%</td><td>${percent(s, 110)}</td></tr>
-                    <tr><td>1 Set of 5 Reps </td><td>90%</td><td>${percent(s, 90)}</td></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>100%</td><td>${percent(s, 100)}</td></tr>
-                    <tr><td>1 Set of 2 Reps </td><td>110%</td><td>${percent(s, 110)}</td></tr>
+                    <tr><td>1 Set of 5 Reps </td><td>90%</td><td>${percent(s, 90)}kg</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>100%</td><td>${percent(s, 100)}kg</td></tr>
+                    <tr><td>1 Set of 2 Reps </td><td>110%</td><td>${percent(s, 110)}kg</td></tr>
+                    <tr><td>1 Set of 5 Reps </td><td>90%</td><td>${percent(s, 90)}kg</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>100%</td><td>${percent(s, 100)}kg</td></tr>
+                    <tr><td>1 Set of 2 Reps </td><td>110%</td><td>${percent(s, 110)}kg</td></tr>
+                    <tr><td>1 Set of 5 Reps </td><td>90%</td><td>${percent(s, 90)}kg</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>100%</td><td>${percent(s, 100)}kg</td></tr>
+                    <tr><td>1 Set of 2 Reps </td><td>110%</td><td>${percent(s, 110)}kg</td></tr>
+                    <tr><td>1 Set of 5 Reps </td><td>90%</td><td>${percent(s, 90)}kg</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>100%</td><td>${percent(s, 100)}kg</td></tr>
+                    <tr><td>1 Set of 2 Reps </td><td>110%</td><td>${percent(s, 110)}kg</td></tr>
               </table>
             `;
             })(),
 
-           "3-4": (() => {
+          "3-4": (() => {
             const bs = parseFloat(lifts.bs);   // Back Squat
             const fs = parseFloat(lifts.fs);   // Front Squat
             const os = parseFloat(lifts.os);   // Overhead Squat
@@ -655,52 +655,52 @@
             return `
               <table>
                 <colgroup>
-                  <col style="width: 50%;">
-                  <col style="width: 25%;">
-                  <col style="width: 25%;">
+                  <col style="width: 70%;">
+                  <col style="width: 15%;">
+                  <col style="width: 15%;">
                 </colgroup>
                     <tr><th colspan="3">Back Squat</th></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>60%</td><td>${percent(bs, 60)}</td></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>70%</td><td>${percent(bs, 70)}</td></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>80%</td><td>${percent(bs, 80)}</td></tr>
-                    <tr><td>2 Sets of 2 Reps </td><td>90%</td><td>${percent(bs, 90)}</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>60%</td><td>${percent(bs, 60)}kg</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>70%</td><td>${percent(bs, 70)}kg</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>80%</td><td>${percent(bs, 80)}kg</td></tr>
+                    <tr><td>2 Sets of 2 Reps </td><td>90%</td><td>${percent(bs, 90)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
 
                     <tr><th colspan="3">Power Snatch</th></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>60%</td><td>${percent(s, 60)}</td></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>65%</td><td>${percent(s, 65)}</td></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>70%</td><td>${percent(s, 70)}</td></tr>
-                    <tr><td>1 Set of 1 Rep </td><td>75%</td><td>${percent(s, 75)}</td></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>60%</td><td>${percent(s, 60)}</td></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>65%</td><td>${percent(s, 65)}</td></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>70%</td><td>${percent(s, 70)}</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>60%</td><td>${percent(s, 60)}kg</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>65%</td><td>${percent(s, 65)}kg</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>70%</td><td>${percent(s, 70)}kg</td></tr>
+                    <tr><td>1 Set of 1 Rep </td><td>75%</td><td>${percent(s, 75)}kg</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>60%</td><td>${percent(s, 60)}kg</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>65%</td><td>${percent(s, 65)}kg</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>70%</td><td>${percent(s, 70)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
 
                     <tr><th colspan="3">Power Clean</th></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>60%</td><td>${percent(c, 60)}</td></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>65%</td><td>${percent(c, 65)}</td></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>70%</td><td>${percent(c, 70)}</td></tr>
-                    <tr><td>1 Set of 1 Rep </td><td>75%</td><td>${percent(c, 75)}</td></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>60%</td><td>${percent(c, 60)}</td></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>65%</td><td>${percent(c, 65)}</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>60%</td><td>${percent(c, 60)}kg</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>65%</td><td>${percent(c, 65)}kg</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>70%</td><td>${percent(c, 70)}kg</td></tr>
+                    <tr><td>1 Set of 1 Rep </td><td>75%</td><td>${percent(c, 75)}kg</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>60%</td><td>${percent(c, 60)}kg</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>65%</td><td>${percent(c, 65)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
 
                     <tr><th colspan="3">Clean Pulls </th></tr>
-                    <tr><td>1 Set of 4 Reps </td><td>90%</td><td>${percent(c, 90)}</td></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>100%</td><td>${percent(c, 100)}</td></tr>
-                    <tr><td>1 Set of 4 Reps </td><td>90%</td><td>${percent(c, 90)}</td></tr>
-                    <tr><td>1 Set of 2 Reps </td><td>100%</td><td>${percent(c, 100)}</td></tr>
-                    <tr><td>1 Set of 4 Reps </td><td>90%</td><td>${percent(c, 90)}</td></tr>
+                    <tr><td>1 Set of 4 Reps </td><td>90%</td><td>${percent(c, 90)}kg</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>100%</td><td>${percent(c, 100)}kg</td></tr>
+                    <tr><td>1 Set of 4 Reps </td><td>90%</td><td>${percent(c, 90)}kg</td></tr>
+                    <tr><td>1 Set of 2 Reps </td><td>100%</td><td>${percent(c, 100)}kg</td></tr>
+                    <tr><td>1 Set of 4 Reps </td><td>90%</td><td>${percent(c, 90)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
 
                     <tr><th colspan="3">Front Squat + Jerk</th></tr>
-                    <tr><td>1 Set of 3 F.S. + 1 Jr. </td><td>60%</td><td>${percent(fs, 60)}</td></tr>
-                    <tr><td>1 Set of 3 F.S. + 1 Jr. </td><td>70%</td><td>${percent(fs, 70)}</td></tr>
-                    <tr><td>4 Sets of 2 F.S. + 1 Jr. </td><td>80%</td><td>${percent(fs, 80)}</td></tr>
+                    <tr><td>1 Set of 3 F.S. + 1 Jr. </td><td>60%</td><td>${percent(fs, 60)}kg</td></tr>
+                    <tr><td>1 Set of 3 F.S. + 1 Jr. </td><td>70%</td><td>${percent(fs, 70)}kg</td></tr>
+                    <tr><td>4 Sets of 2 F.S. + 1 Jr. </td><td>80%</td><td>${percent(fs, 80)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
 
@@ -710,7 +710,7 @@
             `;
             })(),
             
-            "4-1": (() => {
+          "4-1": (() => {
             const bs = parseFloat(lifts.bs);   // Back Squat
             const fs = parseFloat(lifts.fs);   // Front Squat
             const os = parseFloat(lifts.os);   // Overhead Squat
@@ -722,41 +722,41 @@
             return `
               <table>
                 <colgroup>
-                  <col style="width: 50%;">
-                  <col style="width: 25%;">
-                  <col style="width: 25%;">
+                  <col style="width: 70%;">
+                  <col style="width: 15%;">
+                  <col style="width: 15%;">
                 </colgroup>
                     <tr><th colspan="3">Snatch Pulls + Snatch</th></tr>
-                    <tr><td>1 Set of 3 Sn.Pu. + 1 Sn. </td><td>60%</td><td>${percent(s, 60)}</td></tr>
-                    <tr><td>1 Set of 3 Sn.Pu. + 1 Sn. </td><td>70%</td><td>${percent(s, 70)}</td></tr>
-                    <tr><td>4 Sets of 3 Sn.Pu. + 1 Sn. </td><td>80%</td><td>${percent(s, 80)}</td></tr>
+                    <tr><td>1 Set of 3 Sn.Pu. + 1 Sn. </td><td>60%</td><td>${percent(s, 60)}kg</td></tr>
+                    <tr><td>1 Set of 3 Sn.Pu. + 1 Sn. </td><td>70%</td><td>${percent(s, 70)}kg</td></tr>
+                    <tr><td>4 Sets of 3 Sn.Pu. + 1 Sn. </td><td>80%</td><td>${percent(s, 80)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
 
                     <tr><th colspan="3">Clean Pulls + Clean</th></tr>
-                    <tr><td>1 Set of 3 Cl.Pu. + 1 Cl. </td><td>60%</td><td>${percent(c, 60)}</td></tr>
-                    <tr><td>1 Set of 3 Cl.Pu. + 1 Cl. </td><td>70%</td><td>${percent(c, 70)}</td></tr>
-                    <tr><td>3 Sets of 3 Cl.Pu. + 1 Cl. </td><td>80%</td><td>${percent(c, 80)}</td></tr>
+                    <tr><td>1 Set of 3 Cl.Pu. + 1 Cl. </td><td>60%</td><td>${percent(c, 60)}kg</td></tr>
+                    <tr><td>1 Set of 3 Cl.Pu. + 1 Cl. </td><td>70%</td><td>${percent(c, 70)}kg</td></tr>
+                    <tr><td>3 Sets of 3 Cl.Pu. + 1 Cl. </td><td>80%</td><td>${percent(c, 80)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
 
                     <tr><th colspan="3">Jerk - from the rack</th></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>60%</td><td>${percent(cj, 60)}</td></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>70%</td><td>${percent(cj, 70)}</td></tr>
-                    <tr><td>1 Set of 2 Reps </td><td>80%</td><td>${percent(cj, 80)}</td></tr>
-                    <tr><td>1 Set of 2 Reps </td><td>85%</td><td>${percent(cj, 85)}</td></tr>
-                    <tr><td>1 Set of 1 Rep </td><td>90%</td><td>${percent(cj, 90)}</td></tr>
-                    <tr><td>1 Set of 1 Rep1 </td><td>95%</td><td>${percent(cj, 95)}</td></tr>
-                    <tr><td>1 Set of 2 Reps </td><td>80%</td><td>${percent(cj, 80)}</td></tr>
-                    <tr><td>1 Set of 2 Reps </td><td>85%</td><td>${percent(cj, 85)}</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>60%</td><td>${percent(cj, 60)}kg</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>70%</td><td>${percent(cj, 70)}kg</td></tr>
+                    <tr><td>1 Set of 2 Reps </td><td>80%</td><td>${percent(cj, 80)}kg</td></tr>
+                    <tr><td>1 Set of 2 Reps </td><td>85%</td><td>${percent(cj, 85)}kg</td></tr>
+                    <tr><td>1 Set of 1 Rep </td><td>90%</td><td>${percent(cj, 90)}kg</td></tr>
+                    <tr><td>1 Set of 1 Rep1 </td><td>95%</td><td>${percent(cj, 95)}kg</td></tr>
+                    <tr><td>1 Set of 2 Reps </td><td>80%</td><td>${percent(cj, 80)}kg</td></tr>
+                    <tr><td>1 Set of 2 Reps </td><td>85%</td><td>${percent(cj, 85)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
 
                     <tr><th colspan="3">Back Squat</th></tr>
-                    <tr><td>1 Set of 4 Reps </td><td>60%</td><td>${percent(bs, 60)}</td></tr>
-                    <tr><td>1 Set of 4 Reps </td><td>70%</td><td>${percent(bs, 70)}</td></tr>
-                    <tr><td>1 Set of 4 Reps </td><td>80%</td><td>${percent(bs, 80)}</td></tr>
-                    <tr><td>3 Sets of 3 Reps </td><td>85%</td><td>${percent(bs, 85)}</td></tr>
+                    <tr><td>1 Set of 4 Reps </td><td>60%</td><td>${percent(bs, 60)}kg</td></tr>
+                    <tr><td>1 Set of 4 Reps </td><td>70%</td><td>${percent(bs, 70)}kg</td></tr>
+                    <tr><td>1 Set of 4 Reps </td><td>80%</td><td>${percent(bs, 80)}kg</td></tr>
+                    <tr><td>3 Sets of 3 Reps </td><td>85%</td><td>${percent(bs, 85)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
 
@@ -771,7 +771,7 @@
             `;
             })(),
             
-            "4-2": (() => {
+          "4-2": (() => {
             const bs = parseFloat(lifts.bs);   // Back Squat
             const fs = parseFloat(lifts.fs);   // Front Squat
             const os = parseFloat(lifts.os);   // Overhead Squat
@@ -783,45 +783,45 @@
             return `
               <table>
                 <colgroup>
-                  <col style="width: 50%;">
-                  <col style="width: 25%;">
-                  <col style="width: 25%;">
+                  <col style="width: 70%;">
+                  <col style="width: 15%;">
+                  <col style="width: 15%;">
                 </colgroup>
                     <tr><th colspan="3">Front Squat</th></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>60%</td><td>${percent(fs, 60)}</td></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>70%</td><td>${percent(fs, 70)}</td></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>80%</td><td>${percent(fs, 80)}</td></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>85%</td><td>${percent(fs, 85)}</td></tr>
-                    <tr><td>1 Set of 2 Reps </td><td>90%</td><td>${percent(fs, 90)}</td></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>90%</td><td>${percent(fs, 90)}</td></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>85%</td><td>${percent(fs, 85)}</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>60%</td><td>${percent(fs, 60)}kg</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>70%</td><td>${percent(fs, 70)}kg</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>80%</td><td>${percent(fs, 80)}kg</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>85%</td><td>${percent(fs, 85)}kg</td></tr>
+                    <tr><td>1 Set of 2 Reps </td><td>90%</td><td>${percent(fs, 90)}kg</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>90%</td><td>${percent(fs, 90)}kg</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>85%</td><td>${percent(fs, 85)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
 
                     <tr><th colspan="3">Power Snatch + Snatch Grip Behind the Neck Push Press</th></tr>
-                    <tr><td>1 Set of 3 P.Sn. + 3 Sn.G.B.N.P.Pr. </td><td>60%</td><td>${percent(s, 60)}</td></tr>
-                    <tr><td>1 Set of 3 P.Sn. + 3 Sn.G.B.N.P.Pr. </td><td>65%</td><td>${percent(s, 65)}</td></tr>
-                    <tr><td>1 Set of 2 P.Sn. + 3 Sn.G.B.N.P.Pr. </td><td>70%</td><td>${percent(s, 70)}</td></tr>
-                    <tr><td>1 Set of 3 P.Sn. + 3 Sn.G.B.N.P.Pr. </td><td>60%</td><td>${percent(s, 60)}</td></tr>
-                    <tr><td>1 Set of 3 P.Sn. + 3 Sn.G.B.N.P.Pr. </td><td>65%</td><td>${percent(s, 65)}</td></tr>
-                    <tr><td>1 Set of 2 P.Sn. + 3 Sn.G.B.N.P.Pr. </td><td>70%</td><td>${percent(s, 70)}</td></tr>
-                    <tr><td>1 Set of 3 P.Sn. + 3 Sn.G.B.N.P.Pr. </td><td>60%</td><td>${percent(s, 60)}</td></tr>
-                    <tr><td>1 Set of 3 P.Sn. + 3 Sn.G.B.N.P.Pr. </td><td>65%</td><td>${percent(s, 65)}</td></tr>
-                    <tr><td>1 Set of 2 P.Sn. + 3 Sn.G.B.N.P.Pr. </td><td>70%</td><td>${percent(s, 70)}</td></tr>
+                    <tr><td>1 Set of 3 P.Sn. + 3 Sn.G.B.N.P.Pr. </td><td>60%</td><td>${percent(s, 60)}kg</td></tr>
+                    <tr><td>1 Set of 3 P.Sn. + 3 Sn.G.B.N.P.Pr. </td><td>65%</td><td>${percent(s, 65)}kg</td></tr>
+                    <tr><td>1 Set of 2 P.Sn. + 3 Sn.G.B.N.P.Pr. </td><td>70%</td><td>${percent(s, 70)}kg</td></tr>
+                    <tr><td>1 Set of 3 P.Sn. + 3 Sn.G.B.N.P.Pr. </td><td>60%</td><td>${percent(s, 60)}kg</td></tr>
+                    <tr><td>1 Set of 3 P.Sn. + 3 Sn.G.B.N.P.Pr. </td><td>65%</td><td>${percent(s, 65)}kg</td></tr>
+                    <tr><td>1 Set of 2 P.Sn. + 3 Sn.G.B.N.P.Pr. </td><td>70%</td><td>${percent(s, 70)}kg</td></tr>
+                    <tr><td>1 Set of 3 P.Sn. + 3 Sn.G.B.N.P.Pr. </td><td>60%</td><td>${percent(s, 60)}kg</td></tr>
+                    <tr><td>1 Set of 3 P.Sn. + 3 Sn.G.B.N.P.Pr. </td><td>65%</td><td>${percent(s, 65)}kg</td></tr>
+                    <tr><td>1 Set of 2 P.Sn. + 3 Sn.G.B.N.P.Pr. </td><td>70%</td><td>${percent(s, 70)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
 
                     <tr><th colspan="3">Clean Deadlift</th></tr>
-                    <tr><td>1 Set of 4 Reps </td><td>90%</td><td>${percent(c, 90)}</td></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>100%</td><td>${percent(c, 100)}</td></tr>
-                    <tr><td>1 Set of 4 Reps </td><td>90%</td><td>${percent(c, 90)}</td></tr>
-                    <tr><td>1 Set of 2 Reps </td><td>100%</td><td>${percent(c, 100)}</td></tr>
-                    <tr><td>1 Set of 4 Reps </td><td>90%</td><td>${percent(c, 90)}</td></tr>
+                    <tr><td>1 Set of 4 Reps </td><td>90%</td><td>${percent(c, 90)}kg</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>100%</td><td>${percent(c, 100)}kg</td></tr>
+                    <tr><td>1 Set of 4 Reps </td><td>90%</td><td>${percent(c, 90)}kg</td></tr>
+                    <tr><td>1 Set of 2 Reps </td><td>100%</td><td>${percent(c, 100)}kg</td></tr>
+                    <tr><td>1 Set of 4 Reps </td><td>90%</td><td>${percent(c, 90)}kg</td></tr>
               </table>
             `;
             })(),
 
-            "4-3": (() => {
+          "4-3": (() => {
             const bs = parseFloat(lifts.bs);   // Back Squat
             const fs = parseFloat(lifts.fs);   // Front Squat
             const os = parseFloat(lifts.os);   // Overhead Squat
@@ -833,38 +833,38 @@
             return `
               <table>
                 <colgroup>
-                  <col style="width: 50%;">
-                  <col style="width: 25%;">
-                  <col style="width: 25%;">
+                  <col style="width: 70%;">
+                  <col style="width: 15%;">
+                  <col style="width: 15%;">
                 </colgroup>
                     <tr><th colspan="3">Back Squats</th></tr>
-                    <tr><td>1 Set of 5 Reps </td><td>60%</td><td>${percent(bs, 60)}</td></tr>
-                    <tr><td>1 Set of 5 Reps </td><td>70%</td><td>${percent(bs, 70)}</td></tr>
-                    <tr><td>1 Set of 4 Reps </td><td>80%</td><td>${percent(bs, 80)}</td></tr>
-                    <tr><td>1 Set of 4 Reps </td><td>85%</td><td>${percent(bs, 85)}</td></tr>
+                    <tr><td>1 Set of 5 Reps </td><td>60%</td><td>${percent(bs, 60)}kg</td></tr>
+                    <tr><td>1 Set of 5 Reps </td><td>70%</td><td>${percent(bs, 70)}kg</td></tr>
+                    <tr><td>1 Set of 4 Reps </td><td>80%</td><td>${percent(bs, 80)}kg</td></tr>
+                    <tr><td>1 Set of 4 Reps </td><td>85%</td><td>${percent(bs, 85)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
 
                     <tr><th colspan="3">Snatch</th></tr>
-                    <tr><td>1 Set of 2 Reps </td><td>60%</td><td>${percent(s, 60)}</td></tr>
-                    <tr><td>1 Set of 2 Reps </td><td>70%</td><td>${percent(s, 70)}</td></tr>
-                    <tr><td>1 Set of 2 Reps </td><td>80%</td><td>${percent(s, 80)}</td></tr>
-                    <tr><td>1 Set of 1 Rep </td><td>85%</td><td>${percent(s, 85)}</td></tr>
-                    <tr><td>1 Set of 1 Rep </td><td>90%</td><td>${percent(s, 90)}</td></tr>
+                    <tr><td>1 Set of 2 Reps </td><td>60%</td><td>${percent(s, 60)}kg</td></tr>
+                    <tr><td>1 Set of 2 Reps </td><td>70%</td><td>${percent(s, 70)}kg</td></tr>
+                    <tr><td>1 Set of 2 Reps </td><td>80%</td><td>${percent(s, 80)}kg</td></tr>
+                    <tr><td>1 Set of 1 Rep </td><td>85%</td><td>${percent(s, 85)}kg</td></tr>
+                    <tr><td>1 Set of 1 Rep </td><td>90%</td><td>${percent(s, 90)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
 
                     <tr><th colspan="3">Clean + Jerk</th></tr>
-                    <tr><td>1 Set of 2 Cl. + 1 Jr. </td><td>60%</td><td>${percent(cj, 60)}</td></tr>
-                    <tr><td>1 Set of 2 Cl. + 1 Jr. </td><td>70%</td><td>${percent(cj, 70)}</td></tr>
-                    <tr><td>1 Set of 2 Cl. + 1 Jr. </td><td>80%</td><td>${percent(cj, 80)}</td></tr>
-                    <tr><td>1 Set of 1 Cl. + 1 Jr. </td><td>85%</td><td>${percent(cj, 85)}</td></tr>
-                    <tr><td>1 Set of 1 Cl. + 1 Jr. </td><td>90%</td><td>${percent(cj, 90)}</td></tr>
+                    <tr><td>1 Set of 2 Cl. + 1 Jr. </td><td>60%</td><td>${percent(cj, 60)}kg</td></tr>
+                    <tr><td>1 Set of 2 Cl. + 1 Jr. </td><td>70%</td><td>${percent(cj, 70)}kg</td></tr>
+                    <tr><td>1 Set of 2 Cl. + 1 Jr. </td><td>80%</td><td>${percent(cj, 80)}kg</td></tr>
+                    <tr><td>1 Set of 1 Cl. + 1 Jr. </td><td>85%</td><td>${percent(cj, 85)}kg</td></tr>
+                    <tr><td>1 Set of 1 Cl. + 1 Jr. </td><td>90%</td><td>${percent(cj, 90)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
                     
                     <tr><th colspan="3">Snatch Pulls</th></tr>
-                    <tr><td>5 Sets of 4 Reps </td><td>100%</td><td>${percent(s, 100)}</td></tr>
+                    <tr><td>5 Sets of 4 Reps </td><td>100%</td><td>${percent(s, 100)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
 
@@ -884,7 +884,7 @@
             `;
             })(),
 
-            "4-4": (() => {
+          "4-4": (() => {
             const bs = parseFloat(lifts.bs);   // Back Squat
             const fs = parseFloat(lifts.fs);   // Front Squat
             const os = parseFloat(lifts.os);   // Overhead Squat
@@ -896,54 +896,54 @@
             return `
               <table>
                 <colgroup>
-                  <col style="width: 50%;">
-                  <col style="width: 25%;">
-                  <col style="width: 25%;">
+                  <col style="width: 70%;">
+                  <col style="width: 15%;">
+                  <col style="width: 15%;">
                 </colgroup>
                     <tr><th colspan="3">Back Squat</th></tr>
-                    <tr><td>1 Set of 4 Reps </td><td>60%</td><td>${percent(bs, 60)}</td></tr>
-                    <tr><td>1 Set of 4 Reps </td><td>70%</td><td>${percent(bs, 70)}</td></tr>
-                    <tr><td>1 Set of 4 Reps </td><td>80%</td><td>${percent(bs, 80)}</td></tr>
-                    <tr><td>4 Sets of 4 Reps </td><td>85%</td><td>${percent(bs, 85)}</td></tr>
+                    <tr><td>1 Set of 4 Reps </td><td>60%</td><td>${percent(bs, 60)}kg</td></tr>
+                    <tr><td>1 Set of 4 Reps </td><td>70%</td><td>${percent(bs, 70)}kg</td></tr>
+                    <tr><td>1 Set of 4 Reps </td><td>80%</td><td>${percent(bs, 80)}kg</td></tr>
+                    <tr><td>4 Sets of 4 Reps </td><td>85%</td><td>${percent(bs, 85)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
 
                     <tr><th colspan="3">Snatch</th></tr>
-                    <tr><td>1 Set of 2 Reps </td><td>60%</td><td>${percent(s, 60)}</td></tr>
-                    <tr><td>1 Set of 2 Reps </td><td>70%</td><td>${percent(s, 70)}</td></tr>
-                    <tr><td>1 Set of 2 Reps </td><td>80%</td><td>${percent(s, 80)}</td></tr>
-                    <tr><td>1 Set of 1 Rep </td><td>85%</td><td>${percent(s, 85)}</td></tr>
-                    <tr><td>1 Set of 1 Rep </td><td>90%</td><td>${percent(s, 90)}</td></tr>
+                    <tr><td>1 Set of 2 Reps </td><td>60%</td><td>${percent(s, 60)}kg</td></tr>
+                    <tr><td>1 Set of 2 Reps </td><td>70%</td><td>${percent(s, 70)}kg</td></tr>
+                    <tr><td>1 Set of 2 Reps </td><td>80%</td><td>${percent(s, 80)}kg</td></tr>
+                    <tr><td>1 Set of 1 Rep </td><td>85%</td><td>${percent(s, 85)}kg</td></tr>
+                    <tr><td>1 Set of 1 Rep </td><td>90%</td><td>${percent(s, 90)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
 
                     <tr><th colspan="3">Clean + Jerk</th></tr>
-                    <tr><td>1 Set of 2 Cl. +1 Jr. </td><td>60%</td><td>${percent(cj, 60)}</td></tr>
-                    <tr><td>1 Set of 2 Cl. +1 Jr. </td><td>70%</td><td>${percent(cj, 70)}</td></tr>
-                    <tr><td>1 Set of 2 Cl. +1 Jr. </td><td>80%</td><td>${percent(cj, 80)}</td></tr>
-                    <tr><td>1 Set of 1 Cl. +1 Jr. </td><td>85%</td><td>${percent(cj, 85)}</td></tr>
-                    <tr><td>1 Set of 1 Cl. +1 Jr. </td><td>90%</td><td>${percent(cj, 90)}</td></tr>
+                    <tr><td>1 Set of 2 Cl. +1 Jr. </td><td>60%</td><td>${percent(cj, 60)}kg</td></tr>
+                    <tr><td>1 Set of 2 Cl. +1 Jr. </td><td>70%</td><td>${percent(cj, 70)}kg</td></tr>
+                    <tr><td>1 Set of 2 Cl. +1 Jr. </td><td>80%</td><td>${percent(cj, 80)}kg</td></tr>
+                    <tr><td>1 Set of 1 Cl. +1 Jr. </td><td>85%</td><td>${percent(cj, 85)}kg</td></tr>
+                    <tr><td>1 Set of 1 Cl. +1 Jr. </td><td>90%</td><td>${percent(cj, 90)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
 
                     <tr><th colspan="3">Push Press</th></tr>
-                    <tr><td>1 Set of 4 Reps </td><td>60%</td><td>${percent(pp, 60)}</td></tr>
-                    <tr><td>1 Set of 4 Reps </td><td>65%</td><td>${percent(pp, 65)}</td></tr>
-                    <tr><td>1 Set of 4 Reps </td><td>70%</td><td>${percent(pp, 70)}</td></tr>
-                    <tr><td>1 Set of 4 Reps </td><td>60%</td><td>${percent(pp, 60)}</td></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>65%</td><td>${percent(pp, 65)}</td></tr>
+                    <tr><td>1 Set of 4 Reps </td><td>60%</td><td>${percent(pp, 60)}kg</td></tr>
+                    <tr><td>1 Set of 4 Reps </td><td>65%</td><td>${percent(pp, 65)}kg</td></tr>
+                    <tr><td>1 Set of 4 Reps </td><td>70%</td><td>${percent(pp, 70)}kg</td></tr>
+                    <tr><td>1 Set of 4 Reps </td><td>60%</td><td>${percent(pp, 60)}kg</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>65%</td><td>${percent(pp, 65)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
 
                     <tr><th colspan="3">Snatch Pulls </th></tr>
-                    <tr><td>1 Set of 4 Reps </td><td>90%</td><td>${percent(s, 90)}</td></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>100%</td><td>${percent(s, 100)}</td></tr>
-                    <tr><td>1 Set of 4 Reps </td><td>90%</td><td>${percent(s, 90)}</td></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>100%</td><td>${percent(s, 100)}</td></tr>
-                    <tr><td>1 Set of 4 Reps </td><td>90%</td><td>${percent(s, 90)}</td></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>100%</td><td>${percent(s, 100)}</td></tr>
-                    <tr><td>1 Set of 4 Reps </td><td>90%</td><td>${percent(s, 90)}</td></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>100%</td><td>${percent(s, 100)}</td></tr>
+                    <tr><td>1 Set of 4 Reps </td><td>90%</td><td>${percent(s, 90)}kg</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>100%</td><td>${percent(s, 100)}kg</td></tr>
+                    <tr><td>1 Set of 4 Reps </td><td>90%</td><td>${percent(s, 90)}kg</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>100%</td><td>${percent(s, 100)}kg</td></tr>
+                    <tr><td>1 Set of 4 Reps </td><td>90%</td><td>${percent(s, 90)}kg</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>100%</td><td>${percent(s, 100)}kg</td></tr>
+                    <tr><td>1 Set of 4 Reps </td><td>90%</td><td>${percent(s, 90)}kg</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>100%</td><td>${percent(s, 100)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
                     
@@ -953,7 +953,7 @@
             `;
             })(),
 
-            "5-1": (() => {
+          "5-1": (() => {
             const bs = parseFloat(lifts.bs);   // Back Squat
             const fs = parseFloat(lifts.fs);   // Front Squat
             const os = parseFloat(lifts.os);   // Overhead Squat
@@ -965,32 +965,32 @@
             return `
               <table>
                 <colgroup>
-                  <col style="width: 50%;">
-                  <col style="width: 25%;">
-                  <col style="width: 25%;">
+                  <col style="width: 70%;">
+                  <col style="width: 15%;">
+                  <col style="width: 15%;">
                 </colgroup>
                     <tr><th colspan="3">Back Squat</th></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>60%</td><td>${percent(bs, 60)}</td></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>70%</td><td>${percent(bs, 70)}</td></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>80%</td><td>${percent(bs, 80)}</td></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>85%</td><td>${percent(bs, 85)}</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>60%</td><td>${percent(bs, 60)}kg</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>70%</td><td>${percent(bs, 70)}kg</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>80%</td><td>${percent(bs, 80)}kg</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>85%</td><td>${percent(bs, 85)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
 
                     <tr><th colspan="3">Power Snatch</th></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>60%</td><td>${percent(s, 60)}</td></tr>
-                    <tr><td>4 Sets of 3 reps </td><td>70%</td><td>${percent(s, 70)}</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>60%</td><td>${percent(s, 60)}kg</td></tr>
+                    <tr><td>4 Sets of 3 reps </td><td>70%</td><td>${percent(s, 70)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
 
                     <tr><th colspan="3">Power Clean + Jerk</th></tr>
-                    <tr><td>1 Set of 3 P.Cl. + 1 Jr. </td><td>60%</td><td>${percent(cj, 60)}</td></tr>
-                    <tr><td>3 Sets of 3 P.Cl. + 1 Jr. </td><td>70%</td><td>${percent(cj, 70)}</td></tr>
+                    <tr><td>1 Set of 3 P.Cl. + 1 Jr. </td><td>60%</td><td>${percent(cj, 60)}kg</td></tr>
+                    <tr><td>3 Sets of 3 P.Cl. + 1 Jr. </td><td>70%</td><td>${percent(cj, 70)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
 
                     <tr><th colspan="3">Clean Pull</th></tr>
-                    <tr><td>4 Sets of 2 Reps </td><td>90%</td><td>${percent(c, 90)}</td></tr>
+                    <tr><td>4 Sets of 2 Reps </td><td>90%</td><td>${percent(c, 90)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
                     
@@ -1000,7 +1000,7 @@
             `;
             })(),
             
-            "5-2": (() => {
+          "5-2": (() => {
             const bs = parseFloat(lifts.bs);   // Back Squat
             const fs = parseFloat(lifts.fs);   // Front Squat
             const os = parseFloat(lifts.os);   // Overhead Squat
@@ -1012,54 +1012,54 @@
             return `
               <table>
                 <colgroup>
-                  <col style="width: 50%;">
-                  <col style="width: 25%;">
-                  <col style="width: 25%;">
+                  <col style="width: 70%;">
+                  <col style="width: 15%;">
+                  <col style="width: 15%;">
                 </colgroup>
                     <tr><th colspan="3">Front Squat</th></tr>
-                    <tr><td>1 Set of 4 Reps </td><td>60%</td><td>${percent(fs, 60)}</td></tr>
-                    <tr><td>1 Set of 4 Reps </td><td>70%</td><td>${percent(fs, 70)}</td></tr>
-                    <tr><td>1 Set of 4 Reps </td><td>80%</td><td>${percent(fs, 80)}</td></tr>
-                    <tr><td>1 Set of 4 Reps </td><td>85%</td><td>${percent(fs, 85)}</td></tr>
-                    <tr><td>1 Set of 4 Reps </td><td>80%</td><td>${percent(fs, 80)}</td></tr>
-                    <tr><td>1 Set of 4 Reps </td><td>85%</td><td>${percent(fs, 85)}</td></tr>
+                    <tr><td>1 Set of 4 Reps </td><td>60%</td><td>${percent(fs, 60)}kg</td></tr>
+                    <tr><td>1 Set of 4 Reps </td><td>70%</td><td>${percent(fs, 70)}kg</td></tr>
+                    <tr><td>1 Set of 4 Reps </td><td>80%</td><td>${percent(fs, 80)}kg</td></tr>
+                    <tr><td>1 Set of 4 Reps </td><td>85%</td><td>${percent(fs, 85)}kg</td></tr>
+                    <tr><td>1 Set of 4 Reps </td><td>80%</td><td>${percent(fs, 80)}kg</td></tr>
+                    <tr><td>1 Set of 4 Reps </td><td>85%</td><td>${percent(fs, 85)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
 
                     <tr><th colspan="3">Snatch</th></tr>
-                    <tr><td>1 Set of 2 Reps </td><td>60%</td><td>${percent(s, 60)}</td></tr>
-                    <tr><td>1 Set of 2 Reps </td><td>70%</td><td>${percent(s, 70)}</td></tr>
-                    <tr><td>1 Set of 2 Reps </td><td>80%</td><td>${percent(s, 80)}</td></tr>
-                    <tr><td>1 Set of 1 Rep </td><td>85%</td><td>${percent(s, 85)}</td></tr>
-                    <tr><td>3 Sets of 3 Reps </td><td>80%</td><td>${percent(s, 80)}</td></tr>
+                    <tr><td>1 Set of 2 Reps </td><td>60%</td><td>${percent(s, 60)}kg</td></tr>
+                    <tr><td>1 Set of 2 Reps </td><td>70%</td><td>${percent(s, 70)}kg</td></tr>
+                    <tr><td>1 Set of 2 Reps </td><td>80%</td><td>${percent(s, 80)}kg</td></tr>
+                    <tr><td>1 Set of 1 Rep </td><td>85%</td><td>${percent(s, 85)}kg</td></tr>
+                    <tr><td>3 Sets of 3 Reps </td><td>80%</td><td>${percent(s, 80)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
 
                     <tr><th colspan="3">Clean + Jerk</th></tr>
-                    <tr><td>1 Set of 2 Cl. + 1 Jr. </td><td>60%</td><td>${percent(cj, 60)}</td></tr>
-                    <tr><td>1 Set of 2 Cl. + 1 Jr. </td><td>70%</td><td>${percent(cj, 70)}</td></tr>
-                    <tr><td>1 Set of 2 Cl. + 1 Jr. </td><td>80%</td><td>${percent(cj, 80)}</td></tr>
-                    <tr><td>1 Set of 2 Cl. + 1 Jr. </td><td>85%</td><td>${percent(cj, 85)}</td></tr>
-                    <tr><td>3 Sets of 3 Cl. + 1 Jr. </td><td>80%</td><td>${percent(cj, 80)}</td></tr>
+                    <tr><td>1 Set of 2 Cl. + 1 Jr. </td><td>60%</td><td>${percent(cj, 60)}kg</td></tr>
+                    <tr><td>1 Set of 2 Cl. + 1 Jr. </td><td>70%</td><td>${percent(cj, 70)}kg</td></tr>
+                    <tr><td>1 Set of 2 Cl. + 1 Jr. </td><td>80%</td><td>${percent(cj, 80)}kg</td></tr>
+                    <tr><td>1 Set of 2 Cl. + 1 Jr. </td><td>85%</td><td>${percent(cj, 85)}kg</td></tr>
+                    <tr><td>3 Sets of 3 Cl. + 1 Jr. </td><td>80%</td><td>${percent(cj, 80)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
 
                     <tr><th colspan="3">Snatch Pull from Blocks Below the Knee</th></tr>
-                    <tr><td>1 Set of 4 Reps </td><td>80%</td><td>${percent(s, 80)}</td></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>90%</td><td>${percent(s, 90)}</td></tr>
-                    <tr><td>1 Set of 4 Reps </td><td>80%</td><td>${percent(s, 80)}</td></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>90%</td><td>${percent(s, 90)}</td></tr>
-                    <tr><td>1 Set of 4 Reps </td><td>80%</td><td>${percent(s, 80)}</td></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>90%</td><td>${percent(s, 90)}</td></tr>
+                    <tr><td>1 Set of 4 Reps </td><td>80%</td><td>${percent(s, 80)}kg</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>90%</td><td>${percent(s, 90)}kg</td></tr>
+                    <tr><td>1 Set of 4 Reps </td><td>80%</td><td>${percent(s, 80)}kg</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>90%</td><td>${percent(s, 90)}kg</td></tr>
+                    <tr><td>1 Set of 4 Reps </td><td>80%</td><td>${percent(s, 80)}kg</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>90%</td><td>${percent(s, 90)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
 
                     <tr><th colspan="3">Behind the Neck Push Jerk</th></tr>
-                    <tr><td>1 Set of 4 Reps </td><td>60%</td><td>${percent(pp, 60)}</td></tr>
-                    <tr><td>1 Set of 4 Reps </td><td>70%</td><td>${percent(pp, 70)}</td></tr>
-                    <tr><td>1 Set of 1 Rep </td><td>75%</td><td>${percent(pp, 75)}</td></tr>
-                    <tr><td>1 Set of 4 Reps </td><td>60%</td><td>${percent(pp, 60)}</td></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>70%</td><td>${percent(pp, 70)}</td></tr>
+                    <tr><td>1 Set of 4 Reps </td><td>60%</td><td>${percent(pp, 60)}kg</td></tr>
+                    <tr><td>1 Set of 4 Reps </td><td>70%</td><td>${percent(pp, 70)}kg</td></tr>
+                    <tr><td>1 Set of 1 Rep </td><td>75%</td><td>${percent(pp, 75)}kg</td></tr>
+                    <tr><td>1 Set of 4 Reps </td><td>60%</td><td>${percent(pp, 60)}kg</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>70%</td><td>${percent(pp, 70)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
                     
@@ -1069,7 +1069,7 @@
             `;
             })(),
 
-            "5-3": (() => {
+          "5-3": (() => {
             const bs = parseFloat(lifts.bs);   // Back Squat
             const fs = parseFloat(lifts.fs);   // Front Squat
             const os = parseFloat(lifts.os);   // Overhead Squat
@@ -1081,35 +1081,35 @@
             return `
               <table>
                 <colgroup>
-                  <col style="width: 50%;">
-                  <col style="width: 25%;">
-                  <col style="width: 25%;">
+                  <col style="width: 70%;">
+                  <col style="width: 15%;">
+                  <col style="width: 15%;">
                 </colgroup>
                     <tr><th colspan="3">Back Squat</th></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>60%</td><td>${percent(bs, 60)}</td></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>70%</td><td>${percent(bs, 70)}</td></tr>
-                    <tr><td>5 Sets f 3 Reps </td><td>80%</td><td>${percent(bs, 80)}</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>60%</td><td>${percent(bs, 60)}kg</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>70%</td><td>${percent(bs, 70)}kg</td></tr>
+                    <tr><td>5 Sets f 3 Reps </td><td>80%</td><td>${percent(bs, 80)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
 
                     <tr><th colspan="3">Power Snatch + Behind the Neck Snatch Grip Push Press + Overhead Squat</th></tr>
-                    <tr><td>1 Set of 3 P.Sn. + 3 B.N.Sn.Gr.P.Pr. + 3 Oh.S. </td><td>60%</td><td>${percent(os, 60)}</td></tr>
-                    <tr><td>1 Set of 3 P.Sn. + 3 B.N.Sn.Gr.P.Pr. + 2 Oh.S. </td><td>70%</td><td>${percent(os, 70)}</td></tr>
-                    <tr><td>1 Set of 3 P.Sn. + 3 B.N.Sn.Gr.P.Pr. + 3 Oh.S. </td><td>60%</td><td>${percent(os, 60)}</td></tr>
-                    <tr><td>1 Set of 3 P.Sn. + 3 B.N.Sn.Gr.P.Pr. + 2 Oh.S. </td><td>70%</td><td>${percent(os, 70)}</td></tr>
+                    <tr><td>1 Set of 3 P.Sn. + 3 B.N.Sn.Gr.P.Pr. + 3 Oh.S. </td><td>60%</td><td>${percent(os, 60)}kg</td></tr>
+                    <tr><td>1 Set of 3 P.Sn. + 3 B.N.Sn.Gr.P.Pr. + 2 Oh.S. </td><td>70%</td><td>${percent(os, 70)}kg</td></tr>
+                    <tr><td>1 Set of 3 P.Sn. + 3 B.N.Sn.Gr.P.Pr. + 3 Oh.S. </td><td>60%</td><td>${percent(os, 60)}kg</td></tr>
+                    <tr><td>1 Set of 3 P.Sn. + 3 B.N.Sn.Gr.P.Pr. + 2 Oh.S. </td><td>70%</td><td>${percent(os, 70)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
                     
                     <tr><th colspan="3">Power Clean + Front Squat + Push Jerk</th></tr>
-                    <tr><td>1 Set of 3 P.Cl. + 3 F.S. + 3 P.Jr. </td><td>60%</td><td>${percent(cj, 60)}</td></tr>
-                    <tr><td>1 Set of 3 P.Cl. + 3 F.S. + 2 P.Jr. </td><td>70%</td><td>${percent(cj, 70)}</td></tr>
-                    <tr><td>1 Set of 3 P.Cl. + 3 F.S. + 3 P.Jr. </td><td>60%</td><td>${percent(cj, 60)}</td></tr>
-                    <tr><td>1 Set of 3 P.Cl. + 3 F.S. + 2 P.Jr. </td><td>70%</td><td>${percent(cj, 70)}</td></tr>
+                    <tr><td>1 Set of 3 P.Cl. + 3 F.S. + 3 P.Jr. </td><td>60%</td><td>${percent(cj, 60)}kg</td></tr>
+                    <tr><td>1 Set of 3 P.Cl. + 3 F.S. + 2 P.Jr. </td><td>70%</td><td>${percent(cj, 70)}kg</td></tr>
+                    <tr><td>1 Set of 3 P.Cl. + 3 F.S. + 3 P.Jr. </td><td>60%</td><td>${percent(cj, 60)}kg</td></tr>
+                    <tr><td>1 Set of 3 P.Cl. + 3 F.S. + 2 P.Jr. </td><td>70%</td><td>${percent(cj, 70)}kg</td></tr>
               </table>
             `;
             })(),
 
-            "5-4": (() => {
+          "5-4": (() => {
             const bs = parseFloat(lifts.bs);   // Back Squat
             const fs = parseFloat(lifts.fs);   // Front Squat
             const os = parseFloat(lifts.os);   // Overhead Squat
@@ -1121,30 +1121,30 @@
             return `
               <table>
                 <colgroup>
-                  <col style="width: 50%;">
-                  <col style="width: 25%;">
-                  <col style="width: 25%;">
+                  <col style="width: 70%;">
+                  <col style="width: 15%;">
+                  <col style="width: 15%;">
                 </colgroup>
                     <tr><th colspan="3">Back Squat</th></tr>
-                    <tr><td>1 Set of 4 Reps </td><td>60%</td><td>${percent(bs, 60)}</td></tr>
-                    <tr><td>1 Set of 4 Reps </td><td>70%</td><td>${percent(bs, 70)}</td></tr>
-                    <tr><td>3 Sets of 4 Reps </td><td>80%</td><td>${percent(bs, 80)}</td></tr>
+                    <tr><td>1 Set of 4 Reps </td><td>60%</td><td>${percent(bs, 60)}kg</td></tr>
+                    <tr><td>1 Set of 4 Reps </td><td>70%</td><td>${percent(bs, 70)}kg</td></tr>
+                    <tr><td>3 Sets of 4 Reps </td><td>80%</td><td>${percent(bs, 80)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
 
                     <tr><th colspan="3">Snatch Pull</th></tr>
-                    <tr><td>1 Set of 4 Reps </td><td>90%</td><td>${percent(s, 90)}</td></tr>
-                    <tr><td>4 Sets of 4 Reps </td><td>100%</td><td>${percent(s, 100)}</td></tr>
+                    <tr><td>1 Set of 4 Reps </td><td>90%</td><td>${percent(s, 90)}kg</td></tr>
+                    <tr><td>4 Sets of 4 Reps </td><td>100%</td><td>${percent(s, 100)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
 
                     <tr><th colspan="3">Clean Pull from Blocks Below the Knee</th></tr>
-                    <tr><td>1 Set of 4 Reps </td><td>80%</td><td>${percent(c, 80)}</td></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>90%</td><td>${percent(c, 90)}</td></tr>
-                    <tr><td>1 Set of 4 Reps </td><td>80%</td><td>${percent(c, 80)}</td></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>90%</td><td>${percent(c, 90)}</td></tr>
-                    <tr><td>1 Set of 4 Reps </td><td>80%</td><td>${percent(c, 80)}</td></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>90%</td><td>${percent(c, 90)}</td></tr>
+                    <tr><td>1 Set of 4 Reps </td><td>80%</td><td>${percent(c, 80)}kg</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>90%</td><td>${percent(c, 90)}kg</td></tr>
+                    <tr><td>1 Set of 4 Reps </td><td>80%</td><td>${percent(c, 80)}kg</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>90%</td><td>${percent(c, 90)}kg</td></tr>
+                    <tr><td>1 Set of 4 Reps </td><td>80%</td><td>${percent(c, 80)}kg</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>90%</td><td>${percent(c, 90)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
                     
@@ -1154,7 +1154,7 @@
             `;
             })(),
 
-            "6-1": (() => {
+          "6-1": (() => {
             const bs = parseFloat(lifts.bs);   // Back Squat
             const fs = parseFloat(lifts.fs);   // Front Squat
             const os = parseFloat(lifts.os);   // Overhead Squat
@@ -1166,41 +1166,41 @@
             return `
               <table>
                 <colgroup>
-                  <col style="width: 50%;">
-                  <col style="width: 25%;">
-                  <col style="width: 25%;">
+                  <col style="width: 70%;">
+                  <col style="width: 15%;">
+                  <col style="width: 15%;">
                 </colgroup>
                     <tr><th colspan="3">Back Squat</th></tr>
-                    <tr><td>1 Set of 5 Reps </td><td>60%</td><td>${percent(bs, 60)}</td></tr>
-                    <tr><td>1 Set of 5 Reps </td><td>70%</td><td>${percent(bs, 70)}</td></tr>
-                    <tr><td>5 Sets of 5 Reps </td><td>80%</td><td>${percent(bs, 80)}</td></tr>
+                    <tr><td>1 Set of 5 Reps </td><td>60%</td><td>${percent(bs, 60)}kg</td></tr>
+                    <tr><td>1 Set of 5 Reps </td><td>70%</td><td>${percent(bs, 70)}kg</td></tr>
+                    <tr><td>5 Sets of 5 Reps </td><td>80%</td><td>${percent(bs, 80)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
 
                     <tr><th colspan="3">Snatch</th></tr>
-                    <tr><td>1 Set of 4 Reps </td><td>60%</td><td>${percent(s, 60)}</td></tr>
-                    <tr><td>1 Set of 4 Reps </td><td>70%</td><td>${percent(s, 70)}</td></tr>
-                    <tr><td>4 Sets of 4 Reps </td><td>80%</td><td>${percent(s, 80)}</td></tr>
+                    <tr><td>1 Set of 4 Reps </td><td>60%</td><td>${percent(s, 60)}kg</td></tr>
+                    <tr><td>1 Set of 4 Reps </td><td>70%</td><td>${percent(s, 70)}kg</td></tr>
+                    <tr><td>4 Sets of 4 Reps </td><td>80%</td><td>${percent(s, 80)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
 
                     <tr><th colspan="3">Clean + Jerk</th></tr>
-                    <tr><td>1 Set of 1 Cl. + 3 Jr. </td><td>60%</td><td>${percent(cj, 60)}</td></tr>
-                    <tr><td>1 Set of 1 Cl. + 3 Jr. </td><td>70%</td><td>${percent(cj, 70)}</td></tr>
-                    <tr><td>3 Sets of 1 Cl. + 3 Jr. </td><td>80%</td><td>${percent(cj, 80)}</td></tr>
+                    <tr><td>1 Set of 1 Cl. + 3 Jr. </td><td>60%</td><td>${percent(cj, 60)}kg</td></tr>
+                    <tr><td>1 Set of 1 Cl. + 3 Jr. </td><td>70%</td><td>${percent(cj, 70)}kg</td></tr>
+                    <tr><td>3 Sets of 1 Cl. + 3 Jr. </td><td>80%</td><td>${percent(cj, 80)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
 
                     <tr><th colspan="3">Snatch Pull from Blocks Below the Knee</th></tr>
-                    <tr><td>1 Set of 4 Reps </td><td>85%</td><td>${percent(s, 85)}</td></tr>
-                    <tr><td>3 Sets of 4 Reps </td><td>95%</td><td>${percent(s, 95)}</td></tr>
+                    <tr><td>1 Set of 4 Reps </td><td>85%</td><td>${percent(s, 85)}kg</td></tr>
+                    <tr><td>3 Sets of 4 Reps </td><td>95%</td><td>${percent(s, 95)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
 
                     <tr><th colspan="3">Push Press</th></tr>
-                    <tr><td>1 Set of 4 Reps </td><td>60%</td><td>${percent(pp, 60)}</td></tr>
-                    <tr><td>1 Set of 4 Reps </td><td>65%</td><td>${percent(pp, 65)}</td></tr>
-                    <tr><td>3 Sets of 3 Reps </td><td>70%</td><td>${percent(pp, 70)}</td></tr>
+                    <tr><td>1 Set of 4 Reps </td><td>60%</td><td>${percent(pp, 60)}kg</td></tr>
+                    <tr><td>1 Set of 4 Reps </td><td>65%</td><td>${percent(pp, 65)}kg</td></tr>
+                    <tr><td>3 Sets of 3 Reps </td><td>70%</td><td>${percent(pp, 70)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
                     
@@ -1210,7 +1210,7 @@
             `;
             })(),
 
-           "6-2": (() => {
+          "6-2": (() => {
             const bs = parseFloat(lifts.bs);   // Back Squat
             const fs = parseFloat(lifts.fs);   // Front Squat
             const os = parseFloat(lifts.os);   // Overhead Squat
@@ -1222,39 +1222,39 @@
             return `
               <table>
                 <colgroup>
-                  <col style="width: 50%;">
-                  <col style="width: 25%;">
-                  <col style="width: 25%;">
+                  <col style="width: 70%;">
+                  <col style="width: 15%;">
+                  <col style="width: 15%;">
                 </colgroup>
                     <tr><th colspan="3">Back Squat</th></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>60%</td><td>${percent(bs, 60)}</td></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>70%</td><td>${percent(bs, 70)}</td></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>80%</td><td>${percent(bs, 80)}</td></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>85%</td><td>${percent(bs, 85)}</td></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>80%</td><td>${percent(bs, 80)}</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>60%</td><td>${percent(bs, 60)}kg</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>70%</td><td>${percent(bs, 70)}kg</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>80%</td><td>${percent(bs, 80)}kg</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>85%</td><td>${percent(bs, 85)}kg</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>80%</td><td>${percent(bs, 80)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
 
                     <tr><th colspan="3">Power Snatch + Overhead Squat</th></tr>
-                    <tr><td>1 Set of 3 P.Sn. + 3 Oh.S. </td><td>60%</td><td>${percent(s, 60)}</td></tr>
-                    <tr><td>1 Set of 3 P.Sn. + 3 Oh.S. </td><td>65%</td><td>${percent(s, 65)}</td></tr>
-                    <tr><td>2 Sets of 3 P.Sn. + 3 Oh.S. </td><td>70%</td><td>${percent(s, 70)}</td></tr>
+                    <tr><td>1 Set of 3 P.Sn. + 3 Oh.S. </td><td>60%</td><td>${percent(s, 60)}kg</td></tr>
+                    <tr><td>1 Set of 3 P.Sn. + 3 Oh.S. </td><td>65%</td><td>${percent(s, 65)}kg</td></tr>
+                    <tr><td>2 Sets of 3 P.Sn. + 3 Oh.S. </td><td>70%</td><td>${percent(s, 70)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
 
                     <tr><th colspan="3">Power Clean + Push Jerk</th></tr>
-                    <tr><td>1 Set of 3 P.Cl. + 1 P.Jr. </td><td>60%</td><td>${percent(cj, 60)}</td></tr>
-                    <tr><td>1 Set of 3 P.Cl. + 1 P.Jr. </td><td>65%</td><td>${percent(cj, 65)}</td></tr>
-                    <tr><td>3 Sets of 3 P.Cl. + 1 P.Jr. </td><td>70%</td><td>${percent(cj, 70)}</td></tr>
+                    <tr><td>1 Set of 3 P.Cl. + 1 P.Jr. </td><td>60%</td><td>${percent(cj, 60)}kg</td></tr>
+                    <tr><td>1 Set of 3 P.Cl. + 1 P.Jr. </td><td>65%</td><td>${percent(cj, 65)}kg</td></tr>
+                    <tr><td>3 Sets of 3 P.Cl. + 1 P.Jr. </td><td>70%</td><td>${percent(cj, 70)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
 
                     <tr><th colspan="3">Clean Pull</th></tr>
-                    <tr><td>1 Set of 4 Reps </td><td>80%</td><td>${percent(c, 80)}</td></tr>
-                    <tr><td>1 Set of 4 Reps </td><td>90%</td><td>${percent(c, 90)}</td></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>100%</td><td>${percent(c, 100)}</td></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>85%</td><td>${percent(c, 85)}</td></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>90%</td><td>${percent(c, 90)}</td></tr>
+                    <tr><td>1 Set of 4 Reps </td><td>80%</td><td>${percent(c, 80)}kg</td></tr>
+                    <tr><td>1 Set of 4 Reps </td><td>90%</td><td>${percent(c, 90)}kg</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>100%</td><td>${percent(c, 100)}kg</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>85%</td><td>${percent(c, 85)}kg</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>90%</td><td>${percent(c, 90)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
                     
@@ -1264,7 +1264,7 @@
             `;
             })(),
             
-            "6-3": (() => {
+          "6-3": (() => {
             const bs = parseFloat(lifts.bs);   // Back Squat
             const fs = parseFloat(lifts.fs);   // Front Squat
             const os = parseFloat(lifts.os);   // Overhead Squat
@@ -1276,49 +1276,49 @@
             return `
               <table>
                 <colgroup>
-                  <col style="width: 50%;">
-                  <col style="width: 25%;">
-                  <col style="width: 25%;">
+                  <col style="width: 70%;">
+                  <col style="width: 15%;">
+                  <col style="width: 15%;">
                 </colgroup>
                     <tr><th colspan="3">Front Squat</th></tr>
-                    <tr><td>1 Set of 4 Reps </td><td>60%</td><td>${percent(fs, 60)}</td></tr>
-                    <tr><td>1 Set of 4 Reps </td><td>70%</td><td>${percent(fs, 70)}</td></tr>
-                    <tr><td>1 Set of 4 Reps </td><td>80%</td><td>${percent(fs, 80)}</td></tr>
-                    <tr><td>1 Set of 4 Reps </td><td>85%</td><td>${percent(fs, 85)}</td></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>80%</td><td>${percent(fs, 80)}</td></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>85%</td><td>${percent(fs, 85)}</td></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>80%</td><td>${percent(fs, 80)}</td></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>85%</td><td>${percent(fs, 85)}</td></tr>
+                    <tr><td>1 Set of 4 Reps </td><td>60%</td><td>${percent(fs, 60)}kg</td></tr>
+                    <tr><td>1 Set of 4 Reps </td><td>70%</td><td>${percent(fs, 70)}kg</td></tr>
+                    <tr><td>1 Set of 4 Reps </td><td>80%</td><td>${percent(fs, 80)}kg</td></tr>
+                    <tr><td>1 Set of 4 Reps </td><td>85%</td><td>${percent(fs, 85)}kg</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>80%</td><td>${percent(fs, 80)}kg</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>85%</td><td>${percent(fs, 85)}kg</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>80%</td><td>${percent(fs, 80)}kg</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>85%</td><td>${percent(fs, 85)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
 
                     <tr><th colspan="3">Snatch</th></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>60%</td><td>${percent(s, 60)}</td></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>70%</td><td>${percent(s, 70)}</td></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>80%</td><td>${percent(s, 80)}</td></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>85%</td><td>${percent(s, 85)}</td></tr>
-                    <tr><td>1 Set of 2 Reps </td><td>90%</td><td>${percent(s, 90)}</td></tr>
-                    <tr><td>4 Sets of 3 Reps </td><td>80%</td><td>${percent(s, 80)}</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>60%</td><td>${percent(s, 60)}kg</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>70%</td><td>${percent(s, 70)}kg</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>80%</td><td>${percent(s, 80)}kg</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>85%</td><td>${percent(s, 85)}kg</td></tr>
+                    <tr><td>1 Set of 2 Reps </td><td>90%</td><td>${percent(s, 90)}kg</td></tr>
+                    <tr><td>4 Sets of 3 Reps </td><td>80%</td><td>${percent(s, 80)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
 
                     <tr><th colspan="3">Clean + Jerk</th></tr>
-                    <tr><td>1 Set of 3 Cl. + 1 Jr. </td><td>60%</td><td>${percent(cj, 60)}</td></tr>
-                    <tr><td>1 Set of 3 Cl. + 1 Jr. </td><td>70%</td><td>${percent(cj, 70)}</td></tr>
-                    <tr><td>1 Set of 3 Cl. + 1 Jr. </td><td>80%</td><td>${percent(cj, 80)}</td></tr>
-                    <tr><td>1 Set of 3 Cl. + 1 Jr. </td><td>85%</td><td>${percent(cj, 85)}</td></tr>
-                    <tr><td>1 Set of 2 Cl. + 1 Jr. </td><td>90%</td><td>${percent(cj, 90)}</td></tr>
-                    <tr><td>3 Sets of 3 Cl. + 1 Jr. </td><td>80%</td><td>${percent(cj, 80)}</td></tr>
+                    <tr><td>1 Set of 3 Cl. + 1 Jr. </td><td>60%</td><td>${percent(cj, 60)}kg</td></tr>
+                    <tr><td>1 Set of 3 Cl. + 1 Jr. </td><td>70%</td><td>${percent(cj, 70)}kg</td></tr>
+                    <tr><td>1 Set of 3 Cl. + 1 Jr. </td><td>80%</td><td>${percent(cj, 80)}kg</td></tr>
+                    <tr><td>1 Set of 3 Cl. + 1 Jr. </td><td>85%</td><td>${percent(cj, 85)}kg</td></tr>
+                    <tr><td>1 Set of 2 Cl. + 1 Jr. </td><td>90%</td><td>${percent(cj, 90)}kg</td></tr>
+                    <tr><td>3 Sets of 3 Cl. + 1 Jr. </td><td>80%</td><td>${percent(cj, 80)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
 
                     <tr><th colspan="3">Snatch Deadlift from Blocks Below the Knee</th></tr>
-                    <tr><td>1 Set of 4 Reps </td><td>100%</td><td>${percent(s, 100)}</td></tr>
-                    <tr><td>1 Set of 4 Reps </td><td>110%</td><td>${percent(s, 110)}</td></tr>
-                    <tr><td>1 Set of 4 Reps </td><td>100%</td><td>${percent(s, 100)}</td></tr>
-                    <tr><td>1 Set of 4 Reps </td><td>110%</td><td>${percent(s, 110)}</td></tr>
-                    <tr><td>1 Set of 4 Reps </td><td>100%</td><td>${percent(s, 100)}</td></tr>
-                    <tr><td>1 Set of 4 Reps </td><td>110%</td><td>${percent(s, 110)}</td></tr>
+                    <tr><td>1 Set of 4 Reps </td><td>100%</td><td>${percent(s, 100)}kg</td></tr>
+                    <tr><td>1 Set of 4 Reps </td><td>110%</td><td>${percent(s, 110)}kg</td></tr>
+                    <tr><td>1 Set of 4 Reps </td><td>100%</td><td>${percent(s, 100)}kg</td></tr>
+                    <tr><td>1 Set of 4 Reps </td><td>110%</td><td>${percent(s, 110)}kg</td></tr>
+                    <tr><td>1 Set of 4 Reps </td><td>100%</td><td>${percent(s, 100)}kg</td></tr>
+                    <tr><td>1 Set of 4 Reps </td><td>110%</td><td>${percent(s, 110)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
                     
@@ -1328,7 +1328,7 @@
             `;
             })(),
 
-            "6-4": (() => {
+          "6-4": (() => {
             const bs = parseFloat(lifts.bs);   // Back Squat
             const fs = parseFloat(lifts.fs);   // Front Squat
             const os = parseFloat(lifts.os);   // Overhead Squat
@@ -1340,27 +1340,27 @@
             return `
               <table>
                 <colgroup>
-                  <col style="width: 50%;">
-                  <col style="width: 25%;">
-                  <col style="width: 25%;">
+                  <col style="width: 70%;">
+                  <col style="width: 15%;">
+                  <col style="width: 15%;">
                 </colgroup>
                     <tr><th colspan="3">Back Squat</th></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>60%</td><td>${percent(bs, 60)}</td></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>70%</td><td>${percent(bs, 70)}</td></tr>
-                    <tr><td>1 Set of 3 Reps </td><td>80%</td><td>${percent(bs, 80)}</td></tr>
-                    <tr><td>4 Sets of 3 Reps </td><td>85%</td><td>${percent(bs, 85)}</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>60%</td><td>${percent(bs, 60)}kg</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>70%</td><td>${percent(bs, 70)}kg</td></tr>
+                    <tr><td>1 Set of 3 Reps </td><td>80%</td><td>${percent(bs, 80)}kg</td></tr>
+                    <tr><td>4 Sets of 3 Reps </td><td>85%</td><td>${percent(bs, 85)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
 
                     <tr><th colspan="3">Power Snatch + Behind the Neck Snatch Grip Push Press + Overhead Squat</th></tr>
-                    <tr><td>1 Set of 3 P.Sn. + 3 B.N.Sn.G.P.Pr. + 3 Oh.S. </td><td>60%</td><td>${percent(os, 60)}</td></tr>
-                    <tr><td>3 Sets of 3 P.Sn. + 3 B.N.Sn.G.P.Pr. + 2 Oh.S. </td><td>70%</td><td>${percent(os, 70)}</td></tr>
+                    <tr><td>1 Set of 3 P.Sn. + 3 B.N.Sn.G.P.Pr. + 3 Oh.S. </td><td>60%</td><td>${percent(os, 60)}kg</td></tr>
+                    <tr><td>3 Sets of 3 P.Sn. + 3 B.N.Sn.G.P.Pr. + 2 Oh.S. </td><td>70%</td><td>${percent(os, 70)}kg</td></tr>
 
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
 
                     <tr><th colspan="3">Power Clean + Front Squat + Jerk</th></tr>
-                    <tr><td>1 Set of 3 P.Cl. + 3 F.S. + 3 Jr. </td><td>60%</td><td>${percent(cj, 60)}</td></tr>
-                    <tr><td>3 Sets of 3 P.Cl. + 3 F.S. + 2 Jr. </td><td>70%</td><td>${percent(cj, 70)}</td></tr>
+                    <tr><td>1 Set of 3 P.Cl. + 3 F.S. + 3 Jr. </td><td>60%</td><td>${percent(cj, 60)}kg</td></tr>
+                    <tr><td>3 Sets of 3 P.Cl. + 3 F.S. + 2 Jr. </td><td>70%</td><td>${percent(cj, 70)}kg</td></tr>
               </table>
             `;
             })(),

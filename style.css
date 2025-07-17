@@ -19,6 +19,7 @@ body{
   display: flex;
   align-items:center;
   padding-top: 50px;
+  z-index: 1000;
 }
 #header img{
   height: 100px;

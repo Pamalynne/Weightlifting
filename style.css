@@ -52,7 +52,7 @@ body{
     width: 150px;
 }
 
-/*=========== HOME ===========*/
+/*=========== HOME BODY ===========*/
 
 #home-body{
     padding-top: 300px;
@@ -60,10 +60,6 @@ body{
     text-align: center;
     padding-left: 60px;
     padding-right: 60px;
-}
-
-#home-body p{
-    font-size: 1.6em;   
 }
 
 /*=========== BUTTONS ===========*/
@@ -74,12 +70,12 @@ body{
     padding: 30px;
     margin: 0 auto;
     text-align: center;
+    padding-bottom: 100px;
 }
 
 #button a{
     text-decoration: none;
     color: white;
-    font-size: 1.6em;
 }
 
 /*=========== STATS ===========*/
@@ -103,7 +99,6 @@ table{
     border-collapse: separate;
     border-spacing: 20px;
     padding-top: 30px;
-    padding-bottom: 30px;
     font-size: 1.6em;
 }
 
@@ -140,7 +135,7 @@ td{
    color: #202020;
    padding-left: 60px;
    padding-right: 60px;
-   font-size: 1.6em;
+   font-size: 2em;
 }
 
 #selectors {
@@ -150,21 +145,21 @@ td{
 }
 
 #selectors label {
-  font-size: 1.6em;
+  font-size: 1.5em;
   margin-left: 20px;
   margin-right: 10px;
   color: #202020;
 }
 
 #selectors select {
-  font-size: 1.6em;
+  font-size: 1.2em;
   padding: 15px;
   margin: 10px;
   border: 2px solid #202020;
   border-radius: 8px;
   background-color: #f9f9f9;
   color: #202020;
-  width: 200px;
+  width: 100px;
 }
 
 
@@ -196,4 +191,29 @@ td{
     min-height: 40px;
     padding: 8px;
     text-align: left;
+}
+
+/*=========== PROGRAM - CHECKBOXES ===========*/
+
+th label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+th input.section-toggle {
+  transform: scale(3); /* Make the tick box larger */
+  cursor: pointer;
+  margin-right: 30px;
+}
+
+input.section-toggle:checked {
+  background-color: #202020;
+  border-color: #202020;
+}
+
+#programDisplay tr.faded td {
+  color: #aaa;
+  text-decoration: line-through;
 }

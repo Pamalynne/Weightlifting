@@ -104,7 +104,6 @@ table{
   text-align: center;
   border-collapse: separate;
   border-spacing: 30px;
-  padding-top: 30px;
   font-size: 1.6em;
   padding-bottom: 50px;
 }
@@ -118,12 +117,12 @@ td{
 .input {
   width: 120px;
   height: 80px;
-  font-size: 1.2em;
+  font-size: 1em;
   text-align: center;
   border: 2px solid #202020;
   border-radius: 8px;
   background-color: #f9f9f9;
-  color: #202020;
+  color: #2c2c2c;
 }
 
 /*=========== PROGRAM - WEEK & DAY SELECTOR ===========*/

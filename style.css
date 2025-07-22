@@ -77,6 +77,7 @@ body{
   text-align: center;
   font-size: 1.6em;
   margin-bottom: 350px;
+  border-radius: 8px;
 }
 
 #button a{
@@ -177,7 +178,6 @@ td{
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
-  margin-bottom: 400px;
 }
 
 #programDisplay table td:nth-child(2),
@@ -191,6 +191,7 @@ td{
   text-align: left;
   background-color: #202020;
   color: white;
+  border-radius: 8px;
 }
 
 #programDisplay td {
@@ -222,4 +223,51 @@ input.section-toggle:checked {
 #programDisplay tr.faded td {
   color: #aaa;
   text-decoration: line-through;
+}
+
+/*=========== PROGRAM - NOTES ===========*/
+
+#programDisplay > div {
+  margin-top: 20px;
+  margin-bottom: 400px;  
+  max-width: 900px;
+  width: 100%;        
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 1.6em;
+  font-weight: 600;
+  background-color: #202020; 
+  color: white;               
+  border-radius: 8px;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  text-align: left;
+  font-family: 'Raleway', sans-serif;
+}
+
+#programDisplay > div label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 700;
+  color: white;
+}
+
+#programDisplay textarea#notes {
+  width: 100%;
+  min-height: 120px;
+  font-size: 1.6em;
+  font-family: 'Raleway', sans-serif;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  background-color: #464646;
+  color: white;
+  resize: vertical;
+  box-sizing: border-box;
+  transition: background-color 0.3s ease;
+}
+
+#programDisplay textarea#notes:focus {
+  outline: none;
+  background-color: #757575;
 }

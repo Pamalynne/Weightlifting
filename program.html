@@ -747,7 +747,7 @@
                   <tr data-section="433"><td>1 Set of 1 Cl. + 1 Jr.</td><td>85%</td><td>${percent(cj, 85)}kg</td></tr>
                   <tr data-section="433"><td>1 Set of 1 Cl. + 1 Jr.</td><td>90%</td><td>${percent(cj, 90)}kg</td></tr>
                   <tr><td colspan="3" style="height: 40px;"></td></tr>
-                  <tr><th colspan="3"><label>Snatch Pulls <input type="checkbox" class="section-toggle" data-section="434"/></label></th></tr>
+                  <tr><th colspan="3"><label>Snatch Pulls<input type="checkbox" class="section-toggle" data-section="434"/></label></th></tr>
                   <tr data-section="434"><td>5 Sets of 4 Reps</td><td>100%</td><td>${percent(s, 100)}kg</td></tr>
                   <tr><td colspan="3" style="height: 40px;"></td></tr>
                   <tr><th colspan="3"><label>Press<input type="checkbox" class="section-toggle" data-section="435"/></label></th></tr>
@@ -1177,68 +1177,89 @@
         };
 
         // Set selectors to saved values (if any)
-    if (savedWeek) weekSelect.value = savedWeek;
-    if (savedDay) daySelect.value = savedDay;
+        if (savedWeek) weekSelect.value = savedWeek;
+        if (savedDay) daySelect.value = savedDay;
 
-    function showProgram(week, day) {
-      if (!week || !day) {
-        displayDiv.innerHTML = "<p>Please select the week & day of the program you wish to open.</p>";
-        return;
-      }
+        function showProgram(week, day) {
+          if (!week || !day) {
+            displayDiv.innerHTML = "<p>Please select the week & day of the program you wish to open.</p>";
+            return;
+          }
 
-      const key = `${week}-${day}`;
-      if (programs[key]) {
-        displayDiv.innerHTML = programs[key];
+          const key = `${week}-${day}`;
+          if (programs[key]) {
+            displayDiv.innerHTML = programs[key];
 
-        // Restore saved checkbox states and faded rows
-        const savedCheckboxes = JSON.parse(localStorage.getItem(`checkboxes-${key}`)) || {};
-        for (const sectionId in savedCheckboxes) {
-          const checkbox = displayDiv.querySelector(`.section-toggle[data-section="${sectionId}"]`);
-          const rows = displayDiv.querySelectorAll(`tr[data-section="${sectionId}"]`);
-          if (checkbox) {
-            checkbox.checked = savedCheckboxes[sectionId];
-            rows.forEach(row => {
-              row.classList.toggle("faded", checkbox.checked);
+            // Add notes section after program table
+            const notesKey = `notes-${key}`;
+            const savedNote = localStorage.getItem(notesKey) || "";
+
+            const notesHTML = `
+              <div style="margin-top: 20px;">
+                <label for="notes">Notes:</label><br>
+                <textarea id="notes" rows="4" style="width: 100%;">${savedNote}</textarea>
+              </div>
+            `;
+
+            displayDiv.innerHTML += notesHTML;
+
+            // Restore saved checkbox states and faded rows
+            const savedCheckboxes = JSON.parse(localStorage.getItem(`checkboxes-${key}`)) || {};
+            for (const sectionId in savedCheckboxes) {
+              const checkbox = displayDiv.querySelector(`.section-toggle[data-section="${sectionId}"]`);
+              const rows = displayDiv.querySelectorAll(`tr[data-section="${sectionId}"]`);
+              if (checkbox) {
+                checkbox.checked = savedCheckboxes[sectionId];
+                rows.forEach(row => {
+                  row.classList.toggle("faded", checkbox.checked);
+                });
+              }
+            }
+
+            // Add event listeners for checkboxes
+            const checkboxes = displayDiv.querySelectorAll(".section-toggle");
+            checkboxes.forEach((checkbox) => {
+              checkbox.addEventListener("change", () => {
+                const sectionId = checkbox.dataset.section;
+                const rows = displayDiv.querySelectorAll(`tr[data-section="${sectionId}"]`);
+
+                rows.forEach((row) => {
+                  row.classList.toggle("faded", checkbox.checked);
+                });
+
+                const savedCheckboxes = JSON.parse(localStorage.getItem(`checkboxes-${key}`)) || {};
+                savedCheckboxes[sectionId] = checkbox.checked;
+                localStorage.setItem(`checkboxes-${key}`, JSON.stringify(savedCheckboxes));
+              });
             });
+
+            // Add event listener to notes textarea (once)
+            const notesInput = document.getElementById("notes");
+            if (notesInput) {
+              notesInput.addEventListener("input", () => {
+                localStorage.setItem(notesKey, notesInput.value);
+              });
+            }
+
+          } else {
+            displayDiv.innerHTML = "<p>No program available for this week/day yet.</p>";
           }
         }
 
-        // Add event listeners to save changes
-        const checkboxes = displayDiv.querySelectorAll(".section-toggle");
-        checkboxes.forEach((checkbox) => {
-          checkbox.addEventListener("change", () => {
-            const sectionId = checkbox.dataset.section;
-            const rows = displayDiv.querySelectorAll(`tr[data-section="${sectionId}"]`);
+        // Show program on load based on saved or default values
+        showProgram(weekSelect.value, daySelect.value);
 
-            rows.forEach((row) => {
-              row.classList.toggle("faded", checkbox.checked);
-            });
-
-            const savedCheckboxes = JSON.parse(localStorage.getItem(`checkboxes-${key}`)) || {};
-            savedCheckboxes[sectionId] = checkbox.checked;
-            localStorage.setItem(`checkboxes-${key}`, JSON.stringify(savedCheckboxes));
-          });
+        // Save and update program on selector change
+        weekSelect.addEventListener("change", () => {
+          localStorage.setItem("selectedWeek", weekSelect.value);
+          showProgram(weekSelect.value, daySelect.value);
         });
 
-      } else {
-        displayDiv.innerHTML = "<p>No program available for this week/day yet.</p>";
-      }
-    }
-
-    // Show program on load based on saved or default values
-    showProgram(weekSelect.value, daySelect.value);
-
-    // Save and update program on selector change
-    weekSelect.addEventListener("change", () => {
-      localStorage.setItem("selectedWeek", weekSelect.value);
-      showProgram(weekSelect.value, daySelect.value);
-    });
-
-    daySelect.addEventListener("change", () => {
-      localStorage.setItem("selectedDay", daySelect.value);
-      showProgram(weekSelect.value, daySelect.value);
-    });
-  });
+        daySelect.addEventListener("change", () => {
+          localStorage.setItem("selectedDay", daySelect.value);
+          showProgram(weekSelect.value, daySelect.value);
+        });
+      });
     </script>
   </body>
 </html>

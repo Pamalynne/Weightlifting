@@ -1,0 +1,33 @@
+"6-2": (() => {
+            const bs = parseFloat(lifts.bs);   // Back Squat
+            const fs = parseFloat(lifts.fs);   // Front Squat
+            const os = parseFloat(lifts.os);   // Overhead Squat
+            const c  = parseFloat(lifts.c);    // Clean
+            const s  = parseFloat(lifts.s);    // Snatch
+            const cj = parseFloat(lifts.cj);   // Clean & Jerk
+            const d  = parseFloat(lifts.d);    // Deadlift
+            const pp = parseFloat(lifts.pp);   // Push Press
+            return `
+              <table>
+                <colgroup>
+                  <col style="width: 70%;">
+                  <col style="width: 15%;">
+                  <col style="width: 15%;">
+                </colgroup>
+                    <tr><th colspan="3"><label>Back Squat WU<input type="checkbox" class="section-toggle" data-section="621"/></label></th></tr>
+                    <tr data-section="621"><td colspan="3">2 Sets of 5 Reps Empty Bar</td></tr>
+                    <tr data-section="621"><td>1 Set of 1 Rep</td><td>50%</td><td>${percent(fs, 50)}kg</td></tr>
+                    <tr data-section="621"><td>1 Set of 1 Rep</td><td>60%</td><td>${percent(fs, 60)}kg</td></tr>
+                    <tr data-section="621"><td>1 Set of 1 Rep</td><td>70%</td><td>${percent(fs, 70)}kg</td></tr>
+                    <tr><td colspan="3" style="height: 40px;"></td></tr>
+                    <tr><th colspan="3"><label>Back Squat WS<input type="checkbox" class="section-toggle" data-section="622"/></label></th></tr>
+                    <tr data-section="621"><td>1 Set of 1 Rep</td><td>75%</td><td>${percent(fs, 75)}kg</td></tr>
+                    <tr data-section="621"><td>1 Set of 1 Rep</td><td>80%</td><td>${percent(fs, 80)}kg</td></tr>
+                    <tr data-section="621"><td>1 Set of 1 Rep</td><td>85%</td><td>${percent(fs, 85)}kg</td></tr>
+                    <tr data-section="621"><td>1 Set of 1 Rep</td><td>90%</td><td>${percent(fs, 90)}kg</td></tr>
+                    <tr data-section="621"><td>1 Set of 1 Rep</td><td>95%</td><td>${percent(fs, 95)}kg</td></tr>
+                    <tr data-section="622"><td colspan="3">1 Set of 1 Rep 1RM</td></tr>
+                    <tr><td colspan="3" style="height: 40px;"></td></tr>
+              </table>
+            `;
+          })(),

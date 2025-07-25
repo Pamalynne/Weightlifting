@@ -254,7 +254,7 @@ input.section-toggle:checked {
 
 #programDisplay textarea#notes {
   width: 100%;
-  min-height: 120px;
+  min-height: 200px;
   font-size: 1em;
   font-family: 'Raleway', sans-serif;
   padding: 12px;

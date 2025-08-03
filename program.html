@@ -50,9 +50,9 @@
         const program-select = document.getElementById("program-select");
         const displayDiv = document.getElementById("programDisplay");
 
-        // Restore previous week/day if available
-        const savedWeek = localStorage.getItem("selectedWeek");
-        const savedDay = localStorage.getItem("selectedDay");
+        // Restore previous program/level if available
+        const savedprogram = localStorage.getItem("selectedprogram");
+        const savedlevel = localStorage.getItem("selectedlevel");
 
         if (!lifts) {
           displayDiv.innerHTML =
@@ -495,16 +495,16 @@
         };
 
         // Set selectors to saved values (if any)
-        if (savedWeek) level-select.value = savedWeek;
-        if (savedDay) program-select.value = savedDay;
+        if (savedprogram) level-select.value = savedprogram;
+        if (savedlevel) program-select.value = savedlevel;
 
-        function showProgram(week, day) {
-          if (!week || !day) {
-            displayDiv.innerHTML = "<p>Please select the week & day of the program you wish to open.</p>";
+        function showProgram(program, level) {
+          if (!program || !level) {
+            displayDiv.innerHTML = "<p>Please select the program & level of the program you wish to open.</p>";
             return;
           }
 
-          const key = `${week}-${day}`;
+          const key = `${program}-${level}`;
           if (programs[key]) {
             displayDiv.innerHTML = programs[key];
 
@@ -560,7 +560,7 @@
             }
 
           } else {
-            displayDiv.innerHTML = "<p>No program available for this week/day yet.</p>";
+            displayDiv.innerHTML = "<p>No program available for this program/level yet.</p>";
           }
         }
 
@@ -569,12 +569,12 @@
 
         // Save and update program on selector change
         level-select.addEventListener("change", () => {
-          localStorage.setItem("selectedWeek", level-select.value);
+          localStorage.setItem("selectedprogram", level-select.value);
           showProgram(level-select.value, program-select.value);
         });
 
         program-select.addEventListener("change", () => {
-          localStorage.setItem("selectedDay", program-select.value);
+          localStorage.setItem("selectedlevel", program-select.value);
           showProgram(level-select.value, program-select.value);
         });
       });

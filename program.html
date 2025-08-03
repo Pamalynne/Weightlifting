@@ -18,15 +18,15 @@
 
     <div id="program-container"> 
       <div id="selectors">
-        <label for="athleteSelect">Program:</label>
-        <select id="athleteSelect">
+        <label for="program-select">Program:</label>
+        <select id="program-select">
           <option value="" disabled selected>-</option>
-          <option value="1">Back Squat</option>
-          <option value="2">Front Squat</option>
+          <option value="1">Back Squat Build</option>
+          <option value="2">Front Squat Build</option>
         </select>
 
-        <label for="weekSelect">Level:</label>
-        <select id="weekSelect">
+        <label for="level-select">Level:</label>
+        <select id="level-select">
           <option value="" disabled selected>-</option>
           <option value="1">1</option>
           <option value="2">2</option>
@@ -38,7 +38,7 @@
       </div>
 
       <div id="programDisplay">
-        <p>Please select the week &amp; day of the program you wish to open.</p>
+        <p>Please select the program &amp; level of the program you wish to open.</p>
       </div>
     </div>
 
@@ -46,8 +46,8 @@
       document.addEventListener("DOMContentLoaded", function () {
         const lifts = JSON.parse(localStorage.getItem("lifts"));
 
-        const weekSelect = document.getElementById("weekSelect");
-        const athleteSelect = document.getElementById("athleteSelect");
+        const level-select = document.getElementById("level-select");
+        const program-select = document.getElementById("program-select");
         const displayDiv = document.getElementById("programDisplay");
 
         // Restore previous week/day if available
@@ -495,8 +495,8 @@
         };
 
         // Set selectors to saved values (if any)
-        if (savedWeek) weekSelect.value = savedWeek;
-        if (savedDay) athleteSelect.value = savedDay;
+        if (savedWeek) level-select.value = savedWeek;
+        if (savedDay) program-select.value = savedDay;
 
         function showProgram(week, day) {
           if (!week || !day) {
@@ -565,17 +565,17 @@
         }
 
         // Show program on load based on saved or default values
-        showProgram(weekSelect.value, athleteSelect.value);
+        showProgram(level-select.value, program-select.value);
 
         // Save and update program on selector change
-        weekSelect.addEventListener("change", () => {
-          localStorage.setItem("selectedWeek", weekSelect.value);
-          showProgram(weekSelect.value, athleteSelect.value);
+        level-select.addEventListener("change", () => {
+          localStorage.setItem("selectedWeek", level-select.value);
+          showProgram(level-select.value, program-select.value);
         });
 
-        athleteSelect.addEventListener("change", () => {
-          localStorage.setItem("selectedDay", athleteSelect.value);
-          showProgram(weekSelect.value, athleteSelect.value);
+        program-select.addEventListener("change", () => {
+          localStorage.setItem("selectedDay", program-select.value);
+          showProgram(level-select.value, program-select.value);
         });
       });
     </script>

@@ -18,15 +18,15 @@
 
     <div id="program-container"> 
       <div id="selectors">
-        <label for="program-select">Program:</label>
-        <select id="program-select">
+        <label for="athleteSelect">Athlete:</label>
+        <select id="athleteSelect">
           <option value="" disabled selected>-</option>
-          <option value="1">Back Squat Build</option>
-          <option value="2">Front Squat Build</option>
+          <option value="1">Pam</option>
+          <option value="2">Riaan</option>
         </select>
 
-        <label for="level-select">Level:</label>
-        <select id="level-select">
+        <label for="weekSelect">Week:</label>
+        <select id="weekSelect">
           <option value="" disabled selected>-</option>
           <option value="1">1</option>
           <option value="2">2</option>
@@ -38,7 +38,7 @@
       </div>
 
       <div id="programDisplay">
-        <p>Please select the program &amp; level of the program you wish to open.</p>
+        <p>Please select the week &amp; day of the program you wish to open.</p>
       </div>
     </div>
 
@@ -46,13 +46,13 @@
       document.addEventListener("DOMContentLoaded", function () {
         const lifts = JSON.parse(localStorage.getItem("lifts"));
 
-        const level-select = document.getElementById("level-select");
-        const program-select = document.getElementById("program-select");
+        const weekSelect = document.getElementById("weekSelect");
+        const athleteSelect = document.getElementById("athleteSelect");
         const displayDiv = document.getElementById("programDisplay");
 
-        // Restore previous program/level if available
-        const savedprogram = localStorage.getItem("selectedprogram");
-        const savedlevel = localStorage.getItem("selectedlevel");
+        // Restore previous week/day if available
+        const savedWeek = localStorage.getItem("selectedWeek");
+        const savedDay = localStorage.getItem("selectedDay");
 
         if (!lifts) {
           displayDiv.innerHTML =
@@ -125,7 +125,7 @@
                     <tr><th colspan="3"><label>Split Squat<input type="checkbox" class="section-toggle" data-section="213"/></label></th></tr>
                     <tr data-section="213"><td colspan="3">3 Sets of 10 Reps Per side. Work up to weight where you can maintain proper form.</td></tr>
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
-                          <tr><th colspan="3"><label>V-Ups<input type="checkbox" class="section-toggle" data-section="214"/></label></th></tr>
+                    <tr><th colspan="3"><label>Hanging KR<input type="checkbox" class="section-toggle" data-section="214"/></label></th></tr>
                     <tr data-section="214"><td colspan="3">3 Sets of 20 Reps </td></tr>
               </table>
             `;
@@ -199,7 +199,7 @@
                     <tr><th colspan="3"><label>Split Squat<input type="checkbox" class="section-toggle" data-section="413"/></label></th></tr>
                     <tr data-section="413"><td colspan="3">3 Sets of 10 Reps Per side. Work up to weight where you can maintain proper form.</td></tr>
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
-                    <tr><th colspan="3"><label>V-Ups<input type="checkbox" class="section-toggle" data-section="414"/></label></th></tr>
+                    <tr><th colspan="3"><label>Hanging KR<input type="checkbox" class="section-toggle" data-section="414"/></label></th></tr>
                     <tr data-section="414"><td colspan="3">3 Sets of 20 Reps </td></tr>
               </table>
             `;
@@ -338,7 +338,7 @@
                     <tr><th colspan="3"><label>Split Squat<input type="checkbox" class="section-toggle" data-section="223"/></label></th></tr>
                     <tr data-section="223"><td colspan="3">3 Sets of 10 Reps Per side. Work up to weight where you can maintain proper form.</td></tr>
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
-                    <tr><th colspan="3"><label>V-Ups<input type="checkbox" class="section-toggle" data-section="224"/></label></th></tr>
+                    <tr><th colspan="3"><label>Hanging KR<input type="checkbox" class="section-toggle" data-section="224"/></label></th></tr>
                     <tr data-section="224"><td colspan="3">3 Sets of 20 Reps </td></tr>
               </table>
             `;
@@ -412,7 +412,7 @@
                     <tr><th colspan="3"><label>Split Squat<input type="checkbox" class="section-toggle" data-section="423"/></label></th></tr>
                     <tr data-section="423"><td colspan="3">3 Sets of 10 Reps Per side. Work up to weight where you can maintain proper form.</td></tr>
                     <tr><td colspan="3" style="height: 40px;"></td></tr>
-                    <tr><th colspan="3"><label>V-Ups<input type="checkbox" class="section-toggle" data-section="424"/></label></th></tr>
+                    <tr><th colspan="3"><label>Hanging KR<input type="checkbox" class="section-toggle" data-section="424"/></label></th></tr>
                     <tr data-section="424"><td colspan="3">3 Sets of 20 Reps </td></tr>
               </table>
             `;
@@ -495,16 +495,16 @@
         };
 
         // Set selectors to saved values (if any)
-        if (savedprogram) level-select.value = savedprogram;
-        if (savedlevel) program-select.value = savedlevel;
+        if (savedWeek) weekSelect.value = savedWeek;
+        if (savedDay) athleteSelect.value = savedDay;
 
-        function showProgram(program, level) {
-          if (!program || !level) {
-            displayDiv.innerHTML = "<p>Please select the program & level of the program you wish to open.</p>";
+        function showProgram(week, day) {
+          if (!week || !day) {
+            displayDiv.innerHTML = "<p>Please select the week & day of the program you wish to open.</p>";
             return;
           }
 
-          const key = `${program}-${level}`;
+          const key = `${week}-${day}`;
           if (programs[key]) {
             displayDiv.innerHTML = programs[key];
 
@@ -560,22 +560,22 @@
             }
 
           } else {
-            displayDiv.innerHTML = "<p>No program available for this program/level yet.</p>";
+            displayDiv.innerHTML = "<p>No program available for this week/day yet.</p>";
           }
         }
 
         // Show program on load based on saved or default values
-        showProgram(level-select.value, program-select.value);
+        showProgram(weekSelect.value, athleteSelect.value);
 
         // Save and update program on selector change
-        level-select.addEventListener("change", () => {
-          localStorage.setItem("selectedprogram", level-select.value);
-          showProgram(level-select.value, program-select.value);
+        weekSelect.addEventListener("change", () => {
+          localStorage.setItem("selectedWeek", weekSelect.value);
+          showProgram(weekSelect.value, athleteSelect.value);
         });
 
-        program-select.addEventListener("change", () => {
-          localStorage.setItem("selectedlevel", program-select.value);
-          showProgram(level-select.value, program-select.value);
+        athleteSelect.addEventListener("change", () => {
+          localStorage.setItem("selectedDay", athleteSelect.value);
+          showProgram(weekSelect.value, athleteSelect.value);
         });
       });
     </script>

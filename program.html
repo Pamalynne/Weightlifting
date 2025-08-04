@@ -18,15 +18,23 @@
 
     <div id="program-container"> 
       <div id="selectors">
-        <label for="athleteSelect">Athlete:</label>
-        <select id="athleteSelect">
+        <label for="programSelect">Program:</label>
+        <select id="programSelect">
           <option value="" disabled selected>-</option>
-          <option value="1">Pam</option>
-          <option value="2">Riaan</option>
+          <option value="1">Back Squat Build</option>
+          <option value="2">Front Squat Build</option>
+          <option value="3">Back Squat Maintenance</option>
+          <option value="4">Front Squat Maintenance</option>
+          <option value="5">Deadlift Build</option>
+          <option value="6">Deadlift Maintenance</option>
+	  <option value="7">Snatch Build</option>
+	  <option value="8">Clean & Jerk Build</option>
+	  <option value="9">Snatch Competition</option>
+	  <option value="10">Clean & Jerk Competition</option>
         </select>
 
-        <label for="weekSelect">Week:</label>
-        <select id="weekSelect">
+	<label for="levelSelect">Level:</label>
+        <select id="levelSelect">
           <option value="" disabled selected>-</option>
           <option value="1">1</option>
           <option value="2">2</option>
@@ -38,7 +46,7 @@
       </div>
 
       <div id="programDisplay">
-        <p>Please select the week &amp; day of the program you wish to open.</p>
+        <p>Please select the program &amp; level of the program you wish to open.</p>
       </div>
     </div>
 
@@ -46,13 +54,13 @@
       document.addEventListener("DOMContentLoaded", function () {
         const lifts = JSON.parse(localStorage.getItem("lifts"));
 
-        const weekSelect = document.getElementById("weekSelect");
-        const athleteSelect = document.getElementById("athleteSelect");
+        const programSelect = document.getElementById("programSelect");
+        const levelSelect = document.getElementById("levelSelect");
         const displayDiv = document.getElementById("programDisplay");
 
-        // Restore previous week/day if available
-        const savedWeek = localStorage.getItem("selectedWeek");
-        const savedDay = localStorage.getItem("selectedDay");
+        // Restore previous program/level if available
+        const savedprogram = localStorage.getItem("selectedprogram");
+        const savedlevel = localStorage.getItem("selectedlevel");
 
         if (!lifts) {
           displayDiv.innerHTML =
@@ -64,7 +72,7 @@
           return Math.round((base * p) / 100);
         }
 
-        const programs = {
+const programs = {
           "1-1": (() => {
             const bs = parseFloat(lifts.bs);   // Back Squat
             const fs = parseFloat(lifts.fs);   // Front Squat
@@ -81,199 +89,18 @@
                   <col style="width: 15%;">
                   <col style="width: 15%;">
                 </colgroup>
-                    <tr><th colspan="3"><label>Back Squat WU<input type="checkbox" class="section-toggle" data-section="111"/></label></th></tr>
-                    <tr data-section="111"><td>2 Sets of 10 Reps</td><td colspan="2">Empty Bar</td></tr>
-                    <tr data-section="111"><td>2 Sets of 5 Reps</td><td>50%</td><td>${percent(bs, 50)}kg</td></tr>
-                    <tr><td colspan="3" style="height: 40px;"></td></tr>
-                    <tr><th colspan="3"><label>Back Squat WS<input type="checkbox" class="section-toggle" data-section="112"/></label></th></tr>
-                    <tr data-section="112"><td>2 Sets of 10 Reps</td><td>55%</td><td>${percent(bs, 55)}kg</td></tr>
-                    <tr><td colspan="3" style="height: 40px;"></td></tr>
-                    <tr><th colspan="3"><label>Good Mornings<input type="checkbox" class="section-toggle" data-section="113"/></label></th></tr>
-                    <tr data-section="113"><td colspan="3">5 Sets of 5 Reps Work up to weight where you can maintain proper form.</td></tr>
-                    <tr><td colspan="3" style="height: 40px;"></td></tr>
-                    <tr><th colspan="3"><label>WP Sit Ups<input type="checkbox" class="section-toggle" data-section="114"/></label></th></tr>
-                    <tr data-section="114"><td colspan="3">3 Sets of 20 Reps Use a weight where you can maintain proper form.</td></tr>
-              </table>
-            `;
-          })(),
-
-         "2-1": (() => {
-            const bs = parseFloat(lifts.bs);   // Back Squat
-            const fs = parseFloat(lifts.fs);   // Front Squat
-            const os = parseFloat(lifts.os);   // Overhead Squat
-            const c  = parseFloat(lifts.c);    // Clean
-            const s  = parseFloat(lifts.s);    // Snatch
-            const cj = parseFloat(lifts.cj);   // Clean & Jerk
-            const d  = parseFloat(lifts.d);    // Deadlift
-            const pp = parseFloat(lifts.pp);   // Push Press
-            return `
-              <table>
-                <colgroup>
-                  <col style="width: 70%;">
-                  <col style="width: 15%;">
-                  <col style="width: 15%;">
-                </colgroup>
-                    <tr><th colspan="3"><label>Back Squat WU<input type="checkbox" class="section-toggle" data-section="211"/></label></th></tr>
-                    <tr data-section="211"><td>2 Sets of 8 Reps</td><td colspan="2">Empty Bar</td></tr>
-                    <tr data-section="211"><td>1 Set of 4 Reps</td><td>50%</td><td>${percent(bs, 50)}kg</td></tr>
-                    <tr data-section="211"><td>1 Set of 4 Reps</td><td>55%</td><td>${percent(bs, 55)}kg</td></tr>
-                    <tr data-section="211"><td>1 Set of 4 Reps</td><td>60%</td><td>${percent(bs, 60)}kg</td></tr>
-                    <tr><td colspan="3" style="height: 40px;"></td></tr>
-                    <tr><th colspan="3"><label>Back Squat WS<input type="checkbox" class="section-toggle" data-section="212"/></label></th></tr>
-                    <tr data-section="212"><td>2 Sets of 8 Reps</td><td>65%</td><td>${percent(bs, 65)}kg</td></tr>
-                    <tr><td colspan="3" style="height: 40px;"></td></tr>
-                    <tr><th colspan="3"><label>Split Squat<input type="checkbox" class="section-toggle" data-section="213"/></label></th></tr>
-                    <tr data-section="213"><td colspan="3">3 Sets of 10 Reps Per side. Work up to weight where you can maintain proper form.</td></tr>
-                    <tr><td colspan="3" style="height: 40px;"></td></tr>
-                    <tr><th colspan="3"><label>Hanging KR<input type="checkbox" class="section-toggle" data-section="214"/></label></th></tr>
-                    <tr data-section="214"><td colspan="3">3 Sets of 20 Reps </td></tr>
-              </table>
-            `;
-          })(),
-          
-          "3-1": (() => {
-            const bs = parseFloat(lifts.bs);   // Back Squat
-            const fs = parseFloat(lifts.fs);   // Front Squat
-            const os = parseFloat(lifts.os);   // Overhead Squat
-            const c  = parseFloat(lifts.c);    // Clean
-            const s  = parseFloat(lifts.s);    // Snatch
-            const cj = parseFloat(lifts.cj);   // Clean & Jerk
-            const d  = parseFloat(lifts.d);    // Deadlift
-            const pp = parseFloat(lifts.pp);   // Push Press
-            return `
-              <table>
-                <colgroup>
-                  <col style="width: 70%;">
-                  <col style="width: 15%;">
-                  <col style="width: 15%;">
-                </colgroup>
-                    <tr><th colspan="3"><label>Back Squat WU<input type="checkbox" class="section-toggle" data-section="311"/></label></th></tr>
-                    <tr data-section="311"><td>2 Sets of 6 Reps</td><td colspan="2">Empty Bar</td></tr>
-                    <tr data-section="311"><td>1 Set of 3 Reps</td><td>50%</td><td>${percent(bs, 50)}kg</td></tr>
-                    <tr data-section="311"><td>1 Set of 3 Reps</td><td>55%</td><td>${percent(bs, 55)}kg</td></tr>
-                    <tr data-section="311"><td>1 Set of 3 Reps</td><td>60%</td><td>${percent(bs, 60)}kg</td></tr>
-                    <tr data-section="311"><td>1 Set of 3 Reps</td><td>65%</td><td>${percent(bs, 65)}kg</td></tr>
-                    <tr data-section="311"><td>1 Set of 3 Reps</td><td>70%</td><td>${percent(bs, 70)}kg</td></tr>
-                    <tr><td colspan="3" style="height: 40px;"></td></tr>
-                    <tr><th colspan="3"><label>Back Squat WS<input type="checkbox" class="section-toggle" data-section="312"/></label></th></tr>
-                    <tr data-section="312"><td>2 Sets of 6 Reps</td><td>75%</td><td>${percent(bs, 75)}kg</td></tr>
-                    <tr><td colspan="3" style="height: 40px;"></td></tr>
-                    <tr><th colspan="3"><label>Good Mornings<input type="checkbox" class="section-toggle" data-section="313"/></label></th></tr>
-                    <tr data-section="313"><td colspan="3">5 Sets of 5 Reps Work up to weight where you can maintain proper form.</td></tr>
-                    <tr><td colspan="3" style="height: 40px;"></td></tr>
-                    <tr><th colspan="3"><label>WP Sit Ups<input type="checkbox" class="section-toggle" data-section="314"/></label></th></tr>
-                    <tr data-section="314"><td colspan="3">3 Sets of 20 Reps Use a weight where you can maintain proper form.</td></tr>
-              </table>
-            `;
-          })(),
-
-          "4-1": (() => {
-            const bs = parseFloat(lifts.bs);   // Back Squat
-            const fs = parseFloat(lifts.fs);   // Front Squat
-            const os = parseFloat(lifts.os);   // Overhead Squat
-            const c  = parseFloat(lifts.c);    // Clean
-            const s  = parseFloat(lifts.s);    // Snatch
-            const cj = parseFloat(lifts.cj);   // Clean & Jerk
-            const d  = parseFloat(lifts.d);    // Deadlift
-            const pp = parseFloat(lifts.pp);   // Push Press
-            return `
-              <table>
-                <colgroup>
-                  <col style="width: 70%;">
-                  <col style="width: 15%;">
-                  <col style="width: 15%;">
-                </colgroup>
-                    <tr><th colspan="3"><label>Back Squat WU<input type="checkbox" class="section-toggle" data-section="411"/></label></th></tr>
-                    <tr data-section="411"><td>2 Sets of 8 Reps</td><td colspan="2">Empty Bar</td></tr>
-                    <tr data-section="411"><td>1 Set of 2 Reps</td><td>50%</td><td>${percent(bs, 50)}kg</td></tr>
-                    <tr data-section="411"><td>1 Set of 2 Reps</td><td>55%</td><td>${percent(bs, 55)}kg</td></tr>
-                    <tr data-section="411"><td>1 Set of 2 Reps</td><td>60%</td><td>${percent(bs, 60)}kg</td></tr>
-                    <tr data-section="411"><td>1 Set of 2 Reps</td><td>65%</td><td>${percent(bs, 65)}kg</td></tr>
-                    <tr data-section="411"><td>1 Set of 2 Reps</td><td>70%</td><td>${percent(bs, 70)}kg</td></tr>
-                    <tr data-section="411"><td>1 Set of 2 Reps</td><td>75%</td><td>${percent(bs, 75)}kg</td></tr>
-                    <tr data-section="411"><td>1 Set of 2 Reps</td><td>80%</td><td>${percent(bs, 80)}kg</td></tr>
-                    <tr><td colspan="3" style="height: 40px;"></td></tr>
-                    <tr><th colspan="3"><label>Back Squat WS<input type="checkbox" class="section-toggle" data-section="412"/></label></th></tr>
-                    <tr data-section="412"><td>2 Sets of 4 Reps</td><td>85%</td><td>${percent(bs, 85)}kg</td></tr>
-                    <tr><td colspan="3" style="height: 40px;"></td></tr>
-                    <tr><th colspan="3"><label>Split Squat<input type="checkbox" class="section-toggle" data-section="413"/></label></th></tr>
-                    <tr data-section="413"><td colspan="3">3 Sets of 10 Reps Per side. Work up to weight where you can maintain proper form.</td></tr>
-                    <tr><td colspan="3" style="height: 40px;"></td></tr>
-                    <tr><th colspan="3"><label>Hanging KR<input type="checkbox" class="section-toggle" data-section="414"/></label></th></tr>
-                    <tr data-section="414"><td colspan="3">3 Sets of 20 Reps </td></tr>
-              </table>
-            `;
-          })(),
-
-          "5-1": (() => {
-            const bs = parseFloat(lifts.bs);   // Back Squat
-            const fs = parseFloat(lifts.fs);   // Front Squat
-            const os = parseFloat(lifts.os);   // Overhead Squat
-            const c  = parseFloat(lifts.c);    // Clean
-            const s  = parseFloat(lifts.s);    // Snatch
-            const cj = parseFloat(lifts.cj);   // Clean & Jerk
-            const d  = parseFloat(lifts.d);    // Deadlift
-            const pp = parseFloat(lifts.pp);   // Push Press
-            return `
-              <table>
-                <colgroup>
-                  <col style="width: 70%;">
-                  <col style="width: 15%;">
-                  <col style="width: 15%;">
-                </colgroup>
-                    <tr><th colspan="3"><label>Back Squat WU<input type="checkbox" class="section-toggle" data-section="511"/></label></th></tr>
-                    <tr data-section="511"><td>2 Sets of 10 Reps</td><td colspan="2">Empty Bar</td></tr>
-                    <tr data-section="511"><td>1 Set of 2 Reps</td><td>50%</td><td>${percent(bs, 50)}kg</td></tr>
-                    <tr data-section="511"><td>1 Set of 2 Reps</td><td>55%</td><td>${percent(bs, 55)}kg</td></tr>
-                    <tr data-section="511"><td>1 Set of 2 Reps</td><td>60%</td><td>${percent(bs, 60)}kg</td></tr>
-                    <tr data-section="511"><td>1 Set of 2 Reps</td><td>65%</td><td>${percent(bs, 65)}kg</td></tr>
-                    <tr data-section="511"><td>1 Set of 2 Reps</td><td>70%</td><td>${percent(bs, 70)}kg</td></tr>
-                    <tr data-section="511"><td>1 Set of 2 Reps</td><td>75%</td><td>${percent(bs, 75)}kg</td></tr>
-                    <tr data-section="511"><td>1 Set of 2 Reps</td><td>80%</td><td>${percent(bs, 80)}kg</td></tr>
-                    <tr data-section="511"><td>1 Set of 2 Reps</td><td>85%</td><td>${percent(bs, 85)}kg</td></tr>
-                    <tr data-section="511"><td>1 Set of 2 Reps</td><td>90%</td><td>${percent(bs, 90)}kg</td></tr>
-                    <tr><td colspan="3" style="height: 40px;"></td></tr>
-                    <tr><th colspan="3"><label>Back Squat WS<input type="checkbox" class="section-toggle" data-section="512"/></label></th></tr>
-                    <tr data-section="512"><td>2 Sets of 2 Reps</td><td>95%</td><td>${percent(bs, 95)}kg</td></tr>
-                    <tr><td colspan="3" style="height: 40px;"></td></tr>
-                    <tr><th colspan="3"><label>Good Mornings<input type="checkbox" class="section-toggle" data-section="513"/></label></th></tr>
-                    <tr data-section="513"><td colspan="3">5 Sets of 5 Reps Work up to weight where you can maintain proper form.</td></tr>
-                    <tr><td colspan="3" style="height: 40px;"></td></tr>
-                    <tr><th colspan="3"><label>WP Sit Ups<input type="checkbox" class="section-toggle" data-section="514"/></label></th></tr>
-                    <tr data-section="514"><td colspan="3">3 Sets of 20 Reps Use a weight where you can maintain proper form.</td></tr>
-              </table>
-            `;
-          })(),
-
-          "6-1": (() => {
-            const bs = parseFloat(lifts.bs);   // Back Squat
-            const fs = parseFloat(lifts.fs);   // Front Squat
-            const os = parseFloat(lifts.os);   // Overhead Squat
-            const c  = parseFloat(lifts.c);    // Clean
-            const s  = parseFloat(lifts.s);    // Snatch
-            const cj = parseFloat(lifts.cj);   // Clean & Jerk
-            const d  = parseFloat(lifts.d);    // Deadlift
-            const pp = parseFloat(lifts.pp);   // Push Press
-            return `
-              <table>
-                <colgroup>
-                  <col style="width: 70%;">
-                  <col style="width: 15%;">
-                  <col style="width: 15%;">
-                </colgroup>
-                    <tr><th colspan="3"><label>Back Squat WU<input type="checkbox" class="section-toggle" data-section="611"/></label></th></tr>
-                    <tr data-section="611"><td>2 Sets of 5 Reps</td><td colspan="2">Empty Bar</td></tr>
-                    <tr data-section="611"><td>1 Set of 1 Rep</td><td>50%</td><td>${percent(bs, 50)}kg</td></tr>
-                    <tr data-section="611"><td>1 Set of 1 Rep</td><td>60%</td><td>${percent(bs, 60)}kg</td></tr>
-                    <tr data-section="611"><td>1 Set of 1 Rep</td><td>70%</td><td>${percent(bs, 70)}kg</td></tr>
-                    <tr><td colspan="3" style="height: 40px;"></td></tr>
-                    <tr><th colspan="3"><label>Back Squat WS<input type="checkbox" class="section-toggle" data-section="612"/></label></th></tr>
-                    <tr data-section="612"><td>1 Set of 1 Rep</td><td>75%</td><td>${percent(bs, 75)}kg</td></tr>
-                    <tr data-section="612"><td>1 Set of 1 Rep</td><td>80%</td><td>${percent(bs, 80)}kg</td></tr>
-                    <tr data-section="612"><td>1 Set of 1 Rep</td><td>85%</td><td>${percent(bs, 85)}kg</td></tr>
-                    <tr data-section="612"><td>1 Set of 1 Rep</td><td>90%</td><td>${percent(bs, 90)}kg</td></tr>
-                    <tr data-section="612"><td>1 Set of 1 Rep</td><td>95%</td><td>${percent(bs, 95)}kg</td></tr>
-                    <tr data-section="612"><td colspan="3">1 Set of 1 Rep 1RM</td></tr>
+                  <tr><th colspan="3"><label>Back Squat WU<input type="checkbox" class="section-toggle" data-section="111"/></label></th></tr>
+                  <tr data-section="111"><td>2 Sets of 10 Reps</td><td colspan="2">Empty Bar</td></tr>
+                  <tr data-section="111"><td>2 Sets of 5 Reps</td><td>50%</td><td>${percent(bs, 50)}kg</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+                  <tr><th colspan="3"><label>Back Squat WS<input type="checkbox" class="section-toggle" data-section="112"/></label></th></tr>
+                  <tr data-section="112"><td>2 Sets of 10 Reps</td><td>55%</td><td>${percent(bs, 55)}kg</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+                  <tr><th colspan="3"><label>Good Mornings<input type="checkbox" class="section-toggle" data-section="113"/></label></th></tr>
+                  <tr data-section="113"><td colspan="3">5 Sets of 5 Reps Work up to weight where you can maintain proper form.</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+                  <tr><th colspan="3"><label>WP Sit Ups<input type="checkbox" class="section-toggle" data-section="114"/></label></th></tr>
+                  <tr data-section="114"><td colspan="3">3 Sets of 20 Reps Use a weight where you can maintain proper form.</td></tr>
               </table>
             `;
           })(),
@@ -294,18 +121,200 @@
                   <col style="width: 15%;">
                   <col style="width: 15%;">
                 </colgroup>
-                    <tr><th colspan="3"><label>Front Squat WU<input type="checkbox" class="section-toggle" data-section="121"/></label></th></tr>
-                    <tr data-section="121"><td>2 Sets of 10 Reps</td><td colspan="2">Empty Bar</td></tr>
-                    <tr data-section="121"><td>2 Sets of 5 Reps</td><td>50%</td><td>${percent(fs, 50)}kg</td></tr>
-                    <tr><td colspan="3" style="height: 40px;"></td></tr>
-                    <tr><th colspan="3"><label>Front Squat WS<input type="checkbox" class="section-toggle" data-section="122"/></label></th></tr>
-                    <tr data-section="122"><td>2 Sets of 10 Reps</td><td>55%</td><td>${percent(fs, 55)}kg</td></tr>
-                    <tr><td colspan="3" style="height: 40px;"></td></tr>
-                    <tr><th colspan="3"><label>Good Mornings<input type="checkbox" class="section-toggle" data-section="123"/></label></th></tr>
-                    <tr data-section="123"><td colspan="3">5 Sets of 5 Reps Work up to weight where you can maintain proper form.</td></tr>
-                    <tr><td colspan="3" style="height: 40px;"></td></tr>
-                    <tr><th colspan="3"><label>WP Sit Ups<input type="checkbox" class="section-toggle" data-section="124"/></label></th></tr>
-                    <tr data-section="124"><td colspan="3">3 Sets of 20 Reps Use a weight where you can maintain proper form.</td></tr>
+                  <tr><th colspan="3"><label>Back Squat WU<input type="checkbox" class="section-toggle" data-section="121"/></label></th></tr>
+                  <tr data-section="121"><td>2 Sets of 8 Reps</td><td colspan="2">Empty Bar</td></tr>
+                  <tr data-section="121"><td>1 Set of 4 Reps</td><td>50%</td><td>${percent(bs, 50)}kg</td></tr>
+                  <tr data-section="121"><td>1 Set of 4 Reps</td><td>55%</td><td>${percent(bs, 55)}kg</td></tr>
+                  <tr data-section="121"><td>1 Set of 4 Reps</td><td>60%</td><td>${percent(bs, 60)}kg</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+                  <tr><th colspan="3"><label>Back Squat WS<input type="checkbox" class="section-toggle" data-section="122"/></label></th></tr>
+                  <tr data-section="122"><td>2 Sets of 8 Reps</td><td>65%</td><td>${percent(bs, 65)}kg</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+                  <tr><th colspan="3"><label>Split Squat<input type="checkbox" class="section-toggle" data-section="123"/></label></th></tr>
+                  <tr data-section="123"><td colspan="3">3 Sets of 10 Reps Per side. Work up to weight where you can maintain proper form.</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+                  <tr><th colspan="3"><label>V Ups<input type="checkbox" class="section-toggle" data-section="124"/></label></th></tr>
+                  <tr data-section="124"><td colspan="3">3 Sets of 20 Reps </td></tr>
+              </table>
+            `;
+          })(),
+         
+          "1-3": (() => {
+            const bs = parseFloat(lifts.bs);   // Back Squat
+            const fs = parseFloat(lifts.fs);   // Front Squat
+            const os = parseFloat(lifts.os);   // Overhead Squat
+            const c  = parseFloat(lifts.c);    // Clean
+            const s  = parseFloat(lifts.s);    // Snatch
+            const cj = parseFloat(lifts.cj);   // Clean & Jerk
+            const d  = parseFloat(lifts.d);    // Deadlift
+            const pp = parseFloat(lifts.pp);   // Push Press
+            return `
+              <table>
+                <colgroup>
+                  <col style="width: 70%;">
+                  <col style="width: 15%;">
+                  <col style="width: 15%;">
+                </colgroup>
+                  <tr><th colspan="3"><label>Back Squat WU<input type="checkbox" class="section-toggle" data-section="131"/></label></th></tr>
+                  <tr data-section="131"><td>2 Sets of 6 Reps</td><td colspan="2">Empty Bar</td></tr>
+                  <tr data-section="131"><td>1 Set of 3 Reps</td><td>50%</td><td>${percent(bs, 50)}kg</td></tr>
+                  <tr data-section="131"><td>1 Set of 3 Reps</td><td>55%</td><td>${percent(bs, 55)}kg</td></tr>
+                  <tr data-section="131"><td>1 Set of 3 Reps</td><td>60%</td><td>${percent(bs, 60)}kg</td></tr>
+                  <tr data-section="131"><td>1 Set of 3 Reps</td><td>65%</td><td>${percent(bs, 65)}kg</td></tr>
+                  <tr data-section="131"><td>1 Set of 3 Reps</td><td>70%</td><td>${percent(bs, 70)}kg</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+                  <tr><th colspan="3"><label>Back Squat WS<input type="checkbox" class="section-toggle" data-section="132"/></label></th></tr>
+                  <tr data-section="132"><td>2 Sets of 6 Reps</td><td>75%</td><td>${percent(bs, 75)}kg</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+                  <tr><th colspan="3"><label>Good Mornings<input type="checkbox" class="section-toggle" data-section="133"/></label></th></tr>
+                  <tr data-section="133"><td colspan="3">5 Sets of 5 Reps Work up to weight where you can maintain proper form.</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+                  <tr><th colspan="3"><label>WP Sit Ups<input type="checkbox" class="section-toggle" data-section="134"/></label></th></tr>
+                  <tr data-section="134"><td colspan="3">3 Sets of 20 Reps Use a weight where you can maintain proper form.</td></tr>
+              </table>
+            `;
+          })(),
+
+          "1-4": (() => {
+            const bs = parseFloat(lifts.bs);   // Back Squat
+            const fs = parseFloat(lifts.fs);   // Front Squat
+            const os = parseFloat(lifts.os);   // Overhead Squat
+            const c  = parseFloat(lifts.c);    // Clean
+            const s  = parseFloat(lifts.s);    // Snatch
+            const cj = parseFloat(lifts.cj);   // Clean & Jerk
+            const d  = parseFloat(lifts.d);    // Deadlift
+            const pp = parseFloat(lifts.pp);   // Push Press
+            return `
+              <table>
+                <colgroup>
+                  <col style="width: 70%;">
+                  <col style="width: 15%;">
+                  <col style="width: 15%;">
+                </colgroup>
+                  <tr><th colspan="3"><label>Back Squat WU<input type="checkbox" class="section-toggle" data-section="141"/></label></th></tr>
+                  <tr data-section="141"><td>2 Sets of 8 Reps</td><td colspan="2">Empty Bar</td></tr>
+                  <tr data-section="141"><td>1 Set of 2 Reps</td><td>50%</td><td>${percent(bs, 50)}kg</td></tr>
+                  <tr data-section="141"><td>1 Set of 2 Reps</td><td>55%</td><td>${percent(bs, 55)}kg</td></tr>
+                  <tr data-section="141"><td>1 Set of 2 Reps</td><td>60%</td><td>${percent(bs, 60)}kg</td></tr>
+                  <tr data-section="141"><td>1 Set of 2 Reps</td><td>65%</td><td>${percent(bs, 65)}kg</td></tr>
+                  <tr data-section="141"><td>1 Set of 2 Reps</td><td>70%</td><td>${percent(bs, 70)}kg</td></tr>
+                  <tr data-section="141"><td>1 Set of 2 Reps</td><td>75%</td><td>${percent(bs, 75)}kg</td></tr>
+                  <tr data-section="141"><td>1 Set of 2 Reps</td><td>80%</td><td>${percent(bs, 80)}kg</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+                  <tr><th colspan="3"><label>Back Squat WS<input type="checkbox" class="section-toggle" data-section="142"/></label></th></tr>
+                  <tr data-section="142"><td>2 Sets of 4 Reps</td><td>85%</td><td>${percent(bs, 85)}kg</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+                  <tr><th colspan="3"><label>Split Squat<input type="checkbox" class="section-toggle" data-section="143"/></label></th></tr>
+                  <tr data-section="143"><td colspan="3">3 Sets of 10 Reps Per side. Work up to weight where you can maintain proper form.</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+                  <tr><th colspan="3"><label>V Ups<input type="checkbox" class="section-toggle" data-section="144"/></label></th></tr>
+                  <tr data-section="144"><td colspan="3">3 Sets of 20 Reps </td></tr>
+              </table>
+            `;
+          })(),
+
+          "1-5": (() => {
+            const bs = parseFloat(lifts.bs);   // Back Squat
+            const fs = parseFloat(lifts.fs);   // Front Squat
+            const os = parseFloat(lifts.os);   // Overhead Squat
+            const c  = parseFloat(lifts.c);    // Clean
+            const s  = parseFloat(lifts.s);    // Snatch
+            const cj = parseFloat(lifts.cj);   // Clean & Jerk
+            const d  = parseFloat(lifts.d);    // Deadlift
+            const pp = parseFloat(lifts.pp);   // Push Press
+            return `
+              <table>
+                <colgroup>
+                  <col style="width: 70%;">
+                  <col style="width: 15%;">
+                  <col style="width: 15%;">
+                </colgroup>
+                  <tr><th colspan="3"><label>Back Squat WU<input type="checkbox" class="section-toggle" data-section="151"/></label></th></tr>
+                  <tr data-section="151"><td>2 Sets of 10 Reps</td><td colspan="2">Empty Bar</td></tr>
+                  <tr data-section="151"><td>1 Set of 2 Reps</td><td>50%</td><td>${percent(bs, 50)}kg</td></tr>
+                  <tr data-section="151"><td>1 Set of 2 Reps</td><td>55%</td><td>${percent(bs, 55)}kg</td></tr>
+                  <tr data-section="151"><td>1 Set of 2 Reps</td><td>60%</td><td>${percent(bs, 60)}kg</td></tr>
+                  <tr data-section="151"><td>1 Set of 2 Reps</td><td>65%</td><td>${percent(bs, 65)}kg</td></tr>
+                  <tr data-section="151"><td>1 Set of 2 Reps</td><td>70%</td><td>${percent(bs, 70)}kg</td></tr>
+                  <tr data-section="151"><td>1 Set of 2 Reps</td><td>75%</td><td>${percent(bs, 75)}kg</td></tr>
+                  <tr data-section="151"><td>1 Set of 2 Reps</td><td>80%</td><td>${percent(bs, 80)}kg</td></tr>
+                  <tr data-section="151"><td>1 Set of 2 Reps</td><td>85%</td><td>${percent(bs, 85)}kg</td></tr>
+                  <tr data-section="151"><td>1 Set of 2 Reps</td><td>90%</td><td>${percent(bs, 90)}kg</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+                  <tr><th colspan="3"><label>Back Squat WS<input type="checkbox" class="section-toggle" data-section="152"/></label></th></tr>
+                  <tr data-section="152"><td>2 Sets of 2 Reps</td><td>95%</td><td>${percent(bs, 95)}kg</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+                  <tr><th colspan="3"><label>Good Mornings<input type="checkbox" class="section-toggle" data-section="153"/></label></th></tr>
+                  <tr data-section="153"><td colspan="3">5 Sets of 5 Reps Work up to weight where you can maintain proper form.</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+                  <tr><th colspan="3"><label>WP Sit Ups<input type="checkbox" class="section-toggle" data-section="154"/></label></th></tr>
+                  <tr data-section="154"><td colspan="3">3 Sets of 20 Reps Use a weight where you can maintain proper form.</td></tr>
+              </table>
+            `;
+          })(),
+
+          "1-6": (() => {
+            const bs = parseFloat(lifts.bs);   // Back Squat
+            const fs = parseFloat(lifts.fs);   // Front Squat
+            const os = parseFloat(lifts.os);   // Overhead Squat
+            const c  = parseFloat(lifts.c);    // Clean
+            const s  = parseFloat(lifts.s);    // Snatch
+            const cj = parseFloat(lifts.cj);   // Clean & Jerk
+            const d  = parseFloat(lifts.d);    // Deadlift
+            const pp = parseFloat(lifts.pp);   // Push Press
+            return `
+              <table>
+                <colgroup>
+                  <col style="width: 70%;">
+                  <col style="width: 15%;">
+                  <col style="width: 15%;">
+                </colgroup>
+                  <tr><th colspan="3"><label>Back Squat WU<input type="checkbox" class="section-toggle" data-section="161"/></label></th></tr>
+                  <tr data-section="161"><td>2 Sets of 5 Reps</td><td colspan="2">Empty Bar</td></tr>
+                  <tr data-section="161"><td>1 Set of 1 Rep</td><td>50%</td><td>${percent(bs, 50)}kg</td></tr>
+                  <tr data-section="161"><td>1 Set of 1 Rep</td><td>60%</td><td>${percent(bs, 60)}kg</td></tr>
+                  <tr data-section="161"><td>1 Set of 1 Rep</td><td>70%</td><td>${percent(bs, 70)}kg</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+                  <tr><th colspan="3"><label>Back Squat WS<input type="checkbox" class="section-toggle" data-section="162"/></label></th></tr>
+                  <tr data-section="162"><td>1 Set of 1 Rep</td><td>75%</td><td>${percent(bs, 75)}kg</td></tr>
+                  <tr data-section="162"><td>1 Set of 1 Rep</td><td>80%</td><td>${percent(bs, 80)}kg</td></tr>
+                  <tr data-section="162"><td>1 Set of 1 Rep</td><td>85%</td><td>${percent(bs, 85)}kg</td></tr>
+                  <tr data-section="162"><td>1 Set of 1 Rep</td><td>90%</td><td>${percent(bs, 90)}kg</td></tr>
+                  <tr data-section="162"><td>1 Set of 1 Rep</td><td>95%</td><td>${percent(bs, 95)}kg</td></tr>
+                  <tr data-section="162"><td colspan="3">1 Set of 1 Rep 1RM</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+              </table>
+            `;
+          })(),
+
+          "2-1": (() => {
+            const bs = parseFloat(lifts.bs);   // Back Squat
+            const fs = parseFloat(lifts.fs);   // Front Squat
+            const os = parseFloat(lifts.os);   // Overhead Squat
+            const c  = parseFloat(lifts.c);    // Clean
+            const s  = parseFloat(lifts.s);    // Snatch
+            const cj = parseFloat(lifts.cj);   // Clean & Jerk
+            const d  = parseFloat(lifts.d);    // Deadlift
+            const pp = parseFloat(lifts.pp);   // Push Press
+            return `
+              <table>
+                <colgroup>
+                  <col style="width: 70%;">
+                  <col style="width: 15%;">
+                  <col style="width: 15%;">
+                </colgroup>
+                  <tr><th colspan="3"><label>Front Squat WU<input type="checkbox" class="section-toggle" data-section="211"/></label></th></tr>
+                  <tr data-section="211"><td>2 Sets of 10 Reps</td><td colspan="2">Empty Bar</td></tr>
+                  <tr data-section="211"><td>2 Sets of 5 Reps</td><td>50%</td><td>${percent(fs, 50)}kg</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+                  <tr><th colspan="3"><label>Front Squat WS<input type="checkbox" class="section-toggle" data-section="212"/></label></th></tr>
+                  <tr data-section="212"><td>2 Sets of 10 Reps</td><td>55%</td><td>${percent(fs, 55)}kg</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+                  <tr><th colspan="3"><label>Good Mornings<input type="checkbox" class="section-toggle" data-section="213"/></label></th></tr>
+                  <tr data-section="213"><td colspan="3">5 Sets of 5 Reps Work up to weight where you can maintain proper form.</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+                  <tr><th colspan="3"><label>WP Sit Ups<input type="checkbox" class="section-toggle" data-section="214"/></label></th></tr>
+                  <tr data-section="214"><td colspan="3">3 Sets of 20 Reps Use a weight where you can maintain proper form.</td></tr>
               </table>
             `;
           })(),
@@ -326,25 +335,25 @@
                   <col style="width: 15%;">
                   <col style="width: 15%;">
                 </colgroup>
-                    <tr><th colspan="3"><label>Front Squat WU<input type="checkbox" class="section-toggle" data-section="221"/></label></th></tr>
-                    <tr data-section="221"><td>2 Sets of 8 Reps</td><td colspan="2">Empty Bar</td></tr>
-                    <tr data-section="221"><td>1 Set of 4 Reps</td><td>50%</td><td>${percent(fs, 50)}kg</td></tr>
-                    <tr data-section="221"><td>1 Set of 4 Reps</td><td>55%</td><td>${percent(fs, 55)}kg</td></tr>
-                    <tr data-section="221"><td>1 Set of 4 Reps</td><td>60%</td><td>${percent(fs, 60)}kg</td></tr>
-                    <tr><td colspan="3" style="height: 40px;"></td></tr>
-                    <tr><th colspan="3"><label>Front Squat WS<input type="checkbox" class="section-toggle" data-section="222"/></label></th></tr>
-                    <tr data-section="222"><td>2 Sets of 8 Reps</td><td>65%</td><td>${percent(fs, 65)}kg</td></tr>
-                    <tr><td colspan="3" style="height: 40px;"></td></tr>
-                    <tr><th colspan="3"><label>Split Squat<input type="checkbox" class="section-toggle" data-section="223"/></label></th></tr>
-                    <tr data-section="223"><td colspan="3">3 Sets of 10 Reps Per side. Work up to weight where you can maintain proper form.</td></tr>
-                    <tr><td colspan="3" style="height: 40px;"></td></tr>
-                    <tr><th colspan="3"><label>Hanging KR<input type="checkbox" class="section-toggle" data-section="224"/></label></th></tr>
-                    <tr data-section="224"><td colspan="3">3 Sets of 20 Reps </td></tr>
+                  <tr><th colspan="3"><label>Front Squat WU<input type="checkbox" class="section-toggle" data-section="221"/></label></th></tr>
+                  <tr data-section="221"><td>2 Sets of 8 Reps</td><td colspan="2">Empty Bar</td></tr>
+                  <tr data-section="221"><td>1 Set of 4 Reps</td><td>50%</td><td>${percent(fs, 50)}kg</td></tr>
+                  <tr data-section="221"><td>1 Set of 4 Reps</td><td>55%</td><td>${percent(fs, 55)}kg</td></tr>
+                  <tr data-section="221"><td>1 Set of 4 Reps</td><td>60%</td><td>${percent(fs, 60)}kg</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+                  <tr><th colspan="3"><label>Front Squat WS<input type="checkbox" class="section-toggle" data-section="222"/></label></th></tr>
+                  <tr data-section="222"><td>2 Sets of 8 Reps</td><td>65%</td><td>${percent(fs, 65)}kg</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+                  <tr><th colspan="3"><label>Split Squat<input type="checkbox" class="section-toggle" data-section="223"/></label></th></tr>
+                  <tr data-section="223"><td colspan="3">3 Sets of 10 Reps Per side. Work up to weight where you can maintain proper form.</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+                  <tr><th colspan="3"><label>V Ups<input type="checkbox" class="section-toggle" data-section="224"/></label></th></tr>
+                  <tr data-section="224"><td colspan="3">3 Sets of 20 Reps </td></tr>
               </table>
             `;
           })(),
 
-          "3-2": (() => {
+          "2-3": (() => {
             const bs = parseFloat(lifts.bs);   // Back Squat
             const fs = parseFloat(lifts.fs);   // Front Squat
             const os = parseFloat(lifts.os);   // Overhead Squat
@@ -360,27 +369,27 @@
                   <col style="width: 15%;">
                   <col style="width: 15%;">
                 </colgroup>
-                    <tr><th colspan="3"><label>Front Squat WU<input type="checkbox" class="section-toggle" data-section="321"/></label></th></tr>
-                    <tr data-section="321"><td>2 Sets of 6 Reps</td><td colspan="2">Empty Bar</td></tr>
-                    <tr data-section="321"><td>1 Set of 3 Reps</td><td>50%</td><td>${percent(fs, 50)}kg</td></tr>
-                    <tr data-section="321"><td>1 Set of 3 Reps</td><td>55%</td><td>${percent(fs, 55)}kg</td></tr>
-                    <tr data-section="321"><td>1 Set of 3 Reps</td><td>60%</td><td>${percent(fs, 60)}kg</td></tr>
-                    <tr data-section="321"><td>1 Set of 3 Reps</td><td>65%</td><td>${percent(fs, 65)}kg</td></tr>
-                    <tr data-section="321"><td>1 Set of 3 Reps</td><td>70%</td><td>${percent(fs, 70)}kg</td></tr>
-                    <tr><td colspan="3" style="height: 40px;"></td></tr>
-                    <tr><th colspan="3"><label>Front Squat WS<input type="checkbox" class="section-toggle" data-section="322"/></label></th></tr>
-                    <tr data-section="322"><td>2 Sets of 6 Reps</td><td>75%</td><td>${percent(fs, 75)}kg</td></tr>
-                    <tr><td colspan="3" style="height: 40px;"></td></tr>
-                    <tr><th colspan="3"><label>Good Mornings<input type="checkbox" class="section-toggle" data-section="323"/></label></th></tr>
-                    <tr data-section="323"><td colspan="3">5 Sets of 5 Reps Work up to weight where you can maintain proper form.</td></tr>
-                    <tr><td colspan="3" style="height: 40px;"></td></tr>
-                    <tr><th colspan="3"><label>WP Sit Ups<input type="checkbox" class="section-toggle" data-section="324"/></label></th></tr>
-                    <tr data-section="324"><td colspan="3">3 Sets of 20 Reps Use a weight where you can maintain proper form.</td></tr>
+                  <tr><th colspan="3"><label>Front Squat WU<input type="checkbox" class="section-toggle" data-section="231"/></label></th></tr>
+                  <tr data-section="231"><td>2 Sets of 6 Reps</td><td colspan="2">Empty Bar</td></tr>
+                  <tr data-section="231"><td>1 Set of 3 Reps</td><td>50%</td><td>${percent(fs, 50)}kg</td></tr>
+                  <tr data-section="231"><td>1 Set of 3 Reps</td><td>55%</td><td>${percent(fs, 55)}kg</td></tr>
+                  <tr data-section="231"><td>1 Set of 3 Reps</td><td>60%</td><td>${percent(fs, 60)}kg</td></tr>
+                  <tr data-section="231"><td>1 Set of 3 Reps</td><td>65%</td><td>${percent(fs, 65)}kg</td></tr>
+                  <tr data-section="231"><td>1 Set of 3 Reps</td><td>70%</td><td>${percent(fs, 70)}kg</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+                  <tr><th colspan="3"><label>Front Squat WS<input type="checkbox" class="section-toggle" data-section="232"/></label></th></tr>
+                  <tr data-section="232"><td>2 Sets of 6 Reps</td><td>75%</td><td>${percent(fs, 75)}kg</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+                  <tr><th colspan="3"><label>Good Mornings<input type="checkbox" class="section-toggle" data-section="233"/></label></th></tr>
+                  <tr data-section="233"><td colspan="3">5 Sets of 5 Reps Work up to weight where you can maintain proper form.</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+                  <tr><th colspan="3"><label>WP Sit Ups<input type="checkbox" class="section-toggle" data-section="234"/></label></th></tr>
+                  <tr data-section="234"><td colspan="3">3 Sets of 20 Reps Use a weight where you can maintain proper form.</td></tr>
               </table>
             `;
           })(),
 
-          "4-2": (() => {
+          "2-4": (() => {
             const bs = parseFloat(lifts.bs);   // Back Squat
             const fs = parseFloat(lifts.fs);   // Front Squat
             const os = parseFloat(lifts.os);   // Overhead Squat
@@ -396,24 +405,190 @@
                   <col style="width: 15%;">
                   <col style="width: 15%;">
                 </colgroup>
-                    <tr><th colspan="3"><label>Front Squat WU<input type="checkbox" class="section-toggle" data-section="421"/></label></th></tr>
-                    <tr data-section="421"><td>2 Sets of 8 Reps</td><td colspan="2">Empty Bar</td></tr>
-                    <tr data-section="421"><td>1 Set of 2 Reps</td><td>50%</td><td>${percent(fs, 50)}kg</td></tr>
-                    <tr data-section="421"><td>1 Set of 2 Reps</td><td>55%</td><td>${percent(fs, 55)}kg</td></tr>
-                    <tr data-section="421"><td>1 Set of 2 Reps</td><td>60%</td><td>${percent(fs, 60)}kg</td></tr>
-                    <tr data-section="421"><td>1 Set of 2 Reps</td><td>65%</td><td>${percent(fs, 65)}kg</td></tr>
-                    <tr data-section="421"><td>1 Set of 2 Reps</td><td>70%</td><td>${percent(fs, 70)}kg</td></tr>
-                    <tr data-section="421"><td>1 Set of 2 Reps</td><td>75%</td><td>${percent(fs, 75)}kg</td></tr>
-                    <tr data-section="421"><td>1 Set of 2 Reps</td><td>80%</td><td>${percent(fs, 80)}kg</td></tr>
-                    <tr><td colspan="3" style="height: 40px;"></td></tr>
-                    <tr><th colspan="3"><label>Front Squat WS<input type="checkbox" class="section-toggle" data-section="422"/></label></th></tr>
-                    <tr data-section="422"><td>2 Sets of 4 Reps</td><td>85%</td><td>${percent(fs, 85)}kg</td></tr>
-                    <tr><td colspan="3" style="height: 40px;"></td></tr>
-                    <tr><th colspan="3"><label>Split Squat<input type="checkbox" class="section-toggle" data-section="423"/></label></th></tr>
-                    <tr data-section="423"><td colspan="3">3 Sets of 10 Reps Per side. Work up to weight where you can maintain proper form.</td></tr>
-                    <tr><td colspan="3" style="height: 40px;"></td></tr>
-                    <tr><th colspan="3"><label>Hanging KR<input type="checkbox" class="section-toggle" data-section="424"/></label></th></tr>
-                    <tr data-section="424"><td colspan="3">3 Sets of 20 Reps </td></tr>
+                  <tr><th colspan="3"><label>Front Squat WU<input type="checkbox" class="section-toggle" data-section="241"/></label></th></tr>
+                  <tr data-section="241"><td>2 Sets of 8 Reps</td><td colspan="2">Empty Bar</td></tr>
+                  <tr data-section="241"><td>1 Set of 2 Reps</td><td>50%</td><td>${percent(fs, 50)}kg</td></tr>
+                  <tr data-section="241"><td>1 Set of 2 Reps</td><td>55%</td><td>${percent(fs, 55)}kg</td></tr>
+                  <tr data-section="241"><td>1 Set of 2 Reps</td><td>60%</td><td>${percent(fs, 60)}kg</td></tr>
+                  <tr data-section="241"><td>1 Set of 2 Reps</td><td>65%</td><td>${percent(fs, 65)}kg</td></tr>
+                  <tr data-section="241"><td>1 Set of 2 Reps</td><td>70%</td><td>${percent(fs, 70)}kg</td></tr>
+                  <tr data-section="241"><td>1 Set of 2 Reps</td><td>75%</td><td>${percent(fs, 75)}kg</td></tr>
+                  <tr data-section="241"><td>1 Set of 2 Reps</td><td>80%</td><td>${percent(fs, 80)}kg</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+                  <tr><th colspan="3"><label>Front Squat WS<input type="checkbox" class="section-toggle" data-section="242"/></label></th></tr>
+                  <tr data-section="242"><td>2 Sets of 4 Reps</td><td>85%</td><td>${percent(fs, 85)}kg</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+                  <tr><th colspan="3"><label>Split Squat<input type="checkbox" class="section-toggle" data-section="243"/></label></th></tr>
+                  <tr data-section="243"><td colspan="3">3 Sets of 10 Reps Per side. Work up to weight where you can maintain proper form.</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+                  <tr><th colspan="3"><label>V Ups<input type="checkbox" class="section-toggle" data-section="244"/></label></th></tr>
+                  <tr data-section="244"><td colspan="3">3 Sets of 20 Reps </td></tr>
+              </table>
+            `;
+          })(),
+
+          "2-5": (() => {
+            const bs = parseFloat(lifts.bs);   // Back Squat
+            const fs = parseFloat(lifts.fs);   // Front Squat
+            const os = parseFloat(lifts.os);   // Overhead Squat
+            const c  = parseFloat(lifts.c);    // Clean
+            const s  = parseFloat(lifts.s);    // Snatch
+            const cj = parseFloat(lifts.cj);   // Clean & Jerk
+            const d  = parseFloat(lifts.d);    // Deadlift
+            const pp = parseFloat(lifts.pp);   // Push Press
+            return `
+              <table>
+                <colgroup>
+                  <col style="width: 70%;">
+                  <col style="width: 15%;">
+                  <col style="width: 15%;">
+                </colgroup>
+                  <tr><th colspan="3"><label>Front Squat WU<input type="checkbox" class="section-toggle" data-section="251"/></label></th></tr>
+                  <tr data-section="251"><td>2 Sets of 10 Reps</td><td colspan="2">Empty Bar</td></tr>
+                  <tr data-section="251"><td>1 Set of 2 Reps</td><td>50%</td><td>${percent(fs, 50)}kg</td></tr>
+                  <tr data-section="251"><td>1 Set of 2 Reps</td><td>55%</td><td>${percent(fs, 55)}kg</td></tr>
+                  <tr data-section="251"><td>1 Set of 2 Reps</td><td>60%</td><td>${percent(fs, 60)}kg</td></tr>
+                  <tr data-section="251"><td>1 Set of 2 Reps</td><td>65%</td><td>${percent(fs, 65)}kg</td></tr>
+                  <tr data-section="251"><td>1 Set of 2 Reps</td><td>70%</td><td>${percent(fs, 70)}kg</td></tr>
+                  <tr data-section="251"><td>1 Set of 2 Reps</td><td>75%</td><td>${percent(fs, 75)}kg</td></tr>
+                  <tr data-section="251"><td>1 Set of 2 Reps</td><td>80%</td><td>${percent(fs, 80)}kg</td></tr>
+                  <tr data-section="251"><td>1 Set of 2 Reps</td><td>85%</td><td>${percent(fs, 85)}kg</td></tr>
+                  <tr data-section="251"><td>1 Set of 2 Reps</td><td>90%</td><td>${percent(fs, 90)}kg</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+                  <tr><th colspan="3"><label>Front Squat WS<input type="checkbox" class="section-toggle" data-section="252"/></label></th></tr>
+                  <tr data-section="252"><td>2 Sets of 2 Reps</td><td>95%</td><td>${percent(fs, 95)}kg</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+                  <tr><th colspan="3"><label>Good Mornings<input type="checkbox" class="section-toggle" data-section="253"/></label></th></tr>
+                  <tr data-section="253"><td colspan="3">5 Sets of 5 Reps Work up to weight where you can maintain proper form.</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+                  <tr><th colspan="3"><label>WP Sit Ups<input type="checkbox" class="section-toggle" data-section="254"/></label></th></tr>
+                  <tr data-section="254"><td colspan="3">3 Sets of 20 Reps Use a weight where you can maintain proper form.</td></tr>
+              </table>
+            `;
+          })(),
+
+          "2-6": (() => {
+            const bs = parseFloat(lifts.bs);   // Back Squat
+            const fs = parseFloat(lifts.fs);   // Front Squat
+            const os = parseFloat(lifts.os);   // Overhead Squat
+            const c  = parseFloat(lifts.c);    // Clean
+            const s  = parseFloat(lifts.s);    // Snatch
+            const cj = parseFloat(lifts.cj);   // Clean & Jerk
+            const d  = parseFloat(lifts.d);    // Deadlift
+            const pp = parseFloat(lifts.pp);   // Push Press
+            return `
+              <table>
+                <colgroup>
+                  <col style="width: 70%;">
+                  <col style="width: 15%;">
+                  <col style="width: 15%;">
+                </colgroup>
+                  <tr><th colspan="3"><label>Front Squat WU<input type="checkbox" class="section-toggle" data-section="261"/></label></th></tr>
+                  <tr data-section="261"><td>2 Sets of 5 Reps</td><td colspan="2">Empty Bar</td></tr>
+                  <tr data-section="261"><td>1 Set of 1 Rep</td><td>50%</td><td>${percent(fs, 50)}kg</td></tr>
+                  <tr data-section="261"><td>1 Set of 1 Rep</td><td>60%</td><td>${percent(fs, 60)}kg</td></tr>
+                  <tr data-section="261"><td>1 Set of 1 Rep</td><td>70%</td><td>${percent(fs, 70)}kg</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+                  <tr><th colspan="3"><label>Front Squat WS<input type="checkbox" class="section-toggle" data-section="262"/></label></th></tr>
+                  <tr data-section="261"><td>1 Set of 1 Rep</td><td>75%</td><td>${percent(fs, 75)}kg</td></tr>
+                  <tr data-section="261"><td>1 Set of 1 Rep</td><td>80%</td><td>${percent(fs, 80)}kg</td></tr>
+                  <tr data-section="261"><td>1 Set of 1 Rep</td><td>85%</td><td>${percent(fs, 85)}kg</td></tr>
+                  <tr data-section="261"><td>1 Set of 1 Rep</td><td>90%</td><td>${percent(fs, 90)}kg</td></tr>
+                  <tr data-section="261"><td>1 Set of 1 Rep</td><td>95%</td><td>${percent(fs, 95)}kg</td></tr>
+                  <tr data-section="262"><td colspan="3">1 Set of 1 Rep 1RM</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+              </table>
+            `;
+          })(),
+
+          "3-1": (() => {
+            const bs = parseFloat(lifts.bs);   // Back Squat
+            const fs = parseFloat(lifts.fs);   // Front Squat
+            const os = parseFloat(lifts.os);   // Overhead Squat
+            const c  = parseFloat(lifts.c);    // Clean
+            const s  = parseFloat(lifts.s);    // Snatch
+            const cj = parseFloat(lifts.cj);   // Clean & Jerk
+            const d  = parseFloat(lifts.d);    // Deadlift
+            const pp = parseFloat(lifts.pp);   // Push Press
+            return `
+              <table>
+                <colgroup>
+                  <col style="width: 70%;">
+                  <col style="width: 15%;">
+                  <col style="width: 15%;">
+                </colgroup>
+                  <tr><th colspan="3"><label>Back Squat WU<input type="checkbox" class="section-toggle" data-section="311"/></label></th></tr>
+                  <tr data-section="311"><td>2 Sets of 5 Reps</td><td colspan="2">Empty Bar</td></tr>
+                  <tr data-section="311"><td>1 Set of 3 Reps</td><td>50%</td><td>${percent(bs, 50)}kg</td></tr>
+                  <tr data-section="311"><td>1 Set of 2 Reps</td><td>55%</td><td>${percent(bs, 55)}kg</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+                  <tr><th colspan="3"><label>Back Squat WS<input type="checkbox" class="section-toggle" data-section="312"/></label></th></tr>
+                  <tr data-section="312"><td>5 Sets of 5 Reps</td><td>60%</td><td>${percent(bs, 60)}kg</td></tr>
+                  <tr data-section="312"><td>3 Sets of 3 Reps</td><td>70%</td><td>${percent(bs, 70)}kg</td></tr>
+                  <tr data-section="312"><td>2 Sets of 2 Reps</td><td>80%</td><td>${percent(bs, 80)}kg</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+              </table>
+            `;
+          })(),
+
+          "4-1": (() => {
+            const bs = parseFloat(lifts.bs);   // Back Squat
+            const fs = parseFloat(lifts.fs);   // Front Squat
+            const os = parseFloat(lifts.os);   // Overhead Squat
+            const c  = parseFloat(lifts.c);    // Clean
+            const s  = parseFloat(lifts.s);    // Snatch
+            const cj = parseFloat(lifts.cj);   // Clean & Jerk
+            const d  = parseFloat(lifts.d);    // Deadlift
+            const pp = parseFloat(lifts.pp);   // Push Press
+            return `
+              <table>
+                <colgroup>
+                  <col style="width: 70%;">
+                  <col style="width: 15%;">
+                  <col style="width: 15%;">
+                </colgroup>
+                  <tr><th colspan="3"><label>Front Squat WU<input type="checkbox" class="section-toggle" data-section="411"/></label></th></tr>
+                  <tr data-section="411"><td>2 Sets of 5 Reps</td><td colspan="2">Empty Bar</td></tr>
+                  <tr data-section="411"><td>1 Set of 3 Reps</td><td>50%</td><td>${percent(fs, 50)}kg</td></tr>
+                  <tr data-section="411"><td>1 Set of 2 Reps</td><td>55%</td><td>${percent(fs, 55)}kg</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+                  <tr><th colspan="3"><label>Front Squat WS<input type="checkbox" class="section-toggle" data-section="412"/></label></th></tr>
+                  <tr data-section="412"><td>5 Sets of 5 Reps</td><td>60%</td><td>${percent(fs, 60)}kg</td></tr>
+                  <tr data-section="412"><td>3 Sets of 3 Reps</td><td>70%</td><td>${percent(fs, 70)}kg</td></tr>
+                  <tr data-section="412"><td>2 Sets of 2 Reps</td><td>80%</td><td>${percent(fs, 80)}kg</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+              </table>
+            `;
+          })(),
+
+          "5-1": (() => {
+            const bs = parseFloat(lifts.bs);   // Back Squat
+            const fs = parseFloat(lifts.fs);   // Front Squat
+            const os = parseFloat(lifts.os);   // Overhead Squat
+            const c  = parseFloat(lifts.c);    // Clean
+            const s  = parseFloat(lifts.s);    // Snatch
+            const cj = parseFloat(lifts.cj);   // Clean & Jerk
+            const d  = parseFloat(lifts.d);    // Deadlift
+            const pp = parseFloat(lifts.pp);   // Push Press
+            return `
+              <table>
+                <colgroup>
+                  <col style="width: 70%;">
+                  <col style="width: 15%;">
+                  <col style="width: 15%;">
+                </colgroup>
+                  <tr><th colspan="3"><label>Deadlift WU<input type="checkbox" class="section-toggle" data-section="511"/></label></th></tr>
+                  <tr data-section="511"><td>2 Sets of 10 Reps</td><td colspan="2">Empty Bar</td></tr>
+                  <tr data-section="511"><td>2 Sets of 5 Reps</td><td>50%</td><td>${percent(d, 50)}kg</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+                  <tr><th colspan="3"><label>Deadlift WS<input type="checkbox" class="section-toggle" data-section="512"/></label></th></tr>
+                  <tr data-section="512"><td>2 Sets of 10 Reps</td><td>55%</td><td>${percent(d, 55)}kg</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+                  <tr><th colspan="3"><label>Good Mornings<input type="checkbox" class="section-toggle" data-section="513"/></label></th></tr>
+                  <tr data-section="513"><td colspan="3">5 Sets of 5 Reps Work up to weight where you can maintain proper form.</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+                  <tr><th colspan="3"><label>WP Sit Ups<input type="checkbox" class="section-toggle" data-section="514"/></label></th></tr>
+                  <tr data-section="514"><td colspan="3">3 Sets of 20 Reps Use a weight where you can maintain proper form.</td></tr>
               </table>
             `;
           })(),
@@ -434,31 +609,25 @@
                   <col style="width: 15%;">
                   <col style="width: 15%;">
                 </colgroup>
-                    <tr><th colspan="3"><label>Front Squat WU<input type="checkbox" class="section-toggle" data-section="521"/></label></th></tr>
-                    <tr data-section="521"><td>2 Sets of 10 Reps</td><td colspan="2">Empty Bar</td></tr>
-                    <tr data-section="521"><td>1 Set of 2 Reps</td><td>50%</td><td>${percent(fs, 50)}kg</td></tr>
-                    <tr data-section="521"><td>1 Set of 2 Reps</td><td>55%</td><td>${percent(fs, 55)}kg</td></tr>
-                    <tr data-section="521"><td>1 Set of 2 Reps</td><td>60%</td><td>${percent(fs, 60)}kg</td></tr>
-                    <tr data-section="521"><td>1 Set of 2 Reps</td><td>65%</td><td>${percent(fs, 65)}kg</td></tr>
-                    <tr data-section="521"><td>1 Set of 2 Reps</td><td>70%</td><td>${percent(fs, 70)}kg</td></tr>
-                    <tr data-section="521"><td>1 Set of 2 Reps</td><td>75%</td><td>${percent(fs, 75)}kg</td></tr>
-                    <tr data-section="521"><td>1 Set of 2 Reps</td><td>80%</td><td>${percent(fs, 80)}kg</td></tr>
-                    <tr data-section="521"><td>1 Set of 2 Reps</td><td>85%</td><td>${percent(fs, 85)}kg</td></tr>
-                    <tr data-section="521"><td>1 Set of 2 Reps</td><td>90%</td><td>${percent(fs, 90)}kg</td></tr>
-                    <tr><td colspan="3" style="height: 40px;"></td></tr>
-                    <tr><th colspan="3"><label>Front Squat WS<input type="checkbox" class="section-toggle" data-section="522"/></label></th></tr>
-                    <tr data-section="522"><td>2 Sets of 2 Reps</td><td>95%</td><td>${percent(fs, 95)}kg</td></tr>
-                    <tr><td colspan="3" style="height: 40px;"></td></tr>
-                    <tr><th colspan="3"><label>Good Mornings<input type="checkbox" class="section-toggle" data-section="523"/></label></th></tr>
-                    <tr data-section="523"><td colspan="3">5 Sets of 5 Reps Work up to weight where you can maintain proper form.</td></tr>
-                    <tr><td colspan="3" style="height: 40px;"></td></tr>
-                    <tr><th colspan="3"><label>WP Sit Ups<input type="checkbox" class="section-toggle" data-section="524"/></label></th></tr>
-                    <tr data-section="524"><td colspan="3">3 Sets of 20 Reps Use a weight where you can maintain proper form.</td></tr>
+                  <tr><th colspan="3"><label>Deadlift WU<input type="checkbox" class="section-toggle" data-section="521"/></label></th></tr>
+                  <tr data-section="521"><td>2 Sets of 8 Reps</td><td colspan="2">Empty Bar</td></tr>
+                  <tr data-section="521"><td>1 Set of 4 Reps</td><td>50%</td><td>${percent(d, 50)}kg</td></tr>
+                  <tr data-section="521"><td>1 Set of 4 Reps</td><td>55%</td><td>${percent(d, 55)}kg</td></tr>
+                  <tr data-section="521"><td>1 Set of 4 Reps</td><td>60%</td><td>${percent(d, 60)}kg</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+                  <tr><th colspan="3"><label>Deadlift WS<input type="checkbox" class="section-toggle" data-section="522"/></label></th></tr>
+                  <tr data-section="522"><td>2 Sets of 8 Reps</td><td>65%</td><td>${percent(d, 65)}kg</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+                  <tr><th colspan="3"><label>BOR<input type="checkbox" class="section-toggle" data-section="523"/></label></th></tr>
+                  <tr data-section="523"><td colspan="3">3 Sets of 10 Reps Work up to weight where you can maintain proper form.</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+                  <tr><th colspan="3"><label>V Ups<input type="checkbox" class="section-toggle" data-section="524"/></label></th></tr>
+                  <tr data-section="524"><td colspan="3">3 Sets of 20 Reps </td></tr>
               </table>
             `;
           })(),
 
-          "6-2": (() => {
+          "5-3": (() => {
             const bs = parseFloat(lifts.bs);   // Back Squat
             const fs = parseFloat(lifts.fs);   // Front Squat
             const os = parseFloat(lifts.os);   // Overhead Squat
@@ -474,20 +643,519 @@
                   <col style="width: 15%;">
                   <col style="width: 15%;">
                 </colgroup>
-                    <tr><th colspan="3"><label>Front Squat WU<input type="checkbox" class="section-toggle" data-section="621"/></label></th></tr>
-                    <tr data-section="621"><td>2 Sets of 5 Reps</td><td colspan="2">Empty Bar</td></tr>
-                    <tr data-section="621"><td>1 Set of 1 Rep</td><td>50%</td><td>${percent(fs, 50)}kg</td></tr>
-                    <tr data-section="621"><td>1 Set of 1 Rep</td><td>60%</td><td>${percent(fs, 60)}kg</td></tr>
-                    <tr data-section="621"><td>1 Set of 1 Rep</td><td>70%</td><td>${percent(fs, 70)}kg</td></tr>
-                    <tr><td colspan="3" style="height: 40px;"></td></tr>
-                    <tr><th colspan="3"><label>Front Squat WS<input type="checkbox" class="section-toggle" data-section="622"/></label></th></tr>
-                    <tr data-section="621"><td>1 Set of 1 Rep</td><td>75%</td><td>${percent(fs, 75)}kg</td></tr>
-                    <tr data-section="621"><td>1 Set of 1 Rep</td><td>80%</td><td>${percent(fs, 80)}kg</td></tr>
-                    <tr data-section="621"><td>1 Set of 1 Rep</td><td>85%</td><td>${percent(fs, 85)}kg</td></tr>
-                    <tr data-section="621"><td>1 Set of 1 Rep</td><td>90%</td><td>${percent(fs, 90)}kg</td></tr>
-                    <tr data-section="621"><td>1 Set of 1 Rep</td><td>95%</td><td>${percent(fs, 95)}kg</td></tr>
-                    <tr data-section="622"><td colspan="3">1 Set of 1 Rep 1RM</td></tr>
-                    <tr><td colspan="3" style="height: 40px;"></td></tr>
+                  <tr><th colspan="3"><label>Deadlift WU<input type="checkbox" class="section-toggle" data-section="531"/></label></th></tr>
+                  <tr data-section="531"><td>2 Sets of 6 Reps</td><td colspan="2">Empty Bar</td></tr>
+                  <tr data-section="531"><td>1 Set of 3 Reps</td><td>50%</td><td>${percent(d, 50)}kg</td></tr>
+                  <tr data-section="531"><td>1 Set of 3 Reps</td><td>55%</td><td>${percent(d, 55)}kg</td></tr>
+                  <tr data-section="531"><td>1 Set of 3 Reps</td><td>60%</td><td>${percent(d, 60)}kg</td></tr>
+                  <tr data-section="531"><td>1 Set of 3 Reps</td><td>65%</td><td>${percent(d, 65)}kg</td></tr>
+                  <tr data-section="531"><td>1 Set of 3 Reps</td><td>70%</td><td>${percent(d, 70)}kg</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+                  <tr><th colspan="3"><label>Deadlift WS<input type="checkbox" class="section-toggle" data-section="532"/></label></th></tr>
+                  <tr data-section="532"><td>2 Sets of 6 Reps</td><td>75%</td><td>${percent(d, 75)}kg</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+                  <tr><th colspan="3"><label>Good Mornings<input type="checkbox" class="section-toggle" data-section="533"/></label></th></tr>
+                  <tr data-section="533"><td colspan="3">5 Sets of 5 Reps Work up to weight where you can maintain proper form.</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+                  <tr><th colspan="3"><label>WP Sit Ups<input type="checkbox" class="section-toggle" data-section="534"/></label></th></tr>
+                  <tr data-section="534"><td colspan="3">3 Sets of 20 Reps Use a weight where you can maintain proper form.</td></tr>
+              </table>
+            `;
+          })(),
+
+          "5-4": (() => {
+            const bs = parseFloat(lifts.bs);   // Back Squat
+            const fs = parseFloat(lifts.fs);   // Front Squat
+            const os = parseFloat(lifts.os);   // Overhead Squat
+            const c  = parseFloat(lifts.c);    // Clean
+            const s  = parseFloat(lifts.s);    // Snatch
+            const cj = parseFloat(lifts.cj);   // Clean & Jerk
+            const d  = parseFloat(lifts.d);    // Deadlift
+            const pp = parseFloat(lifts.pp);   // Push Press
+            return `
+              <table>
+                <colgroup>
+                  <col style="width: 70%;">
+                  <col style="width: 15%;">
+                  <col style="width: 15%;">
+                </colgroup>
+                  <tr><th colspan="3"><label>Deadlift WU<input type="checkbox" class="section-toggle" data-section="541"/></label></th></tr>
+                  <tr data-section="541"><td>2 Sets of 8 Reps</td><td colspan="2">Empty Bar</td></tr>
+                  <tr data-section="541"><td>1 Set of 2 Reps</td><td>50%</td><td>${percent(d, 50)}kg</td></tr>
+                  <tr data-section="541"><td>1 Set of 2 Reps</td><td>55%</td><td>${percent(d, 55)}kg</td></tr>
+                  <tr data-section="541"><td>1 Set of 2 Reps</td><td>60%</td><td>${percent(d, 60)}kg</td></tr>
+                  <tr data-section="541"><td>1 Set of 2 Reps</td><td>65%</td><td>${percent(d, 65)}kg</td></tr>
+                  <tr data-section="541"><td>1 Set of 2 Reps</td><td>70%</td><td>${percent(d, 70)}kg</td></tr>
+                  <tr data-section="541"><td>1 Set of 2 Reps</td><td>75%</td><td>${percent(d, 75)}kg</td></tr>
+                  <tr data-section="541"><td>1 Set of 2 Reps</td><td>80%</td><td>${percent(d, 80)}kg</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+                  <tr><th colspan="3"><label>Deadlift WS<input type="checkbox" class="section-toggle" data-section="542"/></label></th></tr>
+                  <tr data-section="542"><td>2 Sets of 4 Reps</td><td>85%</td><td>${percent(d, 85)}kg</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+                  <tr><th colspan="3"><label>BOR<input type="checkbox" class="section-toggle" data-section="543"/></label></th></tr>
+                  <tr data-section="543"><td colspan="3">3 Sets of 10 Reps Work up to weight where you can maintain proper form.</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+                  <tr><th colspan="3"><label>V Ups<input type="checkbox" class="section-toggle" data-section="544"/></label></th></tr>
+                  <tr data-section="544"><td colspan="3">3 Sets of 20 Reps </td></tr>
+              </table>
+            `;
+          })(),
+
+          "5-5": (() => {
+            const bs = parseFloat(lifts.bs);   // Back Squat
+            const fs = parseFloat(lifts.fs);   // Front Squat
+            const os = parseFloat(lifts.os);   // Overhead Squat
+            const c  = parseFloat(lifts.c);    // Clean
+            const s  = parseFloat(lifts.s);    // Snatch
+            const cj = parseFloat(lifts.cj);   // Clean & Jerk
+            const d  = parseFloat(lifts.d);    // Deadlift
+            const pp = parseFloat(lifts.pp);   // Push Press
+            return `
+              <table>
+                <colgroup>
+                  <col style="width: 70%;">
+                  <col style="width: 15%;">
+                  <col style="width: 15%;">
+                </colgroup>
+                  <tr><th colspan="3"><label>Deadlift WU<input type="checkbox" class="section-toggle" data-section="551"/></label></th></tr>
+                  <tr data-section="551"><td>2 Sets of 10 Reps</td><td colspan="2">Empty Bar</td></tr>
+                  <tr data-section="551"><td>1 Set of 2 Reps</td><td>50%</td><td>${percent(d, 50)}kg</td></tr>
+                  <tr data-section="551"><td>1 Set of 2 Reps</td><td>55%</td><td>${percent(d, 55)}kg</td></tr>
+                  <tr data-section="551"><td>1 Set of 2 Reps</td><td>60%</td><td>${percent(d, 60)}kg</td></tr>
+                  <tr data-section="551"><td>1 Set of 2 Reps</td><td>65%</td><td>${percent(d, 65)}kg</td></tr>
+                  <tr data-section="551"><td>1 Set of 2 Reps</td><td>70%</td><td>${percent(d, 70)}kg</td></tr>
+                  <tr data-section="551"><td>1 Set of 2 Reps</td><td>75%</td><td>${percent(d, 75)}kg</td></tr>
+                  <tr data-section="551"><td>1 Set of 2 Reps</td><td>80%</td><td>${percent(d, 80)}kg</td></tr>
+                  <tr data-section="551"><td>1 Set of 2 Reps</td><td>85%</td><td>${percent(d, 85)}kg</td></tr>
+                  <tr data-section="551"><td>1 Set of 2 Reps</td><td>90%</td><td>${percent(d, 90)}kg</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+                  <tr><th colspan="3"><label>Deadlift WS<input type="checkbox" class="section-toggle" data-section="552"/></label></th></tr>
+                  <tr data-section="552"><td>2 Sets of 2 Reps</td><td>95%</td><td>${percent(d, 95)}kg</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+                  <tr><th colspan="3"><label>Good Mornings<input type="checkbox" class="section-toggle" data-section="553"/></label></th></tr>
+                  <tr data-section="553"><td colspan="3">5 Sets of 5 Reps Work up to weight where you can maintain proper form.</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+                  <tr><th colspan="3"><label>WP Sit Ups<input type="checkbox" class="section-toggle" data-section="554"/></label></th></tr>
+                  <tr data-section="554"><td colspan="3">3 Sets of 20 Reps Use a weight where you can maintain proper form.</td></tr>
+              </table>
+            `;
+          })(),
+
+          "5-6": (() => {
+            const bs = parseFloat(lifts.bs);   // Back Squat
+            const fs = parseFloat(lifts.fs);   // Front Squat
+            const os = parseFloat(lifts.os);   // Overhead Squat
+            const c  = parseFloat(lifts.c);    // Clean
+            const s  = parseFloat(lifts.s);    // Snatch
+            const cj = parseFloat(lifts.cj);   // Clean & Jerk
+            const d  = parseFloat(lifts.d);    // Deadlift
+            const pp = parseFloat(lifts.pp);   // Push Press
+            return `
+              <table>
+                <colgroup>
+                  <col style="width: 70%;">
+                  <col style="width: 15%;">
+                  <col style="width: 15%;">
+                </colgroup>
+                  <tr><th colspan="3"><label>Deadlift WU<input type="checkbox" class="section-toggle" data-section="561"/></label></th></tr>
+                  <tr data-section="561"><td>2 Sets of 5 Reps</td><td colspan="2">Empty Bar</td></tr>
+                  <tr data-section="561"><td>1 Set of 1 Rep</td><td>50%</td><td>${percent(d, 50)}kg</td></tr>
+                  <tr data-section="561"><td>1 Set of 1 Rep</td><td>60%</td><td>${percent(d, 60)}kg</td></tr>
+                  <tr data-section="561"><td>1 Set of 1 Rep</td><td>70%</td><td>${percent(d, 70)}kg</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+                  <tr><th colspan="3"><label>Deadlift WS<input type="checkbox" class="section-toggle" data-section="562"/></label></th></tr>
+                  <tr data-section="561"><td>1 Set of 1 Rep</td><td>75%</td><td>${percent(d, 75)}kg</td></tr>
+                  <tr data-section="561"><td>1 Set of 1 Rep</td><td>80%</td><td>${percent(d, 80)}kg</td></tr>
+                  <tr data-section="561"><td>1 Set of 1 Rep</td><td>85%</td><td>${percent(d, 85)}kg</td></tr>
+                  <tr data-section="561"><td>1 Set of 1 Rep</td><td>90%</td><td>${percent(d, 90)}kg</td></tr>
+                  <tr data-section="561"><td>1 Set of 1 Rep</td><td>95%</td><td>${percent(d, 95)}kg</td></tr>
+                  <tr data-section="562"><td colspan="3">1 Set of 1 Rep 1RM</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+              </table>
+            `;
+          })(),
+
+
+          "6-1": (() => {
+            const bs = parseFloat(lifts.bs);   // Back Squat
+            const fs = parseFloat(lifts.fs);   // Front Squat
+            const os = parseFloat(lifts.os);   // Overhead Squat
+            const c  = parseFloat(lifts.c);    // Clean
+            const s  = parseFloat(lifts.s);    // Snatch
+            const cj = parseFloat(lifts.cj);   // Clean & Jerk
+            const d  = parseFloat(lifts.d);    // Deadlift
+            const pp = parseFloat(lifts.pp);   // Push Press
+            return `
+              <table>
+                <colgroup>
+                  <col style="width: 70%;">
+                  <col style="width: 15%;">
+                  <col style="width: 15%;">
+                </colgroup>
+                  <tr><th colspan="3"><label>Deadlift WU<input type="checkbox" class="section-toggle" data-section="611"/></label></th></tr>
+                  <tr data-section="611"><td>2 Sets of 5 Reps</td><td colspan="2">Empty Bar</td></tr>
+                  <tr data-section="611"><td>1 Set of 3 Reps</td><td>50%</td><td>${percent(d, 50)}kg</td></tr>
+                  <tr data-section="611"><td>1 Set of 2 Reps</td><td>55%</td><td>${percent(d, 55)}kg</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+                  <tr><th colspan="3"><label>Deadlift WS<input type="checkbox" class="section-toggle" data-section="612"/></label></th></tr>
+                  <tr data-section="612"><td>5 Sets of 5 Reps</td><td>60%</td><td>${percent(d, 60)}kg</td></tr>
+                  <tr data-section="612"><td>3 Sets of 3 Reps</td><td>70%</td><td>${percent(d, 70)}kg</td></tr>
+                  <tr data-section="612"><td>2 Sets of 2 Reps</td><td>80%</td><td>${percent(d, 80)}kg</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+              </table>
+            `;
+          })(),
+
+         
+
+          "7-1": (() => {
+            const bs = parseFloat(lifts.bs);   // Back Squat
+            const fs = parseFloat(lifts.fs);   // Front Squat
+            const os = parseFloat(lifts.os);   // Overhead Squat
+            const c  = parseFloat(lifts.c);    // Clean
+            const s  = parseFloat(lifts.s);    // Snatch
+            const cj = parseFloat(lifts.cj);   // Clean & Jerk
+            const d  = parseFloat(lifts.d);    // Deadlift
+            const pp = parseFloat(lifts.pp);   // Push Press
+            return `
+              <table>
+                <colgroup>
+                  <col style="width: 70%;">
+                  <col style="width: 15%;">
+                  <col style="width: 15%;">
+                </colgroup>
+                  <tr><th colspan="3"><label>Yo-Yo Snatch<input type="checkbox" class="section-toggle" data-section="711"/></label></th></tr>
+                  <tr data-section="711"><td>2 Sets of 2 Reps</td><td colspan="2">Empty Bar</td></tr>
+                  <tr data-section="711"><td>3 Sets of 1 Rep</td><td>40%</td><td>${percent(s, 40)}kg</td></tr>
+                  <tr data-section="711"><td>5 Sets of 1 Rep</td><td>50%</td><td>${percent(s, 50)}kg</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+                  <tr><th colspan="3"><label>Snatch<input type="checkbox" class="section-toggle" data-section="712"/></label></th></tr>
+                  <tr data-section="712"><td>7 Sets of 1 Rep</td><td>60%</td><td>${percent(s, 60)}kg</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+                  <tr><th colspan="3"><label>Snatch Balance<input type="checkbox" class="section-toggle" data-section="713"/></label></th></tr>
+                  <tr data-section="713"><td>1 Set of 2 Reps</td><td>60%</td><td>${percent(s, 60)}kg</td></tr>
+                  <tr data-section="713"><td>3 Sets of 2 Reps</td><td>70%</td><td>${percent(s, 70)}kg</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+                  <tr><th colspan="3"><label>Snatch DL<input type="checkbox" class="section-toggle" data-section="714"/></label></th></tr>
+                  <tr data-section="714"><td>3 Sets of 2 Reps</td><td>80%</td><td>${percent(s, 80)}kg</td></tr>
+              </table>
+            `;
+          })(),
+
+          "7-2": (() => {
+            const bs = parseFloat(lifts.bs);   // Back Squat
+            const fs = parseFloat(lifts.fs);   // Front Squat
+            const os = parseFloat(lifts.os);   // Overhead Squat
+            const c  = parseFloat(lifts.c);    // Clean
+            const s  = parseFloat(lifts.s);    // Snatch
+            const cj = parseFloat(lifts.cj);   // Clean & Jerk
+            const d  = parseFloat(lifts.d);    // Deadlift
+            const pp = parseFloat(lifts.pp);   // Push Press
+            return `
+              <table>
+                <colgroup>
+                  <col style="width: 70%;">
+                  <col style="width: 15%;">
+                  <col style="width: 15%;">
+                </colgroup>
+                  <tr><th colspan="3"><label>Yo-Yo Snatch<input type="checkbox" class="section-toggle" data-section="721"/></label></th></tr>
+                  <tr data-section="721"><td>2 Sets of 2 Reps</td><td colspan="2">Empty Bar</td></tr>
+                  <tr data-section="721"><td>2 Sets of 1 Rep</td><td>40%</td><td>${percent(s, 40)}kg</td></tr>
+                  <tr data-section="721"><td>1 Set of 1 Rep</td><td>50%</td><td>${percent(s, 50)}kg</td></tr>
+                  <tr data-section="721"><td>5 Sets of 1 Rep</td><td>55%</td><td>${percent(s, 55)}kg</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+                  <tr><th colspan="3"><label>Snatch<input type="checkbox" class="section-toggle" data-section="722"/></label></th></tr>
+                  <tr data-section="722"><td>7 Sets of 1 Rep</td><td>65%</td><td>${percent(s, 65)}kg</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+                  <tr><th colspan="3"><label>Snatch Balance<input type="checkbox" class="section-toggle" data-section="723"/></label></th></tr>
+                  <tr data-section="723"><td>1 Set of 2 Reps</td><td>65%</td><td>${percent(s, 65)}kg</td></tr>
+                  <tr data-section="723"><td>3 Sets of 2 Reps</td><td>75%</td><td>${percent(s, 75)}kg</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+                  <tr><th colspan="3"><label>Snatch DL<input type="checkbox" class="section-toggle" data-section="724"/></label></th></tr>
+                  <tr data-section="724"><td>3 Sets of 2 Reps</td><td>85%</td><td>${percent(s, 85)}kg</td></tr>
+              </table>
+            `;
+          })(),
+
+          "7-3": (() => {
+            const bs = parseFloat(lifts.bs);   // Back Squat
+            const fs = parseFloat(lifts.fs);   // Front Squat
+            const os = parseFloat(lifts.os);   // Overhead Squat
+            const c  = parseFloat(lifts.c);    // Clean
+            const s  = parseFloat(lifts.s);    // Snatch
+            const cj = parseFloat(lifts.cj);   // Clean & Jerk
+            const d  = parseFloat(lifts.d);    // Deadlift
+            const pp = parseFloat(lifts.pp);   // Push Press
+            return `
+              <table>
+                <colgroup>
+                  <col style="width: 70%;">
+                  <col style="width: 15%;">
+                  <col style="width: 15%;">
+                </colgroup>
+                  <tr><th colspan="3"><label>Yo-Yo Snatch<input type="checkbox" class="section-toggle" data-section="731"/></label></th></tr>
+                  <tr data-section="731"><td>2 Sets of 2 Reps</td><td colspan="2">Empty Bar</td></tr>
+                  <tr data-section="731"><td>2 Sets of 1 Rep</td><td>40%</td><td>${percent(s, 40)}kg</td></tr>
+                  <tr data-section="731"><td>1 Set of 1 Rep</td><td>50%</td><td>${percent(s, 50)}kg</td></tr>
+                  <tr data-section="731"><td>5 Sets of 1 Rep</td><td>60%</td><td>${percent(s, 60)}kg</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+                  <tr><th colspan="3"><label>Snatch<input type="checkbox" class="section-toggle" data-section="732"/></label></th></tr>
+                  <tr data-section="732"><td>7 Sets of 1 Rep</td><td>70%</td><td>${percent(s, 70)}kg</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+                  <tr><th colspan="3"><label>Snatch Balance<input type="checkbox" class="section-toggle" data-section="733"/></label></th></tr>
+                  <tr data-section="733"><td>1 Set of 2 Reps</td><td>70%</td><td>${percent(s, 70)}kg</td></tr>
+                  <tr data-section="733"><td>3 Sets of 2 Reps</td><td>80%</td><td>${percent(s, 80)}kg</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+                  <tr><th colspan="3"><label>Snatch DL<input type="checkbox" class="section-toggle" data-section="734"/></label></th></tr>
+                  <tr data-section="734"><td>3 Sets of 2 Reps</td><td>90%</td><td>${percent(s, 90)}kg</td></tr>
+              </table>
+            `;
+          })(),
+
+          "7-4": (() => {
+            const bs = parseFloat(lifts.bs);   // Back Squat
+            const fs = parseFloat(lifts.fs);   // Front Squat
+            const os = parseFloat(lifts.os);   // Overhead Squat
+            const c  = parseFloat(lifts.c);    // Clean
+            const s  = parseFloat(lifts.s);    // Snatch
+            const cj = parseFloat(lifts.cj);   // Clean & Jerk
+            const d  = parseFloat(lifts.d);    // Deadlift
+            const pp = parseFloat(lifts.pp);   // Push Press
+            return `
+              <table>
+                <colgroup>
+                  <col style="width: 70%;">
+                  <col style="width: 15%;">
+                  <col style="width: 15%;">
+                </colgroup>
+                  <tr><th colspan="3"><label>Yo-Yo Snatch<input type="checkbox" class="section-toggle" data-section="741"/></label></th></tr>
+                  <tr data-section="741"><td>2 Sets of 2 Reps</td><td colspan="2">Empty Bar</td></tr>
+                  <tr data-section="741"><td>1 Set of 1 Rep</td><td>40%</td><td>${percent(s, 40)}kg</td></tr>
+                  <tr data-section="741"><td>1 Set of 1 Rep</td><td>50%</td><td>${percent(s, 50)}kg</td></tr>
+                  <tr data-section="741"><td>1 Set of 1 Rep</td><td>60%</td><td>${percent(s, 60)}kg</td></tr>
+                  <tr data-section="741"><td>5 Sets of 1 Rep</td><td>65%</td><td>${percent(s, 65)}kg</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+                  <tr><th colspan="3"><label>Snatch<input type="checkbox" class="section-toggle" data-section="742"/></label></th></tr>
+                  <tr data-section="742"><td>7 Sets of 1 Rep</td><td>75%</td><td>${percent(s, 75)}kg</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+                  <tr><th colspan="3"><label>Snatch Balance<input type="checkbox" class="section-toggle" data-section="743"/></label></th></tr>
+                  <tr data-section="743"><td>1 Set of 2 Reps</td><td>75%</td><td>${percent(s, 75)}kg</td></tr>
+                  <tr data-section="743"><td>3 Sets of 2 Reps</td><td>85%</td><td>${percent(s, 85)}kg</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+                  <tr><th colspan="3"><label>Snatch DL<input type="checkbox" class="section-toggle" data-section="744"/></label></th></tr>
+                  <tr data-section="744"><td>3 Sets of 2 Reps</td><td>95%</td><td>${percent(s, 95)}kg</td></tr>
+              </table>
+            `;
+          })(),
+
+          "7-5": (() => {
+            const bs = parseFloat(lifts.bs);   // Back Squat
+            const fs = parseFloat(lifts.fs);   // Front Squat
+            const os = parseFloat(lifts.os);   // Overhead Squat
+            const c  = parseFloat(lifts.c);    // Clean
+            const s  = parseFloat(lifts.s);    // Snatch
+            const cj = parseFloat(lifts.cj);   // Clean & Jerk
+            const d  = parseFloat(lifts.d);    // Deadlift
+            const pp = parseFloat(lifts.pp);   // Push Press
+            return `
+              <table>
+                <colgroup>
+                  <col style="width: 70%;">
+                  <col style="width: 15%;">
+                  <col style="width: 15%;">
+                </colgroup>
+                  <tr><th colspan="3"><label>Yo-Yo Snatch<input type="checkbox" class="section-toggle" data-section="751"/></label></th></tr>
+                  <tr data-section="751"><td>2 Sets of 2 Reps</td><td colspan="2">Empty Bar</td></tr>
+                  <tr data-section="751"><td>1 Set of 1 Rep</td><td>40%</td><td>${percent(s, 40)}kg</td></tr>
+                  <tr data-section="751"><td>1 Set of 1 Rep</td><td>50%</td><td>${percent(s, 50)}kg</td></tr>
+                  <tr data-section="751"><td>1 Set of 1 Rep</td><td>60%</td><td>${percent(s, 60)}kg</td></tr>
+                  <tr data-section="751"><td>5 Sets of 1 Rep</td><td>70%</td><td>${percent(s, 70)}kg</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+                  <tr><th colspan="3"><label>Snatch<input type="checkbox" class="section-toggle" data-section="752"/></label></th></tr>
+                  <tr data-section="752"><td>7 Sets of 1 Rep</td><td>80%</td><td>${percent(s, 80)}kg</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+                  <tr><th colspan="3"><label>Snatch Balance<input type="checkbox" class="section-toggle" data-section="753"/></label></th></tr>
+                  <tr data-section="753"><td>1 Set of 2 Reps</td><td>80%</td><td>${percent(s, 80)}kg</td></tr>
+                  <tr data-section="753"><td>3 Sets of 2 Reps</td><td>90%</td><td>${percent(s, 90)}kg</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+                  <tr><th colspan="3"><label>Snatch DL<input type="checkbox" class="section-toggle" data-section="754"/></label></th></tr>
+                  <tr data-section="754"><td>3 Sets of 2 Reps</td><td>100%</td><td>${percent(s, 100)}kg</td></tr>
+              </table>
+            `;
+          })(),
+
+          "8-1": (() => {
+            const bs = parseFloat(lifts.bs);   // Back Squat
+            const fs = parseFloat(lifts.fs);   // Front Squat
+            const os = parseFloat(lifts.os);   // Overhead Squat
+            const c  = parseFloat(lifts.c);    // Clean
+            const s  = parseFloat(lifts.s);    // Snatch
+            const cj = parseFloat(lifts.cj);   // Clean & Jerk
+            const d  = parseFloat(lifts.d);    // Deadlift
+            const pp = parseFloat(lifts.pp);   // Push Press
+            return `
+              <table>
+                <colgroup>
+                  <col style="width: 70%;">
+                  <col style="width: 15%;">
+                  <col style="width: 15%;">
+                </colgroup>
+                  <tr><th colspan="3"><label>Clean Pull + Clean<input type="checkbox" class="section-toggle" data-section="811"/></label></th></tr>
+                  <tr data-section="811"><td>2 Sets of 2 Reps</td><td colspan="2">Empty Bar</td></tr>
+                  <tr data-section="811"><td>3 Sets of 1 Rep</td><td>40%</td><td>${percent(cj, 40)}kg</td></tr>
+                  <tr data-section="811"><td>5 Sets of 1 Rep</td><td>50%</td><td>${percent(cj, 50)}kg</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+                  <tr><th colspan="3"><label>Clean & Jerk<input type="checkbox" class="section-toggle" data-section="812"/></label></th></tr>
+                  <tr data-section="812"><td>7 Sets of 1 Rep</td><td>60%</td><td>${percent(cj, 60)}kg</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+                  <tr><th colspan="3"><label>Push Press<input type="checkbox" class="section-toggle" data-section="813"/></label></th></tr>
+                  <tr data-section="813"><td>1 Set of 2 Reps</td><td>60%</td><td>${percent(cj, 60)}kg</td></tr>
+                  <tr data-section="813"><td>3 Sets of 2 Reps</td><td>70%</td><td>${percent(cj, 70)}kg</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+                  <tr><th colspan="3"><label>Clean DL<input type="checkbox" class="section-toggle" data-section="814"/></label></th></tr>
+                  <tr data-section="814"><td>3 Sets of 2 Reps</td><td>80%</td><td>${percent(cj, 80)}kg</td></tr>
+              </table>
+            `;
+          })(),
+
+          "8-2": (() => {
+            const bs = parseFloat(lifts.bs);   // Back Squat
+            const fs = parseFloat(lifts.fs);   // Front Squat
+            const os = parseFloat(lifts.os);   // Overhead Squat
+            const c  = parseFloat(lifts.c);    // Clean
+            const s  = parseFloat(lifts.s);    // Snatch
+            const cj = parseFloat(lifts.cj);   // Clean & Jerk
+            const d  = parseFloat(lifts.d);    // Deadlift
+            const pp = parseFloat(lifts.pp);   // Push Press
+            return `
+              <table>
+                <colgroup>
+                  <col style="width: 70%;">
+                  <col style="width: 15%;">
+                  <col style="width: 15%;">
+                </colgroup>
+                  <tr><th colspan="3"><label>Clean Pull + Clean<input type="checkbox" class="section-toggle" data-section="821"/></label></th></tr>
+                  <tr data-section="821"><td>2 Sets of 2 Reps</td><td colspan="2">Empty Bar</td></tr>
+                  <tr data-section="821"><td>2 Sets of 1 Rep</td><td>40%</td><td>${percent(cj, 40)}kg</td></tr>
+                  <tr data-section="821"><td>1 Set of 1 Rep</td><td>50%</td><td>${percent(cj, 50)}kg</td></tr>
+                  <tr data-section="821"><td>5 Sets of 1 Rep</td><td>55%</td><td>${percent(cj, 55)}kg</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+                  <tr><th colspan="3"><label>Clean & Jerk<input type="checkbox" class="section-toggle" data-section="822"/></label></th></tr>
+                  <tr data-section="822"><td>7 Sets of 1 Rep</td><td>65%</td><td>${percent(cj, 65)}kg</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+                  <tr><th colspan="3"><label>Push Press<input type="checkbox" class="section-toggle" data-section="823"/></label></th></tr>
+                  <tr data-section="823"><td>1 Set of 2 Reps</td><td>65%</td><td>${percent(cj, 65)}kg</td></tr>
+                  <tr data-section="823"><td>3 Sets of 2 Reps</td><td>75%</td><td>${percent(cj, 75)}kg</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+                  <tr><th colspan="3"><label>Clean DL<input type="checkbox" class="section-toggle" data-section="824"/></label></th></tr>
+                  <tr data-section="824"><td>3 Sets of 2 Reps</td><td>85%</td><td>${percent(cj, 85)}kg</td></tr>
+              </table>
+            `;
+          })(),
+
+          "8-3": (() => {
+            const bs = parseFloat(lifts.bs);   // Back Squat
+            const fs = parseFloat(lifts.fs);   // Front Squat
+            const os = parseFloat(lifts.os);   // Overhead Squat
+            const c  = parseFloat(lifts.c);    // Clean
+            const s  = parseFloat(lifts.s);    // Snatch
+            const cj = parseFloat(lifts.cj);   // Clean & Jerk
+            const d  = parseFloat(lifts.d);    // Deadlift
+            const pp = parseFloat(lifts.pp);   // Push Press
+            return `
+              <table>
+                <colgroup>
+                  <col style="width: 70%;">
+                  <col style="width: 15%;">
+                  <col style="width: 15%;">
+                </colgroup>
+                  <tr><th colspan="3"><label>Clean Pull + Clean<input type="checkbox" class="section-toggle" data-section="831"/></label></th></tr>
+                  <tr data-section="831"><td>2 Sets of 2 Reps</td><td colspan="2">Empty Bar</td></tr>
+                  <tr data-section="831"><td>2 Sets of 1 Rep</td><td>40%</td><td>${percent(cj, 40)}kg</td></tr>
+                  <tr data-section="831"><td>1 Set of 1 Rep</td><td>50%</td><td>${percent(cj, 50)}kg</td></tr>
+                  <tr data-section="831"><td>5 Sets of 1 Rep</td><td>60%</td><td>${percent(cj, 60)}kg</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+                  <tr><th colspan="3"><label>Clean & Jerk<input type="checkbox" class="section-toggle" data-section="832"/></label></th></tr>
+                  <tr data-section="832"><td>7 Sets of 1 Rep</td><td>70%</td><td>${percent(cj, 70)}kg</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+                  <tr><th colspan="3"><label>Push Press<input type="checkbox" class="section-toggle" data-section="833"/></label></th></tr>
+                  <tr data-section="833"><td>1 Set of 2 Reps</td><td>70%</td><td>${percent(cj, 70)}kg</td></tr>
+                  <tr data-section="833"><td>3 Sets of 2 Reps</td><td>80%</td><td>${percent(cj, 80)}kg</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+                  <tr><th colspan="3"><label>Clean DL<input type="checkbox" class="section-toggle" data-section="834"/></label></th></tr>
+                  <tr data-section="834"><td>3 Sets of 2 Reps</td><td>90%</td><td>${percent(cj, 90)}kg</td></tr>
+              </table>
+            `;
+          })(),
+
+          "8-4": (() => {
+            const bs = parseFloat(lifts.bs);   // Back Squat
+            const fs = parseFloat(lifts.fs);   // Front Squat
+            const os = parseFloat(lifts.os);   // Overhead Squat
+            const c  = parseFloat(lifts.c);    // Clean
+            const s  = parseFloat(lifts.s);    // Snatch
+            const cj = parseFloat(lifts.cj);   // Clean & Jerk
+            const d  = parseFloat(lifts.d);    // Deadlift
+            const pp = parseFloat(lifts.pp);   // Push Press
+            return `
+              <table>
+                <colgroup>
+                  <col style="width: 70%;">
+                  <col style="width: 15%;">
+                  <col style="width: 15%;">
+                </colgroup>
+                  <tr><th colspan="3"><label>Clean Pull + Clean<input type="checkbox" class="section-toggle" data-section="841"/></label></th></tr>
+                  <tr data-section="841"><td>2 Sets of 2 Reps</td><td colspan="2">Empty Bar</td></tr>
+                  <tr data-section="841"><td>1 Set of 1 Rep</td><td>40%</td><td>${percent(cj, 40)}kg</td></tr>
+                  <tr data-section="841"><td>1 Set of 1 Rep</td><td>50%</td><td>${percent(cj, 50)}kg</td></tr>
+                  <tr data-section="841"><td>1 Set of 1 Rep</td><td>60%</td><td>${percent(cj, 60)}kg</td></tr>
+                  <tr data-section="841"><td>5 Sets of 1 Rep</td><td>65%</td><td>${percent(cj, 65)}kg</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+                  <tr><th colspan="3"><label>Clean & Jerk<input type="checkbox" class="section-toggle" data-section="842"/></label></th></tr>
+                  <tr data-section="842"><td>7 Sets of 1 Rep</td><td>75%</td><td>${percent(cj, 75)}kg</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+                  <tr><th colspan="3"><label>Push Press<input type="checkbox" class="section-toggle" data-section="843"/></label></th></tr>
+                  <tr data-section="843"><td>1 Set of 2 Reps</td><td>75%</td><td>${percent(cj, 75)}kg</td></tr>
+                  <tr data-section="843"><td>3 Sets of 2 Reps</td><td>85%</td><td>${percent(cj, 85)}kg</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+                  <tr><th colspan="3"><label>Clean DL<input type="checkbox" class="section-toggle" data-section="844"/></label></th></tr>
+                  <tr data-section="844"><td>3 Sets of 2 Reps</td><td>95%</td><td>${percent(cj, 95)}kg</td></tr>
+              </table>
+            `;
+          })(),
+
+          "8-5": (() => {
+            const bs = parseFloat(lifts.bs);   // Back Squat
+            const fs = parseFloat(lifts.fs);   // Front Squat
+            const os = parseFloat(lifts.os);   // Overhead Squat
+            const c  = parseFloat(lifts.c);    // Clean
+            const s  = parseFloat(lifts.s);    // Snatch
+            const cj = parseFloat(lifts.cj);   // Clean & Jerk
+            const d  = parseFloat(lifts.d);    // Deadlift
+            const pp = parseFloat(lifts.pp);   // Push Press
+            return `
+              <table>
+                <colgroup>
+                  <col style="width: 70%;">
+                  <col style="width: 15%;">
+                  <col style="width: 15%;">
+                </colgroup>
+                  <tr><th colspan="3"><label>Clean Pull + Clean<input type="checkbox" class="section-toggle" data-section="851"/></label></th></tr>
+                  <tr data-section="851"><td>2 Sets of 2 Reps</td><td colspan="2">Empty Bar</td></tr>
+                  <tr data-section="851"><td>1 Set of 1 Rep</td><td>40%</td><td>${percent(cj, 40)}kg</td></tr>
+                  <tr data-section="851"><td>1 Set of 1 Rep</td><td>50%</td><td>${percent(cj, 50)}kg</td></tr>
+                  <tr data-section="851"><td>1 Set of 1 Rep</td><td>60%</td><td>${percent(cj, 60)}kg</td></tr>
+                  <tr data-section="851"><td>5 Sets of 1 Rep</td><td>70%</td><td>${percent(cj, 70)}kg</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+                  <tr><th colspan="3"><label>Clean & Jerk<input type="checkbox" class="section-toggle" data-section="852"/></label></th></tr>
+                  <tr data-section="852"><td>7 Sets of 1 Rep</td><td>80%</td><td>${percent(cj, 80)}kg</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+                  <tr><th colspan="3"><label>Push Press<input type="checkbox" class="section-toggle" data-section="853"/></label></th></tr>
+                  <tr data-section="853"><td>1 Set of 2 Reps</td><td>80%</td><td>${percent(cj, 80)}kg</td></tr>
+                  <tr data-section="853"><td>3 Sets of 2 Reps</td><td>90%</td><td>${percent(cj, 90)}kg</td></tr>
+                  <tr><td colspan="3" style="height: 40px;"></td></tr>
+                  <tr><th colspan="3"><label>Clean DL<input type="checkbox" class="section-toggle" data-section="854"/></label></th></tr>
+                  <tr data-section="854"><td>3 Sets of 2 Reps</td><td>100%</td><td>${percent(cj, 100)}kg</td></tr>
               </table>
             `;
           })(),
@@ -495,16 +1163,16 @@
         };
 
         // Set selectors to saved values (if any)
-        if (savedWeek) weekSelect.value = savedWeek;
-        if (savedDay) athleteSelect.value = savedDay;
+        if (savedprogram) programSelect.value = savedprogram;
+        if (savedlevel) levelSelect.value = savedlevel;
 
-        function showProgram(week, day) {
-          if (!week || !day) {
-            displayDiv.innerHTML = "<p>Please select the week & day of the program you wish to open.</p>";
+        function showProgram(program, level) {
+          if (!program || !level) {
+            displayDiv.innerHTML = "<p>Please select the program & level of the program you wish to open.</p>";
             return;
           }
 
-          const key = `${week}-${day}`;
+          const key = `${program}-${level}`;
           if (programs[key]) {
             displayDiv.innerHTML = programs[key];
 
@@ -560,22 +1228,22 @@
             }
 
           } else {
-            displayDiv.innerHTML = "<p>No program available for this week/day yet.</p>";
+            displayDiv.innerHTML = "<p>No program available for this program/level yet.</p>";
           }
         }
 
         // Show program on load based on saved or default values
-        showProgram(weekSelect.value, athleteSelect.value);
+        showProgram(programSelect.value, levelSelect.value);
 
         // Save and update program on selector change
-        weekSelect.addEventListener("change", () => {
-          localStorage.setItem("selectedWeek", weekSelect.value);
-          showProgram(weekSelect.value, athleteSelect.value);
+        programSelect.addEventListener("change", () => {
+          localStorage.setItem("selectedprogram", programSelect.value);
+          showProgram(programSelect.value, levelSelect.value);
         });
 
-        athleteSelect.addEventListener("change", () => {
-          localStorage.setItem("selectedDay", athleteSelect.value);
-          showProgram(weekSelect.value, athleteSelect.value);
+        levelSelect.addEventListener("change", () => {
+          localStorage.setItem("selectedlevel", levelSelect.value);
+          showProgram(programSelect.value, levelSelect.value);
         });
       });
     </script>

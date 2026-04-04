@@ -49,7 +49,7 @@
 
         // Restore previous target/level if available
         const savedtarget = localStorage.getItem("selectedtarget");
-        const savedlevel = localStorage.getItem("selectedlevel");   
+        const savedlevel = localStorage.getItem("selectedlevelTarget");   
 
       const targets = {
   "1-1": [
@@ -415,7 +415,7 @@
         });
 
         levelSelectTarget.addEventListener("change", () => {
-          localStorage.setItem("selectedlevel", levelSelectTarget.value);
+          localStorage.setItem("selectedlevelTarget", levelSelectTarget.value);
           showTarget(targetSelect.value, levelSelectTarget.value);
         });
       });

@@ -288,3 +288,162 @@ input.section-toggle:checked {
   outline: none;
   background-color: #757575;
 }
+
+
+/*=========== TARGET - SELECTORS ===========*/
+
+#target-container{
+  padding-top: 200px;
+  padding-bottom: 10px;
+  color: #202020;
+  text-align: center;
+  margin: 0 auto;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+#target-container #targetDisplay p {
+  text-align: center;
+  color: #202020;
+  padding-left: 30px;
+  padding-right: 30px;
+  font-size: 1.6em;
+}
+
+#selectors {
+  text-align: center;
+  flex-wrap: wrap;
+  padding-left: 0px;
+  padding-right: 30px;
+  justify-content: center;
+}
+
+#selectors select:first-of-type {
+  width: 300px;              /* wider for long text */
+}
+
+#selectors select:last-of-type {
+  width: 100px;              /* narrower for numbers */
+}
+
+#selectors label {
+  font-size: 1.6em;
+  margin-left: 20px;
+  margin-right: 10px;
+  color: #202020;
+}
+
+#selectors select {
+  font-size: 1.6em;
+  padding: 12px 15px;
+  margin: 10px 5px;
+  border: 2px solid #202020;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  color: #202020;
+  width: 80%;
+  max-width: 200px;
+}
+
+
+
+/*=========== TARGET - OUTPUT ===========*/
+
+#targetDisplay table {
+  table-layout: fixed;
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+#targetDisplay table td:nth-child(2),
+#targetDisplay table td:nth-child(3) {
+  text-align: right;
+}
+
+#targetDisplay th {
+  min-height: 40px;
+  padding: 12px;
+  text-align: left;
+  background-color: #202020;
+  color: white;
+  border-radius: 8px;
+}
+
+#targetDisplay td {
+  min-height: 40px;
+  padding: 8px;
+  text-align: left;
+}
+
+/*=========== TARGET - CHECKBOXES ===========*/
+
+th label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+th input.section-toggle {
+  transform: scale(3); /* Make the tick box larger */
+  cursor: pointer;
+  margin-right: 30px;
+}
+
+input.section-toggle:checked {
+  background-color: #202020;
+  border-color: #202020;
+}
+
+#targetDisplay tr.faded td {
+  color: #aaa;
+  text-decoration: line-through;
+}
+
+/*=========== TARGET - NOTES ===========*/
+
+#targetDisplay > div {
+  margin-top: 20px;
+  margin-bottom: 400px;  
+  max-width: 900px;
+  width: 100%;        
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 1.6em;
+  font-weight: 600;
+  background-color: #202020; 
+  color: white;               
+  border-radius: 8px;
+  padding: 10px 20px;
+  box-sizing: border-box;
+  text-align: left;
+  font-family: 'Raleway', sans-serif;
+}
+
+#targetDisplay > div label {
+  display: block;
+  font-weight: 700;
+  color: white;
+  padding-bottom: 10px;
+}
+
+#targetDisplay textarea#notes {
+  width: 100%;
+  min-height: 400px;
+  font-size: 1em;
+  font-family: 'Raleway', sans-serif;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  background-color: #464646;
+  color: white;
+  resize: vertical;
+  box-sizing: border-box;
+  transition: background-color 0.3s ease;
+}
+
+#targetDisplay textarea#notes:focus {
+  outline: none;
+  background-color: #757575;
+}

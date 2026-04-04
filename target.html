@@ -43,15 +43,25 @@
     <script>
       document.addEventListener("DOMContentLoaded", function () {
 
-        const targetSelect = document.getElementById("targetSelect");
-        const phaseSelect = document.getElementById("phaseSelect");
-        const displayDiv = document.getElementById("targetDisplay");
+    const targetSelect = document.getElementById("targetSelect");
+    const phaseSelect = document.getElementById("phaseSelect");
+    const displayDiv = document.getElementById("targetDisplay");
 
-        // Restore previous target/phase if available
-        const savedtarget = localStorage.getItem("selectedtarget");
-        const savedphase = localStorage.getItem("selectedphase");   
+    // Restore previous target/phase if available
+    const savedtarget = localStorage.getItem("selectedtarget");
+    const savedphase = localStorage.getItem("selectedphase");  
 
-      const targets = {
+    // **Set selectors to saved values first**
+    if (savedtarget) targetSelect.value = savedtarget;
+    if (savedphase) phaseSelect.value = savedphase;
+
+    const targets = {
+        // ...your targets object here...
+    };
+
+    // Then define showTarget() and call it
+    showTarget(targetSelect.value, phaseSelect.value);
+});
   "A-A": [
     {
       id: "AAA",

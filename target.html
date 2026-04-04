@@ -25,8 +25,8 @@
           <option value="B">DU Capacity</option>
         </select>
 
-	<label for="levelSelect">Level:</label>
-        <select id="levelSelect">
+	<label for="phaseSelect">Phase:</label>
+        <select id="phaseSelect">
           <option value="" disabled selected>-</option>
           <option value="A">1</option>
           <option value="B">2</option>
@@ -36,7 +36,7 @@
       </div>
 
       <div id="targetDisplay">
-        <p>Please select the target &amp; level of the target you wish to open.</p>
+        <p>Please select the target &amp; phase of the target you wish to open.</p>
       </div>
     </div>
 
@@ -44,12 +44,12 @@
       document.addEventListener("DOMContentLoaded", function () {
 
         const targetSelect = document.getElementById("targetSelect");
-        const levelSelect = document.getElementById("levelSelect");
+        const phaseSelect = document.getElementById("phaseSelect");
         const displayDiv = document.getElementById("targetDisplay");
 
-        // Restore previous target/level if available
+        // Restore previous target/phase if available
         const savedtarget = localStorage.getItem("selectedtarget");
-        const savedlevel = localStorage.getItem("selectedlevel");   
+        const savedphase = localStorage.getItem("selectedphase");   
 
       const targets = {
   "A-A": [
@@ -231,7 +231,7 @@
         "F: Stay smooth after the run. This is about holding technique as fatigue starts",
         "A: Increase total volume tolerance and reduce calf blow-up",
         "C: faster rope, not higher jumps, soft landings, elbows tucked, relaxed shoulders",
-        "If the second set gets messy stay at this level next week. Don't increase until the reps feel controlled.",
+        "If the second set gets messy stay at this phase next week. Don't increase until the reps feel controlled.",
       ]
     }
   ],
@@ -262,7 +262,7 @@
         "F: Stay smooth after the run. This is about holding technique as fatigue starts",
         "A: Increase total volume tolerance and reduce calf blow-up",
         "C: faster rope, not higher jumps, soft landings, elbows tucked, relaxed shoulders",
-        "If the second set gets messy stay at this level next week. Don't increase until the reps feel controlled.",
+        "If the second set gets messy stay at this phase next week. Don't increase until the reps feel controlled.",
       ]
     }
   ],
@@ -293,7 +293,7 @@
         "F: Stay smooth after the run. This is about holding technique as fatigue starts",
         "A: Increase total volume tolerance and reduce calf blow-up",
         "C: faster rope, not higher jumps, soft landings, elbows tucked, relaxed shoulders",
-        "If the second set gets messy stay at this level next week. Don't increase until the reps feel controlled.",
+        "If the second set gets messy stay at this phase next week. Don't increase until the reps feel controlled.",
       ]
     }
   ],
@@ -324,22 +324,22 @@
         "F: Stay smooth after the run. This is about holding technique as fatigue starts",
         "A: Increase total volume tolerance and reduce calf blow-up",
         "C: faster rope, not higher jumps, soft landings, elbows tucked, relaxed shoulders",
-        "If the second set gets messy stay at this level next week. Don't increase until the reps feel controlled.",
+        "If the second set gets messy stay at this phase next week. Don't increase until the reps feel controlled.",
       ]
     }
   ]
 };      
         // Set selectors to saved values (if any)
         if (savedtarget) targetSelect.value = savedtarget;
-        if (savedlevel) levelSelect.value = savedlevel;
+        if (savedphase) phaseSelect.value = savedphase;
 
-        function showTarget(target, level) {
-          if (!target || !level) {
-            displayDiv.innerHTML = "<p>Please select the target & level of the target you wish to open.</p>";
+        function showTarget(target, phase) {
+          if (!target || !phase) {
+            displayDiv.innerHTML = "<p>Please select the target & phase of the target you wish to open.</p>";
             return;
           }
 
-          const key = `${target}-${level}`;
+          const key = `${target}-${phase}`;
           if (targets[key]) {
             displayDiv.innerHTML = targets[key].map(section => `
   			<table>
@@ -401,22 +401,22 @@
             }
 
           } else {
-            displayDiv.innerHTML = "<p>No target available for this target/level yet.</p>";
+            displayDiv.innerHTML = "<p>No target available for this target/phase yet.</p>";
           }
         }
 
         // Show target on load based on saved or default values
-        showTarget(targetSelect.value, levelSelect.value);
+        showTarget(targetSelect.value, phaseSelect.value);
 
         // Save and update target on selector change
         targetSelect.addEventListener("change", () => {
           localStorage.setItem("selectedtarget", targetSelect.value);
-          showTarget(targetSelect.value, levelSelect.value);
+          showTarget(targetSelect.value, phaseSelect.value);
         });
 
-        levelSelect.addEventListener("change", () => {
-          localStorage.setItem("selectedlevel", levelSelect.value);
-          showTarget(targetSelect.value, levelSelect.value);
+        phaseSelect.addEventListener("change", () => {
+          localStorage.setItem("selectedphase", phaseSelect.value);
+          showTarget(targetSelect.value, phaseSelect.value);
         });
       });
     </script>

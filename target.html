@@ -340,27 +340,27 @@
           }
 
           const key = `${target}-${phase}`;
-          if (targets[key]) {
-            displayDiv.innerHTML = targets[key].map(section => `
-  			<table>
-      			<tr><th colspan="3"><label>${section.title}<input type="checkbox" class="section-toggle" data-section="${section.id}"/></label></th></tr>
-     			${section.details.map(detail => `<tr data-section="${section.id}"><td colspan="3">${detail}</td></tr>`).join('')}
-     			 <tr><td colspan="3" style="height: 40px;"></td></tr>
- 			 </table>
-			`).join('') + notesHTML;  // <- add notesHTML here instead of +=
+         if (targets[key]) {
+    const notesKey = `notes-${key}`;
+    const savedNote = localStorage.getItem(notesKey) || "";
 
-            // Add notes section after target table
-            const notesKey = `notes-${key}`;
-            const savedNote = localStorage.getItem(notesKey) || "";
+    const notesHTML = `
+      <div style="margin-top: 20px;">
+        <label for="notes">Notes:</label>
+        <textarea id="notes" rows="4" style="width: 100%;">${savedNote}</textarea>
+      </div>
+    `;
 
-            const notesHTML = `
-              <div style="margin-top: 20px;">
-                <label for="notes">Notes:</label>
-                <textarea id="notes" rows="4" style="width: 100%;">${savedNote}</textarea>
-              </div>
-            `;
+    displayDiv.innerHTML = targets[key].map(section => `
+      <table>
+        <tr><th colspan="3"><label>${section.title}<input type="checkbox" class="section-toggle" data-section="${section.id}"/></label></th></tr>
+        ${section.details.map(detail => `<tr data-section="${section.id}"><td colspan="3">${detail}</td></tr>`).join('')}
+        <tr><td colspan="3" style="height: 40px;"></td></tr>
+      </table>
+    `).join('') + notesHTML;  // Add notesHTML here once, after the tables
 
-            displayDiv.innerHTML += notesHTML;
+    // No need to do displayDiv.innerHTML += notesHTML; again
+}
 
             // Restore saved checkbox states and faded rows
             const savedCheckboxes = JSON.parse(localStorage.getItem(`checkboxes-${key}`)) || {};

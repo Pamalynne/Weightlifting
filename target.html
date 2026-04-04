@@ -342,12 +342,12 @@
           const key = `${target}-${level}`;
           if (targets[key]) {
             displayDiv.innerHTML = targets[key].map(section => `
-            <table>
-                <tr><th colspan="3"><label>${section.title}<input type="checkbox" class="section-toggle" data-section="${section.id}"/></label></th></tr>
-                ${section.details.map(detail => `<tr data-section="${section.id}"><td colspan="3">${detail}</td></tr>`).join('')}
-                <tr><td colspan="3" style="height: 40px;"></td></tr>
-            </table>
-            `).join('');
+  			<table>
+      			<tr><th colspan="3"><label>${section.title}<input type="checkbox" class="section-toggle" data-section="${section.id}"/></label></th></tr>
+     			${section.details.map(detail => `<tr data-section="${section.id}"><td colspan="3">${detail}</td></tr>`).join('')}
+     			 <tr><td colspan="3" style="height: 40px;"></td></tr>
+ 			 </table>
+			`).join('') + notesHTML;  // <- add notesHTML here instead of +=
 
             // Add notes section after target table
             const notesKey = `notes-${key}`;

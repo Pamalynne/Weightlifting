@@ -16,144 +16,45 @@
             <a href="program.html"><img src="images/program-ns.svg"></a>
             <a href="target.html"><img src="images/target.svg"></a>
         </div>
-<div id="target-container"> 
-  <div id="selectors">
-    <label for="targetSelect">Target:</label>
-    <select id="targetSelect">
-      <option value="" disabled selected>-</option>
-      <option value="1">DU Quality</option>
-      <option value="2">DU Capacity</option>
-    </select>
+    <div id="target-container"> 
+      <div id="selectors">
+        <label for="targetSelect">Target:</label>
+        <select id="targetSelect">
+          <option value="" disabled selected>-</option>
+          <option value="1">DU Quality</option>
+          <option value="2">DU Capacity</option>
+        </select>
 
-    <label for="levelSelectTarget">Level:</label>
-    <select id="levelSelectTarget">
-      <option value="" disabled selected>-</option>
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
-    </select>
-  </div>
-
-  <div id="targetDisplay">
-    <p>Please select the target &amp; level of the target you wish to open.</p>
-  </div>
-</div>
-
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-  const targetSelect = document.getElementById("targetSelect");
-  const levelSelectTarget = document.getElementById("levelSelectTarget");
-  const displayDiv = document.getElementById("targetDisplay");
-
-  // Restore previous target/level if available
-  const savedTarget = localStorage.getItem("selectedTarget") || "";
-  const savedLevel = localStorage.getItem("selectedLevelTarget") || "";
-
-  if (savedTarget) targetSelect.value = savedTarget;
-  if (savedLevel) levelSelectTarget.value = savedLevel;
-
-  const targets = {
-    "1-1": [
-      { id: "111", title: "DU Warm Up", details: ["20 tib raises","15 slow calf raises","20 sec pogo hops","10 single unders"] },
-      { id: "112", title: "DU Working Set", details: ["EMOM x 5 - 5 DU rest the remainder of the min"] },
-      { id: "113", title: "Cool Down", details: ["10 bent-knee calf raises per side","20 sec calf stretch per side","10 ankle circles both directions"] },
-      { id: "114", title: "Focus, Aim, Cues", details: ["F: Every rep should feel the same. The goal is to make small sets automatic not test max reps.","A: Build rhythm and confidence under zero fatigue","C: fast wrists, quiet feet, stay tall, tiny jumps","Do this before squats. Miss a rep, reset immediately and continue."] }
-    ],
-    // add other targets as needed...
-  };
-
-  function showTarget(target, level) {
-    if (!target || !level) {
-      displayDiv.innerHTML = "<p>Please select the target & level of the target you wish to open.</p>";
-      return;
-    }
-
-    const key = `${target}-${level}`;
-    if (!targets[key]) {
-      displayDiv.innerHTML = "<p>No target available for this target/level yet.</p>";
-      return;
-    }
-
-    // Display target tables
-    displayDiv.innerHTML = targets[key].map(section => `
-      <table>
-        <tr>
-          <th colspan="3">
-            <label>${section.title}
-              <input type="checkbox" class="section-toggle" data-section="${section.id}" />
-            </label>
-          </th>
-        </tr>
-        ${section.details.map(detail => `<tr data-section="${section.id}"><td colspan="3">${detail}</td></tr>`).join('')}
-        <tr><td colspan="3" style="height: 40px;"></td></tr>
-      </table>
-    `).join('');
-
-    // Notes
-    const notesKey = `target-notes-${key}`;
-    const savedNote = localStorage.getItem(notesKey) || "";
-    const notesHTML = `
-      <div style="margin-top:20px;">
-        <label for="notes">Notes:</label>
-        <textarea id="notes" rows="4" style="width:100%;">${savedNote}</textarea>
+	<label for="levelSelect">Level:</label>
+        <select id="levelSelect">
+          <option value="" disabled selected>-</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+        </select>
       </div>
-    `;
-    displayDiv.innerHTML += notesHTML;
 
-    // Restore checkbox states
-    const savedCheckboxes = JSON.parse(localStorage.getItem(`target-checkboxes-${key}`)) || {};
-    for (const sectionId in savedCheckboxes) {
-      const checkbox = displayDiv.querySelector(`.section-toggle[data-section="${sectionId}"]`);
-      const rows = displayDiv.querySelectorAll(`tr[data-section="${sectionId}"]`);
-      if (checkbox) {
-        checkbox.checked = savedCheckboxes[sectionId];
-        rows.forEach(row => row.classList.toggle("faded", checkbox.checked));
-      }
-    }
+      <div id="targetDisplay">
+        <p>Please select the target &amp; level of the target you wish to open.</p>
+      </div>
+    </div>
 
-    // Add checkbox listeners
-    displayDiv.querySelectorAll(".section-toggle").forEach(checkbox => {
-      checkbox.addEventListener("change", () => {
-        const sectionId = checkbox.dataset.section;
-        const rows = displayDiv.querySelectorAll(`tr[data-section="${sectionId}"]`);
-        rows.forEach(row => row.classList.toggle("faded", checkbox.checked));
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
 
-        const currentCheckboxes = JSON.parse(localStorage.getItem(`target-checkboxes-${key}`)) || {};
-        currentCheckboxes[sectionId] = checkbox.checked;
-        localStorage.setItem(`target-checkboxes-${key}`, JSON.stringify(currentCheckboxes));
-      });
-    });
+        const targetSelect = document.getElementById("targetSelect");
+        const levelSelect = document.getElementById("levelSelect");
+        const displayDiv = document.getElementById("targetDisplay");
 
-    // Notes listener
-    const notesInput = document.getElementById("notes");
-    if (notesInput) {
-      notesInput.addEventListener("input", () => {
-        localStorage.setItem(notesKey, notesInput.value);
-      });
-    }
-  }
+        // Restore previous target/level if available
+        const savedtarget = localStorage.getItem("selectedtarget");
+        const savedlevel = localStorage.getItem("selectedlevel");   
 
-  // Show saved target on load
-  showTarget(targetSelect.value, levelSelectTarget.value);
-
-  // Selector change events
-  targetSelect.addEventListener("change", () => {
-    localStorage.setItem("selectedTarget", targetSelect.value);
-    showTarget(targetSelect.value, levelSelectTarget.value);
-  });
-
-  levelSelectTarget.addEventListener("change", () => {
-    localStorage.setItem("selectedLevelTarget", levelSelectTarget.value);
-    showTarget(targetSelect.value, levelSelectTarget.value);
-  });
-
-});
-</script>
       const targets = {
-  "1-1": [
+  "A-A": [
     {
-      id: "111",
+      id: "AAA",
       title: "DU Warm Up",
       details: [
         "20 tib raises",
@@ -163,14 +64,14 @@ document.addEventListener("DOMContentLoaded", function () {
       ]
     },
     {
-      id: "112",
+      id: "AAB",
       title: "DU Working Set",
       details: [
         "EMOM x 5 - 5 DU rest the remainder of the min"
       ]
     },
     {
-      id: "113",
+      id: "AAC",
       title: "Cool Down",
       details: [
         "10 bent-knee calf raises per side",
@@ -179,7 +80,7 @@ document.addEventListener("DOMContentLoaded", function () {
       ]
     },
     {
-      id: "114",
+      id: "AAD",
       title: "Focus, Aim, Cues",
       details: [
         "F: Every rep should feel the same. The goal is to make small sets automatic not test max reps.",
@@ -189,9 +90,9 @@ document.addEventListener("DOMContentLoaded", function () {
       ]
     }
   ],
-  "1-2": [
+  "A-B": [
     {
-      id: "121",
+      id: "ABA",
       title: "DU Warm Up",
       details: [
         "20 tib raises",
@@ -201,14 +102,14 @@ document.addEventListener("DOMContentLoaded", function () {
       ]
     },
     {
-      id: "122",
+      id: "ABB",
       title: "DU Working Set",
       details: [
         "EMOM x 5 - 6 DU rest the remainder of the min"
       ]
     },
     {
-      id: "123",
+      id: "ABC",
       title: "Cool Down",
       details: [
         "10 bent-knee calf raises per side",
@@ -217,7 +118,7 @@ document.addEventListener("DOMContentLoaded", function () {
       ]
     },
     {
-      id: "124",
+      id: "ABD",
       title: "Focus, Aim, Cues",
       details: [
         "F: Every rep should feel the same. The goal is to make small sets automatic not test max reps.",
@@ -227,9 +128,9 @@ document.addEventListener("DOMContentLoaded", function () {
       ]
     }
   ],
-  "1-3": [
+  "A-C": [
     {
-      id: "131",
+      id: "ACA",
       title: "DU Warm Up",
       details: [
         "20 tib raises",
@@ -239,14 +140,14 @@ document.addEventListener("DOMContentLoaded", function () {
       ]
     },
     {
-      id: "132",
+      id: "ACB",
       title: "DU Working Set",
       details: [
         "EMOM x 5 - 7 DU rest the remainder of the min"
       ]
     },
     {
-      id: "133",
+      id: "ACC",
       title: "Cool Down",
       details: [
         "10 bent-knee calf raises per side",
@@ -255,7 +156,7 @@ document.addEventListener("DOMContentLoaded", function () {
       ]
     },
     {
-      id: "134",
+      id: "ACD",
       title: "Focus, Aim, Cues",
       details: [
         "F: Every rep should feel the same. The goal is to make small sets automatic not test max reps.",
@@ -265,9 +166,9 @@ document.addEventListener("DOMContentLoaded", function () {
       ]
     }
   ],
-    "1-4": [
+    "A-D": [
     {
-      id: "141",
+      id: "ADA",
       title: "DU Warm Up",
       details: [
         "20 tib raises",
@@ -277,14 +178,14 @@ document.addEventListener("DOMContentLoaded", function () {
       ]
     },
     {
-      id: "142",
+      id: "ADB",
       title: "DU Working Set",
       details: [
         "EMOM x 5 - 8 DU rest the remainder of the min"
       ]
     },
     {
-      id: "143",
+      id: "ADC",
       title: "Cool Down",
       details: [
         "10 bent-knee calf raises per side",
@@ -293,7 +194,7 @@ document.addEventListener("DOMContentLoaded", function () {
       ]
     },
     {
-      id: "144",
+      id: "ADD",
       title: "Focus, Aim, Cues",
       details: [
         "F: Every rep should feel the same. The goal is to make small sets automatic not test max reps.",
@@ -303,9 +204,9 @@ document.addEventListener("DOMContentLoaded", function () {
       ]
     }
   ],
-  "2-1": [
+  "B-A": [
     {
-      id: "211",
+      id: "BAA",
       title: "DU Working Set 3 Rounds of",
       details: [
         "8x DU",
@@ -315,7 +216,7 @@ document.addEventListener("DOMContentLoaded", function () {
       ]
     },
     {
-      id: "212",
+      id: "BAB",
       title: "Cool Down",
       details: [
         "15 tib raises",
@@ -324,7 +225,7 @@ document.addEventListener("DOMContentLoaded", function () {
       ]
     },
     {
-      id: "213",
+      id: "BAC",
       title: "Focus, Aim, Cues",
       details: [
         "F: Stay smooth after the run. This is about holding technique as fatigue starts",
@@ -334,9 +235,9 @@ document.addEventListener("DOMContentLoaded", function () {
       ]
     }
   ],
-    "2-2": [
+    "B-B": [
     {
-      id: "221",
+      id: "BBA",
       title: "DU Working Set 3 Rounds of",
       details: [
         "10x DU",
@@ -346,7 +247,7 @@ document.addEventListener("DOMContentLoaded", function () {
       ]
     },
     {
-      id: "222",
+      id: "BBB",
       title: "Cool Down",
       details: [
         "15 tib raises",
@@ -355,7 +256,7 @@ document.addEventListener("DOMContentLoaded", function () {
       ]
     },
     {
-      id: "223",
+      id: "BBC",
       title: "Focus, Aim, Cues",
       details: [
         "F: Stay smooth after the run. This is about holding technique as fatigue starts",
@@ -365,9 +266,9 @@ document.addEventListener("DOMContentLoaded", function () {
       ]
     }
   ],
-  "2-3": [
+  "B-C": [
     {
-      id: "231",
+      id: "BCA",
       title: "DU Working Set 3 Rounds of",
       details: [
         "12x DU",
@@ -377,7 +278,7 @@ document.addEventListener("DOMContentLoaded", function () {
       ]
     },
     {
-      id: "232",
+      id: "BCB",
       title: "Cool Down",
       details: [
         "15 tib raises",
@@ -386,7 +287,7 @@ document.addEventListener("DOMContentLoaded", function () {
       ]
     },
     {
-      id: "233",
+      id: "BCC",
       title: "Focus, Aim, Cues",
       details: [
         "F: Stay smooth after the run. This is about holding technique as fatigue starts",
@@ -396,9 +297,9 @@ document.addEventListener("DOMContentLoaded", function () {
       ]
     }
   ],
-  "2-4": [
+  "B-D": [
     {
-      id: "241",
+      id: "BDA",
       title: "DU Working Set 3 Rounds of",
       details: [
         "15x DU",
@@ -408,7 +309,7 @@ document.addEventListener("DOMContentLoaded", function () {
       ]
     },
     {
-      id: "242",
+      id: "BDB",
       title: "Cool Down",
       details: [
         "15 tib raises",
@@ -417,7 +318,7 @@ document.addEventListener("DOMContentLoaded", function () {
       ]
     },
     {
-      id: "243",
+      id: "BDC",
       title: "Focus, Aim, Cues",
       details: [
         "F: Stay smooth after the run. This is about holding technique as fatigue starts",
@@ -428,91 +329,96 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   ]
 };      
-        // Restore saved selectors
-if (savedtarget) targetSelect.value = savedtarget;
-if (savedlevel) levelSelectTarget.value = savedlevel;
+        // Set selectors to saved values (if any)
+        if (savedtarget) targetSelect.value = savedtarget;
+        if (savedlevel) levelSelect.value = savedlevel;
 
-function showTarget(target, level) {
-  if (!target || !level) {
-    displayDiv.innerHTML = "<p>Please select the target & level of the target you wish to open.</p>";
-    return;
-  }
+        function showTarget(target, level) {
+          if (!target || !level) {
+            displayDiv.innerHTML = "<p>Please select the target & level of the target you wish to open.</p>";
+            return;
+          }
 
-  const key = `${target}-${level}`;
-  if (targets[key]) {
-    // Build tables
-    displayDiv.innerHTML = targets[key].map(section => `
-      <table>
-        <tr>
-          <th colspan="3">
-            <label>
-              ${section.title}
-              <input type="checkbox" class="section-toggle" data-section="${section.id}" />
-            </label>
-          </th>
-        </tr>
-        ${section.details.map(detail => `<tr data-section="${section.id}"><td colspan="3">${detail}</td></tr>`).join('')}
-        <tr><td colspan="3" style="height:40px;"></td></tr>
-      </table>
-    `).join('');
+          const key = `${target}-${level}`;
+          if (targets[key]) {
+            displayDiv.innerHTML = targets[key].map(section => `
+            <table>
+                <tr><th colspan="3"><label>${section.title}<input type="checkbox" class="section-toggle" data-section="${section.id}"/></label></th></tr>
+                ${section.details.map(detail => `<tr data-section="${section.id}"><td colspan="3">${detail}</td></tr>`).join('')}
+                <tr><td colspan="3" style="height: 40px;"></td></tr>
+            </table>
+            `).join('');
 
-    // Notes
-    const notesKey = `target-notes-${key}`;
-    const savedNote = localStorage.getItem(notesKey) || "";
-    const notesHTML = `
-      <div style="margin-top:20px;">
-        <label for="notes">Notes:</label>
-        <textarea id="notes" rows="4" style="width:100%;">${savedNote}</textarea>
-      </div>
-    `;
-    displayDiv.innerHTML += notesHTML;
+            // Add notes section after target table
+            const notesKey = `notes-${key}`;
+            const savedNote = localStorage.getItem(notesKey) || "";
 
-    // Restore checkbox states
-    const checkboxKey = `target-checkboxes-${key}`;
-    const savedCheckboxes = JSON.parse(localStorage.getItem(checkboxKey)) || {};
-    const checkboxes = displayDiv.querySelectorAll(".section-toggle");
+            const notesHTML = `
+              <div style="margin-top: 20px;">
+                <label for="notes">Notes:</label>
+                <textarea id="notes" rows="4" style="width: 100%;">${savedNote}</textarea>
+              </div>
+            `;
 
-    checkboxes.forEach(checkbox => {
-      const sectionId = checkbox.dataset.section;
-      if (savedCheckboxes[sectionId]) {
-        checkbox.checked = true;
-        displayDiv.querySelectorAll(`tr[data-section="${sectionId}"]`).forEach(row => row.classList.add("faded"));
-      }
+            displayDiv.innerHTML += notesHTML;
 
-      // Add listener for each checkbox
-      checkbox.addEventListener("change", () => {
-        const rows = displayDiv.querySelectorAll(`tr[data-section="${sectionId}"]`);
-        rows.forEach(row => row.classList.toggle("faded", checkbox.checked));
+            // Restore saved checkbox states and faded rows
+            const savedCheckboxes = JSON.parse(localStorage.getItem(`checkboxes-${key}`)) || {};
+            for (const sectionId in savedCheckboxes) {
+              const checkbox = displayDiv.querySelector(`.section-toggle[data-section="${sectionId}"]`);
+              const rows = displayDiv.querySelectorAll(`tr[data-section="${sectionId}"]`);
+              if (checkbox) {
+                checkbox.checked = savedCheckboxes[sectionId];
+                rows.forEach(row => {
+                  row.classList.toggle("faded", checkbox.checked);
+                });
+              }
+            }
 
-        const currentCheckboxes = JSON.parse(localStorage.getItem(checkboxKey)) || {};
-        currentCheckboxes[sectionId] = checkbox.checked;
-        localStorage.setItem(checkboxKey, JSON.stringify(currentCheckboxes));
+            // Add event listeners for checkboxes
+            const checkboxes = displayDiv.querySelectorAll(".section-toggle");
+            checkboxes.forEach((checkbox) => {
+              checkbox.addEventListener("change", () => {
+                const sectionId = checkbox.dataset.section;
+                const rows = displayDiv.querySelectorAll(`tr[data-section="${sectionId}"]`);
+
+                rows.forEach((row) => {
+                  row.classList.toggle("faded", checkbox.checked);
+                });
+
+                const savedCheckboxes = JSON.parse(localStorage.getItem(`checkboxes-${key}`)) || {};
+                savedCheckboxes[sectionId] = checkbox.checked;
+                localStorage.setItem(`checkboxes-${key}`, JSON.stringify(savedCheckboxes));
+              });
+            });
+
+            // Add event listener to notes textarea (once)
+            const notesInput = document.getElementById("notes");
+            if (notesInput) {
+              notesInput.addEventListener("input", () => {
+                localStorage.setItem(notesKey, notesInput.value);
+              });
+            }
+
+          } else {
+            displayDiv.innerHTML = "<p>No target available for this target/level yet.</p>";
+          }
+        }
+
+        // Show target on load based on saved or default values
+        showTarget(targetSelect.value, levelSelect.value);
+
+        // Save and update target on selector change
+        targetSelect.addEventListener("change", () => {
+          localStorage.setItem("selectedtarget", targetSelect.value);
+          showTarget(targetSelect.value, levelSelect.value);
+        });
+
+        levelSelect.addEventListener("change", () => {
+          localStorage.setItem("selectedlevel", levelSelect.value);
+          showTarget(targetSelect.value, levelSelect.value);
+        });
       });
-    });
-
-    // Notes listener
-    const notesInput = document.getElementById("notes");
-    if (notesInput) {
-      notesInput.addEventListener("input", () => {
-        localStorage.setItem(notesKey, notesInput.value);
-      });
-    }
-
-  } else {
-    displayDiv.innerHTML = "<p>No target available for this target/level yet.</p>";
-  }
-}
-
-// Show target on load
-showTarget(targetSelect.value, levelSelectTarget.value);
-
-// Save selector changes
-targetSelect.addEventListener("change", () => {
-  localStorage.setItem("selectedtarget", targetSelect.value);
-  showTarget(targetSelect.value, levelSelectTarget.value);
-});
-
-levelSelectTarget.addEventListener("change", () => {
-  localStorage.setItem("selectedlevelTarget", levelSelectTarget.value);
-  showTarget(targetSelect.value, levelSelectTarget.value);
-});
+    </script>
+  </body>
+</html>

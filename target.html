@@ -16,41 +16,140 @@
             <a href="program.html"><img src="images/program-ns.svg"></a>
             <a href="target.html"><img src="images/target.svg"></a>
         </div>
-    <div id="target-container"> 
-      <div id="selectors">
-        <label for="targetSelect">Target:</label>
-        <select id="targetSelect">
-          <option value="" disabled selected>-</option>
-          <option value="1">DU Quality</option>
-          <option value="2">DU Capacity</option>
-        </select>
+<div id="target-container"> 
+  <div id="selectors">
+    <label for="targetSelect">Target:</label>
+    <select id="targetSelect">
+      <option value="" disabled selected>-</option>
+      <option value="1">DU Quality</option>
+      <option value="2">DU Capacity</option>
+    </select>
 
-	<label for="levelSelectTarget">Level:</label>
-        <select id="levelSelectTarget">
-          <option value="" disabled selected>-</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-        </select>
+    <label for="levelSelectTarget">Level:</label>
+    <select id="levelSelectTarget">
+      <option value="" disabled selected>-</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+    </select>
+  </div>
+
+  <div id="targetDisplay">
+    <p>Please select the target &amp; level of the target you wish to open.</p>
+  </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const targetSelect = document.getElementById("targetSelect");
+  const levelSelectTarget = document.getElementById("levelSelectTarget");
+  const displayDiv = document.getElementById("targetDisplay");
+
+  // Restore previous target/level if available
+  const savedTarget = localStorage.getItem("selectedTarget") || "";
+  const savedLevel = localStorage.getItem("selectedLevelTarget") || "";
+
+  if (savedTarget) targetSelect.value = savedTarget;
+  if (savedLevel) levelSelectTarget.value = savedLevel;
+
+  const targets = {
+    "1-1": [
+      { id: "111", title: "DU Warm Up", details: ["20 tib raises","15 slow calf raises","20 sec pogo hops","10 single unders"] },
+      { id: "112", title: "DU Working Set", details: ["EMOM x 5 - 5 DU rest the remainder of the min"] },
+      { id: "113", title: "Cool Down", details: ["10 bent-knee calf raises per side","20 sec calf stretch per side","10 ankle circles both directions"] },
+      { id: "114", title: "Focus, Aim, Cues", details: ["F: Every rep should feel the same. The goal is to make small sets automatic not test max reps.","A: Build rhythm and confidence under zero fatigue","C: fast wrists, quiet feet, stay tall, tiny jumps","Do this before squats. Miss a rep, reset immediately and continue."] }
+    ],
+    // add other targets as needed...
+  };
+
+  function showTarget(target, level) {
+    if (!target || !level) {
+      displayDiv.innerHTML = "<p>Please select the target & level of the target you wish to open.</p>";
+      return;
+    }
+
+    const key = `${target}-${level}`;
+    if (!targets[key]) {
+      displayDiv.innerHTML = "<p>No target available for this target/level yet.</p>";
+      return;
+    }
+
+    // Display target tables
+    displayDiv.innerHTML = targets[key].map(section => `
+      <table>
+        <tr>
+          <th colspan="3">
+            <label>${section.title}
+              <input type="checkbox" class="section-toggle" data-section="${section.id}" />
+            </label>
+          </th>
+        </tr>
+        ${section.details.map(detail => `<tr data-section="${section.id}"><td colspan="3">${detail}</td></tr>`).join('')}
+        <tr><td colspan="3" style="height: 40px;"></td></tr>
+      </table>
+    `).join('');
+
+    // Notes
+    const notesKey = `target-notes-${key}`;
+    const savedNote = localStorage.getItem(notesKey) || "";
+    const notesHTML = `
+      <div style="margin-top:20px;">
+        <label for="notes">Notes:</label>
+        <textarea id="notes" rows="4" style="width:100%;">${savedNote}</textarea>
       </div>
+    `;
+    displayDiv.innerHTML += notesHTML;
 
-      <div id="targetDisplay">
-        <p>Please select the target &amp; level of the target you wish to open.</p>
-      </div>
-    </div>
+    // Restore checkbox states
+    const savedCheckboxes = JSON.parse(localStorage.getItem(`target-checkboxes-${key}`)) || {};
+    for (const sectionId in savedCheckboxes) {
+      const checkbox = displayDiv.querySelector(`.section-toggle[data-section="${sectionId}"]`);
+      const rows = displayDiv.querySelectorAll(`tr[data-section="${sectionId}"]`);
+      if (checkbox) {
+        checkbox.checked = savedCheckboxes[sectionId];
+        rows.forEach(row => row.classList.toggle("faded", checkbox.checked));
+      }
+    }
 
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
+    // Add checkbox listeners
+    displayDiv.querySelectorAll(".section-toggle").forEach(checkbox => {
+      checkbox.addEventListener("change", () => {
+        const sectionId = checkbox.dataset.section;
+        const rows = displayDiv.querySelectorAll(`tr[data-section="${sectionId}"]`);
+        rows.forEach(row => row.classList.toggle("faded", checkbox.checked));
 
-        const targetSelect = document.getElementById("targetSelect");
-        const levelSelectTarget = document.getElementById("levelSelectTarget");
-        const displayDiv = document.getElementById("targetDisplay");
+        const currentCheckboxes = JSON.parse(localStorage.getItem(`target-checkboxes-${key}`)) || {};
+        currentCheckboxes[sectionId] = checkbox.checked;
+        localStorage.setItem(`target-checkboxes-${key}`, JSON.stringify(currentCheckboxes));
+      });
+    });
 
-        // Restore previous target/level if available
-        const savedtarget = localStorage.getItem("selectedtarget");
-        const savedlevel = localStorage.getItem("selectedlevelTarget");   
+    // Notes listener
+    const notesInput = document.getElementById("notes");
+    if (notesInput) {
+      notesInput.addEventListener("input", () => {
+        localStorage.setItem(notesKey, notesInput.value);
+      });
+    }
+  }
 
+  // Show saved target on load
+  showTarget(targetSelect.value, levelSelectTarget.value);
+
+  // Selector change events
+  targetSelect.addEventListener("change", () => {
+    localStorage.setItem("selectedTarget", targetSelect.value);
+    showTarget(targetSelect.value, levelSelectTarget.value);
+  });
+
+  levelSelectTarget.addEventListener("change", () => {
+    localStorage.setItem("selectedLevelTarget", levelSelectTarget.value);
+    showTarget(targetSelect.value, levelSelectTarget.value);
+  });
+
+});
+</script>
       const targets = {
   "1-1": [
     {

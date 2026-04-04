@@ -388,7 +388,7 @@
 
                 const savedCheckboxes = JSON.parse(localStorage.getItem(`target-checkboxes-${key}`)) || {};
                 savedCheckboxes[sectionId] = checkbox.checked;
-                localStorage.setItem(`target-target-checkboxes-${key}`, JSON.stringify(savedCheckboxes));
+                localStorage.setItem(`target-checkboxes-${key}`, JSON.stringify(savedCheckboxes));
               });
             });
 

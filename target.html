@@ -329,96 +329,91 @@
     }
   ]
 };      
-        // Set selectors to saved values (if any)
-        if (savedtarget) targetSelect.value = savedtarget;
-        if (savedlevel) levelSelectTarget.value = savedlevel;
+        // Restore saved selectors
+if (savedtarget) targetSelect.value = savedtarget;
+if (savedlevel) levelSelectTarget.value = savedlevel;
 
-        function showTarget(target, level) {
-          if (!target || !level) {
-            displayDiv.innerHTML = "<p>Please select the target & level of the target you wish to open.</p>";
-            return;
-          }
+function showTarget(target, level) {
+  if (!target || !level) {
+    displayDiv.innerHTML = "<p>Please select the target & level of the target you wish to open.</p>";
+    return;
+  }
 
-          const key = `${target}-${level}`;
-          if (targets[key]) {
-            displayDiv.innerHTML = targets[key].map(section => `
-            <table>
-                <tr><th colspan="3"><label>${section.title}<input type="checkbox" class="section-toggle" data-section="${section.id}"/></label></th></tr>
-                ${section.details.map(detail => `<tr data-section="${section.id}"><td colspan="3">${detail}</td></tr>`).join('')}
-                <tr><td colspan="3" style="height: 40px;"></td></tr>
-            </table>
-            `).join('');
+  const key = `${target}-${level}`;
+  if (targets[key]) {
+    // Build tables
+    displayDiv.innerHTML = targets[key].map(section => `
+      <table>
+        <tr>
+          <th colspan="3">
+            <label>
+              ${section.title}
+              <input type="checkbox" class="section-toggle" data-section="${section.id}" />
+            </label>
+          </th>
+        </tr>
+        ${section.details.map(detail => `<tr data-section="${section.id}"><td colspan="3">${detail}</td></tr>`).join('')}
+        <tr><td colspan="3" style="height:40px;"></td></tr>
+      </table>
+    `).join('');
 
-            // Add notes section after target table
-            const notesKey = `target-notes-${key}`;
-            const savedNote = localStorage.getItem(notesKey) || "";
+    // Notes
+    const notesKey = `target-notes-${key}`;
+    const savedNote = localStorage.getItem(notesKey) || "";
+    const notesHTML = `
+      <div style="margin-top:20px;">
+        <label for="notes">Notes:</label>
+        <textarea id="notes" rows="4" style="width:100%;">${savedNote}</textarea>
+      </div>
+    `;
+    displayDiv.innerHTML += notesHTML;
 
-            const notesHTML = `
-              <div style="margin-top: 20px;">
-                <label for="notes">Notes:</label>
-                <textarea id="notes" rows="4" style="width: 100%;">${savedNote}</textarea>
-              </div>
-            `;
+    // Restore checkbox states
+    const checkboxKey = `target-checkboxes-${key}`;
+    const savedCheckboxes = JSON.parse(localStorage.getItem(checkboxKey)) || {};
+    const checkboxes = displayDiv.querySelectorAll(".section-toggle");
 
-            displayDiv.innerHTML += notesHTML;
+    checkboxes.forEach(checkbox => {
+      const sectionId = checkbox.dataset.section;
+      if (savedCheckboxes[sectionId]) {
+        checkbox.checked = true;
+        displayDiv.querySelectorAll(`tr[data-section="${sectionId}"]`).forEach(row => row.classList.add("faded"));
+      }
 
-            // Restore saved checkbox states and faded rows
-            const savedCheckboxes = JSON.parse(localStorage.getItem(`target-checkboxes-${key}`)) || {};
-            for (const sectionId in savedCheckboxes) {
-              const checkbox = displayDiv.querySelector(`.section-toggle[data-section="${sectionId}"]`);
-              const rows = displayDiv.querySelectorAll(`tr[data-section="${sectionId}"]`);
-              if (checkbox) {
-                checkbox.checked = savedCheckboxes[sectionId];
-                rows.forEach(row => {
-                  row.classList.toggle("faded", checkbox.checked);
-                });
-              }
-            }
+      // Add listener for each checkbox
+      checkbox.addEventListener("change", () => {
+        const rows = displayDiv.querySelectorAll(`tr[data-section="${sectionId}"]`);
+        rows.forEach(row => row.classList.toggle("faded", checkbox.checked));
 
-            // Add event listeners for checkboxes
-            const checkboxes = displayDiv.querySelectorAll(".section-toggle");
-            checkboxes.forEach((checkbox) => {
-              checkbox.addEventListener("change", () => {
-                const sectionId = checkbox.dataset.section;
-                const rows = displayDiv.querySelectorAll(`tr[data-section="${sectionId}"]`);
-
-                rows.forEach((row) => {
-                  row.classList.toggle("faded", checkbox.checked);
-                });
-
-                const savedCheckboxes = JSON.parse(localStorage.getItem(`target-checkboxes-${key}`)) || {};
-                savedCheckboxes[sectionId] = checkbox.checked;
-                localStorage.setItem(`target-checkboxes-${key}`, JSON.stringify(savedCheckboxes));
-              });
-            });
-
-            // Add event listener to notes textarea (once)
-            const notesInput = document.getElementById("notes");
-            if (notesInput) {
-              notesInput.addEventListener("input", () => {
-                localStorage.setItem(notesKey, notesInput.value);
-              });
-            }
-
-          } else {
-            displayDiv.innerHTML = "<p>No target available for this target/level yet.</p>";
-          }
-        }
-
-        // Show target on load based on saved or default values
-        showTarget(targetSelect.value, levelSelectTarget.value);
-
-        // Save and update target on selector change
-        targetSelect.addEventListener("change", () => {
-          localStorage.setItem("selectedtarget", targetSelect.value);
-          showTarget(targetSelect.value, levelSelectTarget.value);
-        });
-
-        levelSelectTarget.addEventListener("change", () => {
-          localStorage.setItem("selectedlevelTarget", levelSelectTarget.value);
-          showTarget(targetSelect.value, levelSelectTarget.value);
-        });
+        const currentCheckboxes = JSON.parse(localStorage.getItem(checkboxKey)) || {};
+        currentCheckboxes[sectionId] = checkbox.checked;
+        localStorage.setItem(checkboxKey, JSON.stringify(currentCheckboxes));
       });
-    </script>
-  </body>
-</html>
+    });
+
+    // Notes listener
+    const notesInput = document.getElementById("notes");
+    if (notesInput) {
+      notesInput.addEventListener("input", () => {
+        localStorage.setItem(notesKey, notesInput.value);
+      });
+    }
+
+  } else {
+    displayDiv.innerHTML = "<p>No target available for this target/level yet.</p>";
+  }
+}
+
+// Show target on load
+showTarget(targetSelect.value, levelSelectTarget.value);
+
+// Save selector changes
+targetSelect.addEventListener("change", () => {
+  localStorage.setItem("selectedtarget", targetSelect.value);
+  showTarget(targetSelect.value, levelSelectTarget.value);
+});
+
+levelSelectTarget.addEventListener("change", () => {
+  localStorage.setItem("selectedlevelTarget", levelSelectTarget.value);
+  showTarget(targetSelect.value, levelSelectTarget.value);
+});

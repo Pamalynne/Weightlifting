@@ -25,8 +25,8 @@
           <option value="2">DU Capacity</option>
         </select>
 
-	<label for="levelSelect">Level:</label>
-        <select id="levelSelect">
+	<label for="levelSelectTarget">Level:</label>
+        <select id="levelSelectTarget">
           <option value="" disabled selected>-</option>
           <option value="1">1</option>
           <option value="2">2</option>
@@ -44,7 +44,7 @@
       document.addEventListener("DOMContentLoaded", function () {
 
         const targetSelect = document.getElementById("targetSelect");
-        const levelSelect = document.getElementById("levelSelect");
+        const levelSelectTarget = document.getElementById("levelSelectTarget");
         const displayDiv = document.getElementById("targetDisplay");
 
         // Restore previous target/level if available
@@ -331,7 +331,7 @@
 };      
         // Set selectors to saved values (if any)
         if (savedtarget) targetSelect.value = savedtarget;
-        if (savedlevel) levelSelect.value = savedlevel;
+        if (savedlevel) levelSelectTarget.value = savedlevel;
 
         function showTarget(target, level) {
           if (!target || !level) {
@@ -350,7 +350,7 @@
             `).join('');
 
             // Add notes section after target table
-            const notesKey = `notes-${key}`;
+            const notesKey = `target-notes-${key}`;
             const savedNote = localStorage.getItem(notesKey) || "";
 
             const notesHTML = `
@@ -406,17 +406,17 @@
         }
 
         // Show target on load based on saved or default values
-        showTarget(targetSelect.value, levelSelect.value);
+        showTarget(targetSelect.value, levelSelectTarget.value);
 
         // Save and update target on selector change
         targetSelect.addEventListener("change", () => {
           localStorage.setItem("selectedtarget", targetSelect.value);
-          showTarget(targetSelect.value, levelSelect.value);
+          showTarget(targetSelect.value, levelSelectTarget.value);
         });
 
-        levelSelect.addEventListener("change", () => {
-          localStorage.setItem("selectedlevel", levelSelect.value);
-          showTarget(targetSelect.value, levelSelect.value);
+        levelSelectTarget.addEventListener("change", () => {
+          localStorage.setItem("selectedlevel", levelSelectTarget.value);
+          showTarget(targetSelect.value, levelSelectTarget.value);
         });
       });
     </script>

@@ -16,5 +16,409 @@
             <a href="program.html"><img src="images/program-ns.svg"></a>
             <a href="target.html"><img src="images/target.svg"></a>
         </div>
-      </body>
+    <div id="target-container"> 
+      <div id="selectors">
+        <label for="targetSelect">Target:</label>
+        <select id="targetSelect">
+          <option value="" disabled selected>-</option>
+          <option value="1">DU Quality</option>
+          <option value="2">DU Capacity</option>
+        </select>
+
+	<label for="levelSelect">Level:</label>
+        <select id="levelSelect">
+          <option value="" disabled selected>-</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+        </select>
+      </div>
+
+      <div id="targetDisplay">
+        <p>Please select the target &amp; level of the target you wish to open.</p>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+
+        const targetSelect = document.getElementById("targetSelect");
+        const levelSelect = document.getElementById("levelSelect");
+        const displayDiv = document.getElementById("targetDisplay");
+
+        // Restore previous target/level if available
+        const savedtarget = localStorage.getItem("selectedtarget");
+        const savedlevel = localStorage.getItem("selectedlevel");   
+
+      const targets = {
+  "1-1": [
+    {
+      id: "111",
+      title: "DU Warm Up",
+      details: [
+        "20 tib raises",
+        "15 slow calf raises",
+        "20 sec pogo hops",
+        "10 single unders"
+      ]
+    },
+    {
+      id: "112",
+      title: "DU Working Set",
+      details: [
+        "EMOM x 5 - 5 DU rest the remainder of the min"
+      ]
+    },
+    {
+      id: "113",
+      title: "Cool Down",
+      details: [
+        "10 bent-knee calf raises per side",
+        "20 sec calf stretch per side",
+        "10 ankle circles both directions"
+      ]
+    },
+    {
+      id: "114",
+      title: "Focus, Aim, Cues",
+      details: [
+        "F: Every rep should feel the same. The goal is to make small sets automatic not test max reps.",
+        "A: Build rhythm and confidence under zero fatigue",
+        "C: fast wrists, quiet feet, stay tall, tiny jumps",
+        "Do this before squats. Miss a rep, reset immediately and continue."
+      ]
+    }
+  ],
+  "1-2": [
+    {
+      id: "121",
+      title: "DU Warm Up",
+      details: [
+        "20 tib raises",
+        "15 slow calf raises",
+        "20 sec pogo hops",
+        "10 single unders"
+      ]
+    },
+    {
+      id: "122",
+      title: "DU Working Set",
+      details: [
+        "EMOM x 5 - 6 DU rest the remainder of the min"
+      ]
+    },
+    {
+      id: "123",
+      title: "Cool Down",
+      details: [
+        "10 bent-knee calf raises per side",
+        "20 sec calf stretch per side",
+        "10 ankle circles both directions"
+      ]
+    },
+    {
+      id: "124",
+      title: "Focus, Aim, Cues",
+      details: [
+        "F: Every rep should feel the same. The goal is to make small sets automatic not test max reps.",
+        "A: Build rhythm and confidence under zero fatigue",
+        "C: fast wrists, quiet feet, stay tall, tiny jumps",
+        "Do this before squats. Miss a rep, reset immediately and continue."
+      ]
+    }
+  ],
+  "1-3": [
+    {
+      id: "131",
+      title: "DU Warm Up",
+      details: [
+        "20 tib raises",
+        "15 slow calf raises",
+        "20 sec pogo hops",
+        "10 single unders"
+      ]
+    },
+    {
+      id: "132",
+      title: "DU Working Set",
+      details: [
+        "EMOM x 5 - 7 DU rest the remainder of the min"
+      ]
+    },
+    {
+      id: "133",
+      title: "Cool Down",
+      details: [
+        "10 bent-knee calf raises per side",
+        "20 sec calf stretch per side",
+        "10 ankle circles both directions"
+      ]
+    },
+    {
+      id: "134",
+      title: "Focus, Aim, Cues",
+      details: [
+        "F: Every rep should feel the same. The goal is to make small sets automatic not test max reps.",
+        "A: Build rhythm and confidence under zero fatigue",
+        "C: fast wrists, quiet feet, stay tall, tiny jumps",
+        "Do this before squats. Miss a rep, reset immediately and continue."
+      ]
+    }
+  ],
+    "1-4": [
+    {
+      id: "141",
+      title: "DU Warm Up",
+      details: [
+        "20 tib raises",
+        "15 slow calf raises",
+        "20 sec pogo hops",
+        "10 single unders"
+      ]
+    },
+    {
+      id: "142",
+      title: "DU Working Set",
+      details: [
+        "EMOM x 5 - 8 DU rest the remainder of the min"
+      ]
+    },
+    {
+      id: "143",
+      title: "Cool Down",
+      details: [
+        "10 bent-knee calf raises per side",
+        "20 sec calf stretch per side",
+        "10 ankle circles both directions"
+      ]
+    },
+    {
+      id: "144",
+      title: "Focus, Aim, Cues",
+      details: [
+        "F: Every rep should feel the same. The goal is to make small sets automatic not test max reps.",
+        "A: Build rhythm and confidence under zero fatigue",
+        "C: fast wrists, quiet feet, stay tall, tiny jumps",
+        "Do this before squats. Miss a rep, reset immediately and continue."
+      ]
+    }
+  ],
+  "2-1": [
+    {
+      id: "211",
+      title: "DU Working Set 3 Rounds of",
+      details: [
+        "8x DU",
+        "rest 20 sec",
+        "8x DU",
+        "rest 60 sec",
+      ]
+    },
+    {
+      id: "212",
+      title: "Cool Down",
+      details: [
+        "15 tib raises",
+        "10 eccentric heel drops per side",
+        "20 sec soleus stretch per side (bent knee)",
+      ]
+    },
+    {
+      id: "213",
+      title: "Focus, Aim, Cues",
+      details: [
+        "F: Stay smooth after the run. This is about holding technique as fatigue starts",
+        "A: Increase total volume tolerance and reduce calf blow-up",
+        "C: faster rope, not higher jumps, soft landings, elbows tucked, relaxed shoulders",
+        "If the second set gets messy stay at this level next week. Don't increase until the reps feel controlled.",
+      ]
+    }
+  ],
+    "2-2": [
+    {
+      id: "221",
+      title: "DU Working Set 3 Rounds of",
+      details: [
+        "10x DU",
+        "rest 20 sec",
+        "10x DU",
+        "rest 60 sec",
+      ]
+    },
+    {
+      id: "222",
+      title: "Cool Down",
+      details: [
+        "15 tib raises",
+        "10 eccentric heel drops per side",
+        "20 sec soleus stretch per side (bent knee)",
+      ]
+    },
+    {
+      id: "223",
+      title: "Focus, Aim, Cues",
+      details: [
+        "F: Stay smooth after the run. This is about holding technique as fatigue starts",
+        "A: Increase total volume tolerance and reduce calf blow-up",
+        "C: faster rope, not higher jumps, soft landings, elbows tucked, relaxed shoulders",
+        "If the second set gets messy stay at this level next week. Don't increase until the reps feel controlled.",
+      ]
+    }
+  ],
+  "2-3": [
+    {
+      id: "231",
+      title: "DU Working Set 3 Rounds of",
+      details: [
+        "12x DU",
+        "rest 20 sec",
+        "12x DU",
+        "rest 60 sec",
+      ]
+    },
+    {
+      id: "232",
+      title: "Cool Down",
+      details: [
+        "15 tib raises",
+        "10 eccentric heel drops per side",
+        "20 sec soleus stretch per side (bent knee)",
+      ]
+    },
+    {
+      id: "233",
+      title: "Focus, Aim, Cues",
+      details: [
+        "F: Stay smooth after the run. This is about holding technique as fatigue starts",
+        "A: Increase total volume tolerance and reduce calf blow-up",
+        "C: faster rope, not higher jumps, soft landings, elbows tucked, relaxed shoulders",
+        "If the second set gets messy stay at this level next week. Don't increase until the reps feel controlled.",
+      ]
+    }
+  ],
+  "2-4": [
+    {
+      id: "241",
+      title: "DU Working Set 3 Rounds of",
+      details: [
+        "15x DU",
+        "rest 20 sec",
+        "15x DU",
+        "rest 60 sec",
+      ]
+    },
+    {
+      id: "242",
+      title: "Cool Down",
+      details: [
+        "15 tib raises",
+        "10 eccentric heel drops per side",
+        "20 sec soleus stretch per side (bent knee)",
+      ]
+    },
+    {
+      id: "243",
+      title: "Focus, Aim, Cues",
+      details: [
+        "F: Stay smooth after the run. This is about holding technique as fatigue starts",
+        "A: Increase total volume tolerance and reduce calf blow-up",
+        "C: faster rope, not higher jumps, soft landings, elbows tucked, relaxed shoulders",
+        "If the second set gets messy stay at this level next week. Don't increase until the reps feel controlled.",
+      ]
+    }
+  ]
+};      
+        // Set selectors to saved values (if any)
+        if (savedtarget) targetSelect.value = savedtarget;
+        if (savedlevel) levelSelect.value = savedlevel;
+
+        function showTarget(target, level) {
+          if (!target || !level) {
+            displayDiv.innerHTML = "<p>Please select the target & level of the target you wish to open.</p>";
+            return;
+          }
+
+          const key = `${target}-${level}`;
+          if (targets[key]) {
+            displayDiv.innerHTML = targets[key].map(section => `
+            <table>
+                <tr><th colspan="3"><label>${section.title}<input type="checkbox" class="section-toggle" data-section="${section.id}"/></label></th></tr>
+                ${section.details.map(detail => `<tr data-section="${section.id}"><td colspan="3">${detail}</td></tr>`).join('')}
+                <tr><td colspan="3" style="height: 40px;"></td></tr>
+            </table>
+            `).join('');
+
+            // Add notes section after target table
+            const notesKey = `notes-${key}`;
+            const savedNote = localStorage.getItem(notesKey) || "";
+
+            const notesHTML = `
+              <div style="margin-top: 20px;">
+                <label for="notes">Notes:</label>
+                <textarea id="notes" rows="4" style="width: 100%;">${savedNote}</textarea>
+              </div>
+            `;
+
+            displayDiv.innerHTML += notesHTML;
+
+            // Restore saved checkbox states and faded rows
+            const savedCheckboxes = JSON.parse(localStorage.getItem(`checkboxes-${key}`)) || {};
+            for (const sectionId in savedCheckboxes) {
+              const checkbox = displayDiv.querySelector(`.section-toggle[data-section="${sectionId}"]`);
+              const rows = displayDiv.querySelectorAll(`tr[data-section="${sectionId}"]`);
+              if (checkbox) {
+                checkbox.checked = savedCheckboxes[sectionId];
+                rows.forEach(row => {
+                  row.classList.toggle("faded", checkbox.checked);
+                });
+              }
+            }
+
+            // Add event listeners for checkboxes
+            const checkboxes = displayDiv.querySelectorAll(".section-toggle");
+            checkboxes.forEach((checkbox) => {
+              checkbox.addEventListener("change", () => {
+                const sectionId = checkbox.dataset.section;
+                const rows = displayDiv.querySelectorAll(`tr[data-section="${sectionId}"]`);
+
+                rows.forEach((row) => {
+                  row.classList.toggle("faded", checkbox.checked);
+                });
+
+                const savedCheckboxes = JSON.parse(localStorage.getItem(`checkboxes-${key}`)) || {};
+                savedCheckboxes[sectionId] = checkbox.checked;
+                localStorage.setItem(`checkboxes-${key}`, JSON.stringify(savedCheckboxes));
+              });
+            });
+
+            // Add event listener to notes textarea (once)
+            const notesInput = document.getElementById("notes");
+            if (notesInput) {
+              notesInput.addEventListener("input", () => {
+                localStorage.setItem(notesKey, notesInput.value);
+              });
+            }
+
+          } else {
+            displayDiv.innerHTML = "<p>No target available for this target/level yet.</p>";
+          }
+        }
+
+        // Show target on load based on saved or default values
+        showTarget(targetSelect.value, levelSelect.value);
+
+        // Save and update target on selector change
+        targetSelect.addEventListener("change", () => {
+          localStorage.setItem("selectedtarget", targetSelect.value);
+          showTarget(targetSelect.value, levelSelect.value);
+        });
+
+        levelSelect.addEventListener("change", () => {
+          localStorage.setItem("selectedlevel", levelSelect.value);
+          showTarget(targetSelect.value, levelSelect.value);
+        });
+      });
+    </script>
+  </body>
 </html>
